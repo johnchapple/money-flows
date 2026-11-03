@@ -2,10 +2,13 @@
 
 An interactive explainer of US federal debt and dollar flows, set up like a strategy game's codex. The finished product will be a single self-contained HTML page (vanilla JS + SVG).
 
-**Status: Phase 0 (research and data). No UI yet.**
+**Status:** Phase 0 (data, verified against primary sources) and Phase 2 (the plumbing flow map) are built. Phase 1 (the debt section) is next. Open `index.html` in a browser; it needs no server and no build step.
 
 | File | What it is |
 |---|---|
+| `index.html` | The page. Its data sits in one block at the top (copied from `data/*.json` by `scripts/sync-data.mjs`), followed by the scenario engine and the UI |
+| `data/history.json` | Monthly history series for the sparklines (FRED, MSPD) |
+| `tests/scenarios.test.mjs` | Runs every scenario step and checks that Fed assets = liabilities, reserves and deposits move together, and nothing goes negative |
 | `data/data.json` | Every figure, each with `value`, `asOf`, `source`, `url` and a `status` (`primary` / `secondary` / `derived` / `modeled` / `recall` / `conflict`) |
 | `data/maturities.json` | Maturity schedule built from MSPD Table III (463 CUSIPs, Sep 30 2026): monthly for 24 months, then yearly to 2056, by instrument, with coupons |
 | `data/maturities-model.json` | The earlier approximate model, kept for comparison (within ~5% per year) |
@@ -14,12 +17,40 @@ An interactive explainer of US federal debt and dollar flows, set up like a stra
 | `scripts/build-maturities-mspd.mjs` | Builds `maturities.json` from the Fiscal Data API |
 | `scripts/model-maturities.mjs` | Builds the comparison model from auction history |
 | `scripts/refresh.mjs` | Pulls the latest figures from Treasury Fiscal Data and FRED into `data/refresh-output.json`, for comparing by hand with `data.json` |
+| `scripts/fetch-history.mjs` | Rebuilds `data/history.json` |
+| `scripts/sync-data.mjs` | Copies `data/*.json` into `index.html` |
 | `scripts/validate-data.mjs` | Checks that glossary links resolve, every figure has source and date fields, and the identities balance |
+
+To refresh the data (needs network access to api.fiscaldata.treasury.gov, fred.stlouisfed.org, www.federalreserve.gov and markets.newyorkfed.org), pull the latest figures for comparing by hand with `data/data.json`:
+
+```bash
+node scripts/refresh.mjs
+```
+
+Rebuild the maturity schedule from the latest MSPD:
+
+```bash
+node scripts/build-maturities-mspd.mjs
+```
+
+Rebuild the sparkline history:
+
+```bash
+node scripts/fetch-history.mjs
+```
+
+After editing any data file, copy the data into the page:
+
+```bash
+node scripts/sync-data.mjs
+```
+
+Then run the checks:
 
 ```bash
 node scripts/validate-data.mjs
 ```
 
 ```bash
-node scripts/model-maturities.mjs
+node --test
 ```

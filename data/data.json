@@ -939,6 +939,15 @@
         }
       ],
       "note": "Z.1's household sector is a residual and includes hedge funds, so \"households\" overstates what individuals hold. Sectors not listed (credit unions, other financial firms, nonfinancial corporations, GSEs, etc.) make up the remainder."
+    },
+    "bankDeposits": {
+      "label": "Deposits at all commercial banks",
+      "value": 19771.116,
+      "unit": "USD bn",
+      "asOf": "2026-10-21",
+      "source": "Federal Reserve H.8 via FRED DPSACBW027SBOG (seasonally adjusted)",
+      "url": "https://fred.stlouisfed.org/series/DPSACBW027SBOG",
+      "status": "primary"
     }
   },
   "market_plumbing": {
