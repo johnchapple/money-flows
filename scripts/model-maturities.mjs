@@ -12,7 +12,7 @@
 // Once the MSPD API is reachable, scripts/refresh.mjs computes the real schedule.
 // Every number below is approximate (roughly ±20% per bucket). The output is labeled `modeled`.
 //
-// Usage: node scripts/model-maturities.mjs   → writes data/maturities.json and prints checks
+// Usage: node scripts/model-maturities.mjs   → writes data/maturities-model.json and prints checks
 
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -193,7 +193,7 @@ const out = {
   _meta: {
     status: 'modeled',
     asOf: '2026-09-30',
-    method: 'Rebuilt from approximate auction-size history and the Treasury maturity calendar, then scaled per instrument to MSPD Sep 2026 totals. Coupons are approximate annual-average yields at issue. Bills assume steady weekly auction sizes. FRNs assume level issuance. Bucket error is roughly ±20%. Replace with scripts/refresh.mjs output once MSPD detail is reachable.',
+    method: 'Rebuilt from approximate auction-size history and the Treasury maturity calendar, then scaled per instrument to MSPD Sep 2026 totals. Coupons are approximate annual-average yields at issue. Bills assume steady weekly auction sizes. FRNs assume level issuance. Bucket error is roughly ±20%. Superseded by data/maturities.json (built from MSPD by scripts/build-maturities-mspd.mjs); kept for comparison.',
     calibrationScale: Object.fromEntries(Object.entries(scale).map(([k, v]) => [k, round(v, 3)])),
     unit: 'USD bn face value (TIPS at inflation-adjusted principal via calibration)',
     source: 'Model inputs: Treasury refunding statements (auction sizes), Treasury par yields (coupons). Calibration totals: MSPD Sep 2026 via data/data.json.',
@@ -203,8 +203,8 @@ const out = {
   monthly,
   yearly,
 };
-writeFileSync(join(root, 'data/maturities.json'), JSON.stringify(out, null, 1) + '\n');
+writeFileSync(join(root, 'data/maturities-model.json'), JSON.stringify(out, null, 1) + '\n');
 
 console.log('Calibration scale per family:', out._meta.calibrationScale);
 console.table(checks);
-console.log(`Wrote ${monthly.length} monthly and ${yearly.length} yearly buckets → data/maturities.json`);
+console.log(`Wrote ${monthly.length} monthly and ${yearly.length} yearly buckets → data/maturities-model.json`);

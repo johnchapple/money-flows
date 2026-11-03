@@ -2,16 +2,16 @@
 // Pull the latest figures straight from primary sources and write them to data/refresh-output.json
 // for a human to compare with data/data.json. It never overwrites data.json.
 //
-// NOTE: NOT YET RUN. When this was written (2026-11-03), the session's network policy blocked
-// api.fiscaldata.treasury.gov and fred.stlouisfed.org. Field names follow the published API docs,
-// but they are unverified. The script prints the available fields whenever an expected one is missing.
+// First run 2026-11-03. The script prints the available fields whenever an expected one is missing.
+// The maturity schedule is built separately: scripts/build-maturities-mspd.mjs.
 //
-// Usage: node scripts/refresh.mjs            (Node 18+; no dependencies)
-//        node scripts/refresh.mjs --mspd     also rebuild data/maturities.json from MSPD detail (CUSIP-level)
+// Usage: node scripts/refresh.mjs            (Node 22+; no dependencies)
 
 import { writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { ensureProxy } from './lib/net.mjs';
+ensureProxy();
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const FD = 'https://api.fiscaldata.treasury.gov/services/api/fiscal_service';
@@ -67,11 +67,12 @@ await step('avg_interest_rates', async () => {
 
 // --- Treasury: Daily Treasury Statement, TGA closing balance ---
 await step('dts_operating_cash_balance', async () => {
-  const { rows, url } = await fd('/v1/accounting/dts/operating_cash_balance', { sort: '-record_date', 'page[size]': '40' });
+  const { rows, url } = await fd('/v1/accounting/dts/operating_cash_balance', { sort: 'record_date', filter: `record_date:gte:${new Date(Date.now() - 20 * 864e5).toISOString().slice(0, 10)}`, 'page[size]': '200' });
   const tga = rows.filter((r) => /closing balance/i.test(r.account_type));
   if (!tga.length) throw new Error(`no closing-balance row; account types: ${[...new Set(rows.map((r) => r.account_type))].join(' | ')}`);
-  out.figures.tga = { value: bn(tga[0].open_today_bal ?? tga[0].opening_balance_today_amt), asOf: tga[0].record_date, url,
-    note: 'DTS reports in millions. For the Closing Balance row, the "open today" field holds the closing amount; check this.' };
+  const last = tga[tga.length - 1];
+  out.figures.tga = { value: bn(last.open_today_bal), asOf: last.record_date, url,
+    note: 'DTS reports in millions. For the Closing Balance row, open_today_bal holds the closing amount (checked against H.4.1, Oct 28 2026).' };
 });
 
 // --- FRED (no API key needed for fredgraph.csv) ---
@@ -89,34 +90,6 @@ for (const [id, label] of Object.entries(fredSeries)) {
     const [d, v] = lines[lines.length - 1];
     out.figures[`fred_${id}`] = { label, value: +v, asOf: d, url: `https://fred.stlouisfed.org/series/${id}`,
       spark: lines.slice(-260).map(([dd, vv]) => [dd, +vv]) };
-  });
-}
-
-// --- Optional: real maturity schedule from MSPD Table III (one row per CUSIP) ---
-if (process.argv.includes('--mspd')) {
-  await step('mspd_table_3_market (maturity schedule)', async () => {
-    let page = 1, all = [], date;
-    for (;;) {
-      const { rows } = await fd('/v1/debt/mspd/mspd_table_3_market', { sort: '-record_date', 'page[size]': '10000', 'page[number]': String(page) });
-      if (!rows.length) break;
-      date ??= rows[0].record_date;
-      const cur = rows.filter((r) => r.record_date === date);
-      all.push(...cur);
-      if (cur.length < rows.length) break;
-      page++;
-    }
-    const fam = (t) => /bill/i.test(t) ? 'bills' : /inflation/i.test(t) ? 'tips' : /floating/i.test(t) ? 'frn' : /bond/i.test(t) ? 'bonds' : 'notes';
-    const monthly = {}, yearly = {};
-    for (const r of all) {
-      const mat = need(r, 'maturity_date'); const amt = bn(r.outstanding_amt ?? r.total_mil_amt); if (!mat || !amt) continue;
-      const f = fam(r.security_type_desc + ' ' + (r.security_class1_desc || ''));
-      const rate = +(r.interest_rate_pct ?? r.yield_pct ?? 0);
-      for (const [map, k] of [[monthly, mat.slice(0, 7)], [yearly, mat.slice(0, 4)]]) {
-        map[k] ??= {}; map[k][f] ??= { amount: 0, couponDollars: 0 };
-        map[k][f].amount += amt; map[k][f].couponDollars += amt * rate;
-      }
-    }
-    out.figures.maturities = { asOf: date, status: 'primary', monthly, yearly, rows: all.length };
   });
 }
 

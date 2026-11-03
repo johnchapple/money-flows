@@ -14,14 +14,16 @@ Labels:
 **[identity]** The Fed's balance sheet always balances:
 
 ```
-ASSETS                                   LIABILITIES (+ capital)
-  Treasuries (SOMA)          ~4.4T         Currency in circulation   ~2.4T  (placeholder)
-  Agency MBS                 ~1.9T         Bank reserves             ~2.9T  (conflicting sources)
-  Repo lending (SRF, FIMA)    ~0           TGA                       ~1.0T
-  Loans, swaps, other        small         ON RRP                    ~0.0002T
-                                           Foreign official RRP      ~0.33T
-                                           Other, capital, minus deferred asset (residual)
-  TOTAL                     ~6.75T         TOTAL                    ~6.75T
+ASSETS  (H.4.1, Wed Oct 28 2026, $bn)    LIABILITIES (+ capital)
+  Treasuries (SOMA)       4,576.6          Currency (Fed notes, net)  2,434.0
+  Agency MBS              1,883.5          Bank reserves              2,895.2
+  Repo lending (SRF/FIMA)     0.0          TGA                        1,015.6
+  Loans                       9.6          ON RRP ("others")              0.2
+  Swaps                       0.2          Foreign official RRP         325.7
+  Premiums, gold, FX, other 275.8          Other deposits               248.8
+                                           Other liabilities           −221.9  (includes deferred asset −232.5)
+                                           Capital                       47.7
+  TOTAL                   6,745.6          TOTAL                      6,745.6
 ```
 
 Consequences used everywhere below:
@@ -83,7 +85,7 @@ When Treasury sells $X of new securities, cash goes into the TGA. **Where the bu
 | **RMPs** (since Dec 12, 2025): Fed buys $X of bills | Fed: bills +X, reserves +X. The same accounting as QE, but short-dated and sized to offset growth in currency and the TGA |
 | **MBS reinvestment into bills** | MBS −X, bills +X. Total assets unchanged |
 
-**[mechanism]** QT (June 2022 – Dec 1, 2025) drained the ON RRP first, because money funds found bills more attractive, and then reserves. QT ended Dec 1, 2025. Reserve-management purchases started Dec 12, 2025. *Current pace: see TODO-verify.*
+**[mechanism]** QT (June 2022 – Dec 1, 2025) drained the ON RRP first, because money funds found bills more attractive, and then reserves. QT ended Dec 1, 2025. Fed bill purchases (reserve management plus MBS reinvestment) began Dec 12, 2025: $38B in Dec, a peak of $60B in Mar 2026, slowing to about $12–13B a month in Sep–Oct 2026 ($378B in total, NY Fed operation results).
 
 **[heuristic]** "QT is a liquidity drain" is true in terms of reserves and RRP. Whether it moves asset prices much is debated.
 
@@ -94,14 +96,14 @@ When Treasury sells $X of new securities, cash goes into the TGA. **Where the bu
 ```
  4.00%  ── Standing repo (SRP/SRF) minimum bid rate = ceiling, also discount window primary credit
  3.90%  ── IORB (interest on reserve balances)
- ~3.88% ── EFFR (mid-Oct)        SOFR ~3.90–3.95% (late Oct) ← at or above IORB = cash getting scarce
+ 3.88%  ── EFFR (Nov 2)          SOFR 3.95% (Nov 2) ← above IORB = cash getting scarce
  3.75%  ── ON RRP offering rate = floor
         Target range 3.75–4.00% (raised 25bp on Sep 16, 2026; held Oct 28, 2026)
 ```
 
-**[mechanism]** Money funds won't lend for less than the ON RRP rate, because they can always lend to the Fed instead. Dealers won't pay much more than the standing-repo rate, because they can borrow from the Fed. **Where SOFR sits between these lines is a live gauge of reserve scarcity.** SOFR trading above IORB, as it has at times in late Oct 2026, is the sign usually cited for reserves no longer being "ample".
+**[mechanism]** Money funds won't lend for less than the ON RRP rate, because they can always lend to the Fed instead. Dealers won't pay much more than the standing-repo rate, because they can borrow from the Fed. **Where SOFR sits between these lines is a live gauge of reserve scarcity.** SOFR trading above IORB (3.95% vs 3.90% on Nov 2 2026) is the sign usually cited for reserves no longer being "ample".
 
-**[mechanism]** Quarter-end: foreign banks shrink their balance sheets on reporting dates (their leverage ratios are measured on those dates), so repo supply falls, SOFR jumps, and standing-repo use rises. Record: $74.6B on Dec 31, 2025. T-accounts: Fed repo assets +X, reserves +X, reversing the next day.
+**[mechanism]** Quarter-end: foreign banks shrink their balance sheets on reporting dates (their leverage ratios are measured on those dates), so repo supply falls, SOFR jumps, and standing-repo use rises. Record: $74.6B on Dec 31, 2025. After bill purchases resumed, quarter-end use fell to about zero in Mar and Jun 2026 and $1.2B on Sep 30, 2026. T-accounts: Fed repo assets +X, reserves +X, reversing the next day.
 
 ---
 
@@ -139,12 +141,27 @@ Sizes: SOFR covers about $3T/day of underlying trades (NY Fed, Sep 2026). Total 
 
 ## 8. Who holds the debt, and what changes it
 
-- **Trust funds** ($7.7T, intragovernmental) grow with payroll-tax surpluses and shrink as Social Security draws them down.
-- **Fed** (about $4.4T of Treasuries) grows through RMPs and reinvestment, shrinks through QT.
-- **Foreign** (about $9.3T, Jun 2026). Japan $1.07T, UK $1.01T (much of it custody for hedge funds), China $0.59T and falling. About 41% official, 59% private. TIC records where a security is held, not who ultimately owns it.
-- **Money funds** (about $7.9T in total assets): bills plus repo. *Their exact Treasury holdings are a TODO.*
-- **Banks**, **mutual funds**, **pensions and insurers**, **state and local governments**, **households**: *need Fed Z.1 Table L.210*.
-- **Stablecoin issuers** (about $300B in total supply; Tether about $115B in bills by its attestation).
+Fed Z.1 Financial Accounts, Q2 2026 (base: $31.49T held by the public, Z.1 definition), plus H.4.1 and MSPD:
+
+| Holder | $bn | Note |
+|---|---|---|
+| Foreign | 9,269 | 41% official (central banks), 59% private. TIC: Japan 1,068, UK 1,010 (much of it custody for hedge funds), China 591 (Aug 2026) |
+| Federal trust funds | 7,747 | Intragovernmental, not in the $31.49T base (MSPD, Sep 30) |
+| Federal Reserve | 4,577 | H.4.1, Oct 28. Z.1 shows 4,083 for Q2 (valuation gap: TODO) |
+| Money market funds | 3,282 | Mostly bills, plus repo |
+| Households & nonprofits | 2,831 | **Z.1 residual: includes hedge funds** |
+| Banks (US-chartered) | 1,799 | |
+| Mutual funds | 1,741 | |
+| State & local governments | 1,648 | Excluding SLGS |
+| Pension funds | 1,175 | Private 590, state & local DB 562, federal 23 |
+| ETFs | 808 | |
+| Insurers | 609 | Property-casualty 380, life 229 |
+| Broker-dealers (net) | 567 | |
+| Stablecoin issuers | ~150 | Not a Z.1 sector. Tether about $115B in bills (attestation, secondary source). Total stablecoin supply about $300B |
+
+Rows can't simply be added up: Z.1 uses market value for some sectors and face value for others, and the residual sectors (credit unions, GSEs, nonfinancial corporations, other financial firms) aren't listed.
+
+What changes the holdings: trust funds grow with payroll-tax surpluses and shrink as benefits are paid. The Fed's grow with bill purchases and shrink with QT. Money funds' follow the bill share of issuance. Foreign holdings follow reserve management and hedged yields (Japan).
 
 ---
 
@@ -174,7 +191,7 @@ Sequence for a $10B inflow (scenario 6):
 
 ## 11. Why markets and bitcoin watch "liquidity"
 
-**[heuristic]** **Fed net liquidity = Fed total assets − TGA − ON RRP.** On current figures: 6,746 − 1,016 − 0.2 ≈ **$5.73T**. It is a trader's measure, not an official one.
+**[heuristic]** **Fed net liquidity = Fed total assets − TGA − ON RRP.** On Oct 28 2026: 6,745.6 − 1,015.6 − 0.2 = **$5,729.8B**. It is a trader's measure, not an official one.
 
 Why people watch it: if the TGA or ON RRP absorbs cash, less of the Fed's balance sheet is left as reserves in private hands, and supposedly less is available to buy risk assets. With the ON RRP at about $0, the measure now mostly tracks Fed assets minus the TGA.
 
@@ -190,44 +207,46 @@ The honest caveats:
 
 **[mechanism]**
 - About 22% of marketable debt is bills, which reprice within weeks. FRNs (2%) reset weekly.
-- About 33% of marketable debt matures within 12 months (GAO), so a one-point change in short rates moves interest costs by about 0.33 × $31.8T ≈ **$105B a year within a year** (rough; ignores new deficits).
+- 33.4% of marketable debt matures within 12 months (MSPD detail, Sep 30 2026: $10.6T, including $2.95T of notes and bonds at an average coupon of 2.98%), so a one-point change in short rates moves interest costs by about 0.33 × $31.8T ≈ **$105B a year within a year** (rough; ignores new deficits).
 - Notes and bonds lock in their coupon until maturity. A 10-year issued in 2020 at about 0.9% only reprices in 2030.
-- The average rate on marketable debt was 3.518% (Sep 2026), up from about 1.56% (early 2022), and is still rising as low-coupon 2020–21 debt matures.
+- The average rate on marketable debt was 3.518% (Sep 2026), up from an all-time low of 1.424% (Jan 2022), and is still rising as low-coupon 2020–21 debt matures.
 - Fed losses add a further channel: the Fed's losses (the deferred asset) mean the $55–110B a year it remitted in 2019–21 no longer reduces the deficit.
 
-The simulator in Phase 1 will use `data/maturities.json` (modeled) to roll each bucket over at the slider rates.
+The simulator in Phase 1 will use `data/maturities.json` (built from MSPD Table III, CUSIP by CUSIP) to roll each bucket over at the slider rates.
 
 ---
 
 ## TODO-verify
 
-### Figures to confirm against primary sources (blocked: primary hosts unreachable)
-1. **MSPD Table I, Sep 30 2026**: exact million-level values for marketable total, bills, notes, bonds, TIPS, FRNs, and the non-marketable breakdown (GAS, savings bonds, SLGS). The current values come from JEC and Pier20 excerpts.
-2. **Reserve balances, Oct 28 2026**: 2.89T (H.4.1, garbled), 2.96T (week average to Oct 21) or 3.11T (Substack)?
-3. **Currency in circulation, Oct 2026**: 2,430 is a placeholder. The last confirmed figure is 2,416.9bn (Oct 2025).
-4. **SOMA Treasury holdings**: 4.41T, 4.44T or 4.57T? Sources conflict.
-5. **RMP pace**: still $10–15bn/month, or paused since Aug 14 2026? Get the latest NY Fed Desk statement.
-6. **3-month and 5-year yields** on Oct 30 2026 (not found). The **2-year 4.56%** has only one source.
-7. **SOFR, Oct 27 2026**: 3.91% or 3.95%?
-8. **Gross debt in Aug 2026**: your starting note says ≈$39.9T. MSPD excerpts give $40.176T at Aug 31, and NTU gives $39.7T on Aug 10. Both could be right for different dates in August. Also check when debt first crossed $40T.
-9. **"Interest $1.17T in the first 10 months of FY2026"**: not found. I have $1.36T gross for the full year (secondary) and $1.052T net (MTS).
-10. **Fed total assets**: your "≈$6.76T (Oct 2026)" vs $6.746T on Oct 28. Probably a different week.
-11. **Tether T-bills**: $114.9bn (attestation) vs about $141bn (probably including reverse repo). Which date's attestation?
-12. **Standing repo take-up on Sep 30 2026**: $1.2bn, single blog source.
-13. **Total foreign holdings, Aug 2026** (only Jun 2026 found, $9.29T). India $219.7bn is secondary.
-14. **Money funds' Treasury holdings** (ICI/SEC N-MFP), and **Z.1 L.210** holder shares for banks, mutual funds, pensions, insurers, state and local governments, and households.
-15. **ON RRP peak ($2,553.7bn, Dec 30 2022)**, **Fed assets peak ($8.965T, Apr 13 2022)**, **reserves peak (~$4.27T, Dec 2021)**, **SOFR 5.25% on Sep 17 2019**, **BTFP peak (~$168bn)**: all entered from memory.
-16. **Average rate on marketable debt, early 2022**: 1.56% from memory. Find the exact low month.
+Rechecked 2026-11-03 against primary sources. Items marked ✅ are resolved, with the answer noted.
 
-### Mechanisms I'm not sure about (questions, not claims)
-17. When money funds buy bills with cash they would otherwise lend in **private repo** (not the ON RRP), does the drain fall on reserves one for one, or do dealers replace the funding in ways that change the split? The flow map currently treats "private repo" as ultimately backed by bank deposits, so reserves fall.
-18. Does the **foreign official repo pool** pay the ON RRP rate, or a rate tied to it? What has kept it at about $325bn?
-19. Is the Fed's **deferred asset** still shrinking after the Sep 2026 hike? A higher IORB raises Fed expenses, while RMP bills earn more income.
-20. What is Treasury's current **TGA target** (end-of-quarter cash balance), and is the TGA's rise to about $1.04T at end-October in line with it?
-21. **GENIUS Act final rules**: did the OCC final rule (Bulletin 2026-50) keep the 93-day limit unchanged, and what is the binding effective date: Jan 18 2027, or 120 days after the final rules?
-22. **Net T-bill demand from stablecoins**: how much is new demand versus displaced demand from money funds and banks? Is there research from the Fed, BIS or Treasury (TBAC's 2025 stablecoin charge) to cite?
-23. **eSLR reform details**: is the new buffer exactly 50% of the method-1 G-SIB surcharge, and does the depository-institution-level cap matter for Treasury market making?
-24. **Standing repo central clearing**: has the Fed started clearing standing repo through FICC, or announced dates?
-25. **Debt-ceiling timing**: does the Oct 2026 headroom (~$860bn) pull the 2027 hit date earlier than May 2027?
-26. **Who cast the dissents on Oct 28 2026** (reported as Cook and Hammack, favoring a hike)? Secondary sources only. Not needed for the page unless quoted.
-27. The **Warsh chairmanship** and the **Sep 2026 hike** are confirmed by Fed documents in search results. Confirm the date Warsh took office, for the codex.
+### Figures
+1. ✅ **MSPD Table I**: marketable $31,834.878B. Bills 7,118.145, notes 16,281.507, bonds 5,551.018, TIPS 2,172.642, FRNs 707.975, FFB 3.591. Non-marketable 8,336.947 (Government Account Series 8,094.3, savings 146.3, SLGS 81.0).
+2. ✅ **Reserves**: $2,895.2B (H.4.1 Wednesday level, Oct 28).
+3. ✅ **Currency**: $2,434.0B (H.4.1, Federal Reserve notes, net). My placeholder was 2,430.
+4. ✅ **SOMA Treasuries**: $4,576.6B (H.4.1, Oct 28).
+5. ✅ **Bill purchases**: not paused. About $12–13B a month in Sep–Oct 2026, $378B since Dec 2025.
+6. ✅ **Yields, Nov 2**: 3m 4.21, 2y 4.59, 5y 4.70, 10y 4.91, 20y 5.31, 30y 5.28. The 3-month bill sits above the top of the funds range, pricing in another hike.
+7. ✅ **SOFR**: 3.95% on Nov 2 (FRED).
+8. ✅ **Gross debt in August**: $39,891.8B on Aug 10 (your ≈$39.9T). First above $40T on **Aug 18, 2026**. $40,175.6B on Aug 31.
+9. ✅ **Interest in the first 10 months**: $1,170.1B gross through July (Interest Expense dataset). Full FY2026 $1,360.4B gross, $1,052B net (MTS).
+10. ✅ **Fed total assets**: $6,745.6B (Oct 28).
+11. ⬜ **Tether T-bills**: $114.9B vs ~$141B. Issuer sites are still unreachable.
+12. ✅ **Standing repo on Sep 30 2026**: $1.2B (FRED RPONTTLD). Record $74.6B on Dec 31 2025.
+13. ⬜ **TIC by country for Aug 2026**: ticdata.treasury.gov and home.treasury.gov are still blocked. Country figures stay secondary. Total foreign holdings now from Z.1: $9,269B (Q2).
+14. ✅ **Money funds' Treasury holdings**: $3,281.6B (Z.1, Q2 2026). ✅ Z.1 sector breakdown added (section 8).
+15. ✅ **History anchors**: ON RRP peak $2,553.7B (Dec 30 2022); Fed assets peak $8,965.5B (Apr 13 2022); reserves peak $4,275.8B (week of Dec 8 2021); SOFR 5.25% (Sep 17 2019). ⬜ BTFP peak (~$168B) still from memory.
+16. ✅ **Average-rate low**: 1.424% in Jan 2022. My recalled 1.56% was wrong.
+17. ⬜ **Fed holdings, Z.1 vs H.4.1**: Z.1 shows $4,082.7B in Q2 2026, H.4.1 $4,488.1B on Jun 24 2026. Is the gap valuation, inflation compensation, or a sector definition?
+18. ⬜ **Stablecoin supply** (~$300B) and **ICI money-fund assets** ($7.9T): secondary sources. ici.org is unreachable.
+
+### Mechanisms (questions, not claims)
+19. When money funds buy bills with cash they would otherwise lend in **private repo** (not the ON RRP), does the drain fall on reserves one for one, or do dealers replace the funding in ways that change the split? The flow map currently treats "private repo" as ultimately backed by bank deposits, so reserves fall.
+20. Does the **foreign official repo pool** pay the ON RRP rate, or a rate tied to it? What has kept it at about $325B?
+21. Is the Fed's **deferred asset** still shrinking after the Sep 2026 hike? Table 6 shows $232.5B on Oct 28, down from ~$236B in July, so it is shrinking slowly. ✅ partly answered.
+22. What is Treasury's current **TGA target** (end-of-quarter cash balance)? The TGA fell from $1,052B (Oct 27) to $931B (Nov 2), driven by month-end payments.
+23. **GENIUS Act final rules**: did the OCC final rule (Bulletin 2026-50) keep the 93-day limit unchanged, and what is the binding effective date?
+24. **Net T-bill demand from stablecoins**: how much is new demand versus displaced demand from money funds and banks? Is there research from the Fed, BIS or TBAC to cite?
+25. **eSLR reform details**: is the new buffer exactly 50% of the method-1 G-SIB surcharge?
+26. **Standing repo central clearing**: has it started, and on what dates?
+27. **Debt-ceiling timing**: does the current headroom (~$860B on Oct 22) pull the 2027 hit date earlier than May 2027?
