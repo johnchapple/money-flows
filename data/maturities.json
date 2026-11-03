@@ -1,0 +1,1495 @@
+{
+ "_meta": {
+  "status": "modeled",
+  "asOf": "2026-09-30",
+  "method": "Rebuilt from approximate auction-size history and the Treasury maturity calendar, then scaled per instrument to MSPD Sep 2026 totals. Coupons are approximate annual-average yields at issue. Bills assume steady weekly auction sizes. FRNs assume level issuance. Bucket error is roughly ±20%. Replace with scripts/refresh.mjs output once MSPD detail is reachable.",
+  "calibrationScale": {
+   "bills": 1.101,
+   "notes": 1.091,
+   "bonds": 1.037,
+   "tips": 1.231,
+   "frn": 29.458
+  },
+  "unit": "USD bn face value (TIPS at inflation-adjusted principal via calibration)",
+  "source": "Model inputs: Treasury refunding statements (auction sizes), Treasury par yields (coupons). Calibration totals: MSPD Sep 2026 via data/data.json.",
+  "url": "https://fiscaldata.treasury.gov/datasets/monthly-statement-public-debt/",
+  "checks": [
+   {
+    "what": "Fixed notes+bonds maturing in next 12 months (USD bn)",
+    "model": 3132.3,
+    "published": 2950,
+    "source": "dollarliquidity.com"
+   },
+   {
+    "what": "Avg coupon of those (%)",
+    "model": 3.05,
+    "published": 2.98,
+    "source": "dollarliquidity.com"
+   },
+   {
+    "what": "TIPS+FRN maturing next 12 months (USD bn)",
+    "model": 599.6,
+    "published": 575.8,
+    "source": "dollarliquidity.com"
+   },
+   {
+    "what": "Share of marketable maturing within 12 months (%)",
+    "model": 34.1,
+    "published": 33,
+    "source": "GAO-26-107529 / Conference Board"
+   },
+   {
+    "what": "Avg coupon, notes (%)",
+    "model": 3.38,
+    "published": 3.383,
+    "source": "Treasury Average Interest Rates"
+   },
+   {
+    "what": "Avg coupon, bonds (%)",
+    "model": 3.46,
+    "published": 3.466,
+    "source": "Treasury Average Interest Rates"
+   },
+   {
+    "what": "Avg real coupon, TIPS (%)",
+    "model": 1.09,
+    "published": 1.149,
+    "source": "Treasury Average Interest Rates"
+   }
+  ]
+ },
+ "monthly": [
+  {
+   "period": "2026-10",
+   "total": 2551.6,
+   "byInstrument": {
+    "bills": {
+     "amount": 2235,
+     "avgCoupon": 3.87
+    },
+    "notes": {
+     "amount": 222.5,
+     "avgCoupon": 2.96
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 64.6,
+     "avgCoupon": 0.13
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2026-11",
+   "total": 2229.6,
+   "byInstrument": {
+    "bills": {
+     "amount": 1896.5,
+     "avgCoupon": 3.87
+    },
+    "notes": {
+     "amount": 291.2,
+     "avgCoupon": 2.74
+    },
+    "bonds": {
+     "amount": 12.4,
+     "avgCoupon": 6.68
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2026-12",
+   "total": 1320,
+   "byInstrument": {
+    "bills": {
+     "amount": 1068,
+     "avgCoupon": 3.87
+    },
+    "notes": {
+     "amount": 222.5,
+     "avgCoupon": 2.96
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2027-01",
+   "total": 1019.3,
+   "byInstrument": {
+    "bills": {
+     "amount": 693.6,
+     "avgCoupon": 3.87
+    },
+    "notes": {
+     "amount": 237.8,
+     "avgCoupon": 3.1
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 58.5,
+     "avgCoupon": 0.5
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2027-02",
+   "total": 830.1,
+   "byInstrument": {
+    "bills": {
+     "amount": 481.7,
+     "avgCoupon": 3.87
+    },
+    "notes": {
+     "amount": 306.5,
+     "avgCoupon": 2.93
+    },
+    "bonds": {
+     "amount": 12.4,
+     "avgCoupon": 6.61
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2027-03",
+   "total": 652.6,
+   "byInstrument": {
+    "bills": {
+     "amount": 385.4,
+     "avgCoupon": 3.87
+    },
+    "notes": {
+     "amount": 237.8,
+     "avgCoupon": 3.1
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2027-04",
+   "total": 386.9,
+   "byInstrument": {
+    "bills": {
+     "amount": 55.1,
+     "avgCoupon": 3.87
+    },
+    "notes": {
+     "amount": 237.8,
+     "avgCoupon": 3.1
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 64.6,
+     "avgCoupon": 0.4
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2027-05",
+   "total": 417.2,
+   "byInstrument": {
+    "bills": {
+     "amount": 68.8,
+     "avgCoupon": 3.87
+    },
+    "notes": {
+     "amount": 306.5,
+     "avgCoupon": 2.93
+    },
+    "bonds": {
+     "amount": 12.4,
+     "avgCoupon": 6.61
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2027-06",
+   "total": 322.3,
+   "byInstrument": {
+    "bills": {
+     "amount": 55.1,
+     "avgCoupon": 3.87
+    },
+    "notes": {
+     "amount": 237.8,
+     "avgCoupon": 3.1
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2027-07",
+   "total": 380.8,
+   "byInstrument": {
+    "bills": {
+     "amount": 55.1,
+     "avgCoupon": 3.87
+    },
+    "notes": {
+     "amount": 237.8,
+     "avgCoupon": 3.1
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 58.5,
+     "avgCoupon": 0.5
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2027-08",
+   "total": 417.2,
+   "byInstrument": {
+    "bills": {
+     "amount": 68.8,
+     "avgCoupon": 3.87
+    },
+    "notes": {
+     "amount": 306.5,
+     "avgCoupon": 2.93
+    },
+    "bonds": {
+     "amount": 12.4,
+     "avgCoupon": 6.61
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2027-09",
+   "total": 322.3,
+   "byInstrument": {
+    "bills": {
+     "amount": 55.1,
+     "avgCoupon": 3.87
+    },
+    "notes": {
+     "amount": 237.8,
+     "avgCoupon": 3.1
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2027-10",
+   "total": 331.9,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 237.8,
+     "avgCoupon": 3.1
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 64.6,
+     "avgCoupon": 0.4
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2027-11",
+   "total": 351.7,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 309.8,
+     "avgCoupon": 2.97
+    },
+    "bonds": {
+     "amount": 12.4,
+     "avgCoupon": 6.27
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2027-12",
+   "total": 267.2,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 237.8,
+     "avgCoupon": 3.1
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2028-01",
+   "total": 343.2,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 255.2,
+     "avgCoupon": 3.17
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 58.5,
+     "avgCoupon": 0.8
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2028-02",
+   "total": 375.7,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 333.8,
+     "avgCoupon": 3.11
+    },
+    "bonds": {
+     "amount": 12.4,
+     "avgCoupon": 5.58
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2028-03",
+   "total": 284.7,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 255.2,
+     "avgCoupon": 3.17
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2028-04",
+   "total": 349.3,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 255.2,
+     "avgCoupon": 3.17
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 64.6,
+     "avgCoupon": 1.8
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2028-05",
+   "total": 375.7,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 333.8,
+     "avgCoupon": 3.11
+    },
+    "bonds": {
+     "amount": 12.4,
+     "avgCoupon": 5.58
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2028-06",
+   "total": 284.7,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 255.2,
+     "avgCoupon": 3.17
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2028-07",
+   "total": 343.2,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 255.2,
+     "avgCoupon": 3.17
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 58.5,
+     "avgCoupon": 0.8
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2028-08",
+   "total": 375.7,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 333.8,
+     "avgCoupon": 3.11
+    },
+    "bonds": {
+     "amount": 12.4,
+     "avgCoupon": 5.58
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2028-09",
+   "total": 284.7,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 255.2,
+     "avgCoupon": 3.17
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 29.5,
+     "avgCoupon": 3.9
+    }
+   }
+  }
+ ],
+ "yearly": [
+  {
+   "period": "2026",
+   "total": 6101.2,
+   "byInstrument": {
+    "bills": {
+     "amount": 5199.5,
+     "avgCoupon": 3.87
+    },
+    "notes": {
+     "amount": 736.3,
+     "avgCoupon": 2.87
+    },
+    "bonds": {
+     "amount": 12.4,
+     "avgCoupon": 6.68
+    },
+    "tips": {
+     "amount": 64.6,
+     "avgCoupon": 0.13
+    },
+    "frn": {
+     "amount": 88.4,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2027",
+   "total": 5699.6,
+   "byInstrument": {
+    "bills": {
+     "amount": 1918.5,
+     "avgCoupon": 3.87
+    },
+    "notes": {
+     "amount": 3131.7,
+     "avgCoupon": 3.04
+    },
+    "bonds": {
+     "amount": 49.8,
+     "avgCoupon": 6.52
+    },
+    "tips": {
+     "amount": 246.1,
+     "avgCoupon": 0.45
+    },
+    "frn": {
+     "amount": 353.5,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2028",
+   "total": 3713.4,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 3152.4,
+     "avgCoupon": 3.09
+    },
+    "bonds": {
+     "amount": 49.8,
+     "avgCoupon": 5.6
+    },
+    "tips": {
+     "amount": 246.1,
+     "avgCoupon": 1.33
+    },
+    "frn": {
+     "amount": 265.1,
+     "avgCoupon": 3.9
+    }
+   }
+  },
+  {
+   "period": "2029",
+   "total": 2587.7,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 2292.8,
+     "avgCoupon": 3.53
+    },
+    "bonds": {
+     "amount": 48.7,
+     "avgCoupon": 5.87
+    },
+    "tips": {
+     "amount": 246.1,
+     "avgCoupon": 1.24
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2030",
+   "total": 2109.5,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 1826,
+     "avgCoupon": 3.22
+    },
+    "bonds": {
+     "amount": 37.3,
+     "avgCoupon": 5.9
+    },
+    "tips": {
+     "amount": 246.1,
+     "avgCoupon": 1.06
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2031",
+   "total": 1970.8,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 1755.1,
+     "avgCoupon": 3.39
+    },
+    "bonds": {
+     "amount": 34.2,
+     "avgCoupon": 5.49
+    },
+    "tips": {
+     "amount": 181.5,
+     "avgCoupon": 0.76
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2032",
+   "total": 1140.1,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 1023.2,
+     "avgCoupon": 3.61
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 116.9,
+     "avgCoupon": 0.4
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2033",
+   "total": 1025.5,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 908.6,
+     "avgCoupon": 4.13
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 116.9,
+     "avgCoupon": 1.8
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2034",
+   "total": 654.7,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 537.8,
+     "avgCoupon": 4.22
+    },
+    "bonds": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "tips": {
+     "amount": 116.9,
+     "avgCoupon": 2
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2035",
+   "total": 669.8,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 549.8,
+     "avgCoupon": 4.33
+    },
+    "bonds": {
+     "amount": 3.1,
+     "avgCoupon": 4.91
+    },
+    "tips": {
+     "amount": 116.9,
+     "avgCoupon": 1.9
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2036",
+   "total": 520.8,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 366.5,
+     "avgCoupon": 4.6
+    },
+    "bonds": {
+     "amount": 37.3,
+     "avgCoupon": 4.9
+    },
+    "tips": {
+     "amount": 116.9,
+     "avgCoupon": 1.9
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2037",
+   "total": 40.4,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 40.4,
+     "avgCoupon": 4.75
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2038",
+   "total": 80.9,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 80.9,
+     "avgCoupon": 4.25
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2039",
+   "total": 171.1,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 171.1,
+     "avgCoupon": 3.76
+    },
+    "tips": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2040",
+   "total": 433.7,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 412.8,
+     "avgCoupon": 2.47
+    },
+    "tips": {
+     "amount": 20.9,
+     "avgCoupon": 1.2
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2041",
+   "total": 449.2,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 428.3,
+     "avgCoupon": 2.62
+    },
+    "tips": {
+     "amount": 20.9,
+     "avgCoupon": 0.8
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2042",
+   "total": 368.3,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 347.4,
+     "avgCoupon": 3.05
+    },
+    "tips": {
+     "amount": 20.9,
+     "avgCoupon": 0.13
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2043",
+   "total": 356.9,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 336,
+     "avgCoupon": 3.76
+    },
+    "tips": {
+     "amount": 20.9,
+     "avgCoupon": 0.13
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2044",
+   "total": 355.9,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 335,
+     "avgCoupon": 3.84
+    },
+    "tips": {
+     "amount": 20.9,
+     "avgCoupon": 0.4
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2045",
+   "total": 344.5,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 323.6,
+     "avgCoupon": 3.72
+    },
+    "tips": {
+     "amount": 20.9,
+     "avgCoupon": 0.5
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2046",
+   "total": 290.6,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 269.6,
+     "avgCoupon": 3.51
+    },
+    "tips": {
+     "amount": 20.9,
+     "avgCoupon": 0.3
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2047",
+   "total": 184.8,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 163.9,
+     "avgCoupon": 2.91
+    },
+    "tips": {
+     "amount": 20.9,
+     "avgCoupon": 0.5
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2048",
+   "total": 209.7,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 188.7,
+     "avgCoupon": 3.06
+    },
+    "tips": {
+     "amount": 20.9,
+     "avgCoupon": 0.8
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2049",
+   "total": 239.7,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 218.8,
+     "avgCoupon": 2.46
+    },
+    "tips": {
+     "amount": 20.9,
+     "avgCoupon": 0.4
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2050",
+   "total": 321.7,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 300.7,
+     "avgCoupon": 1.6
+    },
+    "tips": {
+     "amount": 20.9,
+     "avgCoupon": 0.13
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2051",
+   "total": 339.3,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 318.4,
+     "avgCoupon": 2.13
+    },
+    "tips": {
+     "amount": 20.9,
+     "avgCoupon": 0.13
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2052",
+   "total": 282.3,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 261.3,
+     "avgCoupon": 3.19
+    },
+    "tips": {
+     "amount": 20.9,
+     "avgCoupon": 0.4
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2053",
+   "total": 284.3,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 263.4,
+     "avgCoupon": 4.12
+    },
+    "tips": {
+     "amount": 20.9,
+     "avgCoupon": 1.8
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2054",
+   "total": 309.2,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 288.3,
+     "avgCoupon": 4.45
+    },
+    "tips": {
+     "amount": 20.9,
+     "avgCoupon": 2
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2055",
+   "total": 332,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 311.1,
+     "avgCoupon": 4.82
+    },
+    "tips": {
+     "amount": 20.9,
+     "avgCoupon": 1.9
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  },
+  {
+   "period": "2056",
+   "total": 228.3,
+   "byInstrument": {
+    "bills": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "notes": {
+     "amount": 0,
+     "avgCoupon": null
+    },
+    "bonds": {
+     "amount": 207.4,
+     "avgCoupon": 5
+    },
+    "tips": {
+     "amount": 20.9,
+     "avgCoupon": 1.9
+    },
+    "frn": {
+     "amount": 0,
+     "avgCoupon": null
+    }
+   }
+  }
+ ]
+}

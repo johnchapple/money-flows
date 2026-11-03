@@ -1,0 +1,874 @@
+{
+  "_meta": {
+    "title": "The Debt & The Plumbing — figures",
+    "compiled": "2026-11-03",
+    "units": "Dollar amounts are in billions of USD unless a figure's `unit` says otherwise. Rates are percent per year.",
+    "status_legend": {
+      "primary": "The number appears in the named primary document (Treasury, Fed, CBO, SEC, GAO). Read from a search excerpt of that document, not from the document opened directly. See `access_note`.",
+      "secondary": "Taken from a secondary site (aggregator, news, research note) that cites the primary source. Must be checked against the primary before publishing.",
+      "derived": "Computed in this file from other figures. The `formula` field shows how.",
+      "modeled": "An approximation built by a script in /scripts. Not a published number.",
+      "recall": "A well-known historical figure entered from memory. Needs checking against the source.",
+      "conflict": "Sources disagree. `note` explains how."
+    },
+    "access_note": "On 2026-11-03 the session's network policy blocked direct access to api.fiscaldata.treasury.gov, fiscaldata.treasury.gov, www.federalreserve.gov, markets.newyorkfed.org and fred.stlouisfed.org. Every figure was gathered through web-search excerpts. `scripts/refresh.mjs` pulls the same series straight from the primary APIs once those hosts are allowed."
+  },
+  "debt": {
+    "totalPublicDebt": {
+      "label": "Total public debt outstanding (gross)",
+      "value": 40171.825,
+      "unit": "USD bn",
+      "asOf": "2026-09-30",
+      "source": "Treasury, Monthly Statement of the Public Debt (MSPD), Sep 2026, Table I",
+      "url": "https://fiscaldata.treasury.gov/static-data/published-reports/mspd-entire/MonthlyStatementPublicDebt_Entire_202609.pdf",
+      "status": "primary"
+    },
+    "debtHeldByPublic": {
+      "label": "Debt held by the public",
+      "value": 32425.013,
+      "unit": "USD bn",
+      "asOf": "2026-09-30",
+      "source": "Treasury, MSPD Sep 2026, Table I",
+      "url": "https://fiscaldata.treasury.gov/static-data/published-reports/mspd-entire/MonthlyStatementPublicDebt_Entire_202609.pdf",
+      "status": "primary",
+      "note": "Includes the Federal Reserve's holdings. The Fed counts as 'the public' in Treasury accounting."
+    },
+    "intragovernmental": {
+      "label": "Intragovernmental holdings (trust funds etc.)",
+      "value": 7746.813,
+      "unit": "USD bn",
+      "asOf": "2026-09-30",
+      "source": "Treasury, MSPD Sep 2026, Table I",
+      "url": "https://fiscaldata.treasury.gov/static-data/published-reports/mspd-entire/MonthlyStatementPublicDebt_Entire_202609.pdf",
+      "status": "primary",
+      "note": "Mostly non-marketable Government Account Series securities held by Social Security, Medicare, federal pension and other trust funds."
+    },
+    "totalPublicDebtLatest": {
+      "label": "Total public debt outstanding, latest daily",
+      "value": 40593.637,
+      "unit": "USD bn",
+      "asOf": "2026-10-29",
+      "source": "Treasury, Debt to the Penny (via IndexBox excerpt)",
+      "url": "https://fiscaldata.treasury.gov/datasets/debt-to-the-penny/",
+      "status": "secondary",
+      "parts": {
+        "debtHeldByPublic": 32712.19,
+        "intragovernmental": 7881.447
+      }
+    },
+    "totalPublicDebtOct16": {
+      "label": "Total public debt outstanding",
+      "value": 40387.509,
+      "unit": "USD bn",
+      "asOf": "2026-10-16",
+      "source": "Treasury, Debt to the Penny (via fedpolicy.org excerpt)",
+      "url": "https://fiscaldata.treasury.gov/datasets/debt-to-the-penny/",
+      "status": "secondary",
+      "parts": {
+        "debtHeldByPublic": 32532.41,
+        "intragovernmental": 7855.099
+      },
+      "note": "Used with the Oct 29 figure to set the counter's growth rate."
+    },
+    "dailyGrowthEstimate": {
+      "label": "Recent average daily increase in gross debt (estimate)",
+      "value": 15.856,
+      "unit": "USD bn/day",
+      "asOf": "2026-10-29",
+      "formula": "(40593.637 - 40387.509) / 13 calendar days (Oct 16 → Oct 29)",
+      "status": "derived",
+      "note": "Daily debt moves in steps, not smoothly: big jumps on settlement days, small dips on others. Use only for a labeled 'estimate' ticker. The Sep 30 → Oct 29 window gives (40593.6 - 40171.8)/29 ≈ 14.5 bn/day."
+    },
+    "marketableTotal": {
+      "label": "Total marketable debt",
+      "value": 31835,
+      "unit": "USD bn",
+      "asOf": "2026-09-30",
+      "source": "Treasury, MSPD Sep 2026 (short-term 7,12x + long-term 24,72x per excerpt)",
+      "url": "https://fiscaldata.treasury.gov/static-data/published-reports/mspd-entire/MonthlyStatementPublicDebt_Entire_202609.pdf",
+      "status": "primary",
+      "note": "User's starting figure 31.835T matches the excerpt's short-term ≈7.12T + long-term ≈24.72T. Exact million-level figure still to be read off Table I."
+    },
+    "nonMarketableTotal": {
+      "label": "Total non-marketable debt",
+      "value": 8336.825,
+      "unit": "USD bn",
+      "asOf": "2026-09-30",
+      "formula": "totalPublicDebt - marketableTotal",
+      "status": "derived",
+      "note": "Mostly Government Account Series (trust funds), plus savings bonds, State and Local Government Series (SLGS) and small foreign/other series."
+    },
+    "debtLimit": {
+      "label": "Statutory debt limit",
+      "value": 41104,
+      "unit": "USD bn",
+      "asOf": "2025-07-04",
+      "source": "One Big Beautiful Bill Act (P.L. 119-21) raised the limit by $5T; CRFB debt-ceiling Q&A",
+      "url": "https://www.crfb.org/papers/qa-everything-you-should-know-about-debt-ceiling",
+      "status": "secondary"
+    },
+    "debtSubjectToLimit": {
+      "label": "Debt subject to limit",
+      "value": 40244,
+      "unit": "USD bn",
+      "asOf": "2026-10-22",
+      "source": "Treasury, Debt to the Penny / DTS Table III-C (via tensorust.com excerpt)",
+      "url": "https://fiscaldata.treasury.gov/datasets/daily-treasury-statement/",
+      "status": "secondary",
+      "note": "Slightly below total public debt because some debt (e.g. unamortized discount, Federal Financing Bank) is excluded. Headroom ≈ $860bn. NTU projects the limit is reached around May 2027; CRFB says mid-to-late 2027."
+    }
+  },
+  "composition": {
+    "_note": "Marketable debt by instrument, Sep 30 2026. Dollar amounts for bills, notes and bonds come from the JEC Monthly Debt Update (citing MSPD). TIPS and FRN dollar amounts are derived from Pier20 percentage shares × marketable total. Average rates come from Treasury's Average Interest Rates dataset (via secondary excerpts).",
+    "bills": {
+      "label": "Bills",
+      "value": 7118,
+      "share": 22.36,
+      "avgRate": 3.87,
+      "unit": "USD bn",
+      "asOf": "2026-09-30",
+      "source": "MSPD Sep 2026 via JEC Monthly Debt Update; rate: Treasury Average Interest Rates (via businessquant/tftc excerpts)",
+      "url": "https://www.jec.senate.gov/public/vendor/_accounts/JEC-R/debt/Monthly%20Debt%20Update%20(PDF).pdf",
+      "status": "secondary",
+      "note": "Share = 7,118 / 31,835. JEC quotes 21.95% because it divides by debt held by the public (32.43T), not marketable debt. Pier20 gives 22.4%."
+    },
+    "notes": {
+      "label": "Notes (2–10y)",
+      "value": 16280,
+      "share": 51.14,
+      "avgRate": 3.383,
+      "unit": "USD bn",
+      "asOf": "2026-09-30",
+      "source": "MSPD Sep 2026 via JEC Monthly Debt Update",
+      "url": "https://www.jec.senate.gov/public/vendor/_accounts/JEC-R/debt/Monthly%20Debt%20Update%20(PDF).pdf",
+      "status": "secondary"
+    },
+    "bonds": {
+      "label": "Bonds (20–30y)",
+      "value": 5540,
+      "share": 17.4,
+      "avgRate": 3.466,
+      "unit": "USD bn",
+      "asOf": "2026-09-30",
+      "source": "MSPD Sep 2026 via JEC Monthly Debt Update",
+      "url": "https://www.jec.senate.gov/public/vendor/_accounts/JEC-R/debt/Monthly%20Debt%20Update%20(PDF).pdf",
+      "status": "secondary"
+    },
+    "tips": {
+      "label": "TIPS",
+      "value": 2171,
+      "share": 6.82,
+      "avgRate": 1.149,
+      "unit": "USD bn",
+      "asOf": "2026-09-30",
+      "formula": "6.82% × 31,835 (Pier20 share)",
+      "source": "Pier20 Treasury debt composition (MSPD-based)",
+      "url": "https://pier20.com/benchmarks/treasury-debt-composition",
+      "status": "derived",
+      "note": "TIPS average rate is the real coupon. Treasury also pays the inflation adjustment to principal, which this rate leaves out."
+    },
+    "frn": {
+      "label": "Floating-rate notes",
+      "value": 707,
+      "share": 2.22,
+      "avgRate": 4.141,
+      "unit": "USD bn",
+      "asOf": "2026-09-30",
+      "formula": "2.22% × 31,835 (Pier20 share)",
+      "source": "Pier20 Treasury debt composition (MSPD-based)",
+      "url": "https://pier20.com/benchmarks/treasury-debt-composition",
+      "status": "derived"
+    },
+    "check": {
+      "formula": "7118 + 16280 + 5540 + 2171 + 707 = 31816 vs 31835 marketable",
+      "gap": 19,
+      "note": "≈$19bn gap: rounding plus Federal Financing Bank securities. Close once exact Table I values are read."
+    }
+  },
+  "rates_on_debt": {
+    "avgRateMarketable": {
+      "label": "Average interest rate, marketable debt",
+      "value": 3.518,
+      "unit": "%",
+      "asOf": "2026-09-30",
+      "source": "Treasury, Average Interest Rates on U.S. Treasury Securities (via businessquant.com, dollarliquidity.com excerpts)",
+      "url": "https://fiscaldata.treasury.gov/datasets/average-interest-rates-treasury-securities/",
+      "status": "secondary",
+      "history": [
+        {
+          "asOf": "2026-08-31",
+          "value": 3.475
+        },
+        {
+          "asOf": "2025-09-30",
+          "value": 3.415
+        }
+      ]
+    },
+    "avgRateAllInterestBearing": {
+      "label": "Average interest rate, all interest-bearing debt",
+      "value": 3.531,
+      "unit": "%",
+      "asOf": "2026-09-30",
+      "source": "Treasury, Average Interest Rates (via secondary excerpt)",
+      "url": "https://fiscaldata.treasury.gov/datasets/average-interest-rates-treasury-securities/",
+      "status": "secondary"
+    },
+    "avgRateMarketable2022": {
+      "label": "Average interest rate, marketable debt, early 2022",
+      "value": 1.56,
+      "unit": "%",
+      "asOf": "2022-01-31",
+      "source": "Treasury, Average Interest Rates dataset",
+      "url": "https://fiscaldata.treasury.gov/datasets/average-interest-rates-treasury-securities/",
+      "status": "recall",
+      "note": "Low point of the series was about 1.5–1.6% in early 2022. Confirm the exact month and value."
+    },
+    "weightedAvgMaturity": {
+      "label": "Weighted average maturity of marketable debt",
+      "value": 71,
+      "unit": "months",
+      "asOf": "2026-06-30",
+      "source": "JEC Monthly Debt Update; GAO-26-107529 gives 71 months for Sep 2025",
+      "url": "https://files.gao.gov/reports/GAO-26-107529/index.html",
+      "status": "secondary"
+    },
+    "shareMaturingWithin12m": {
+      "label": "Share of marketable debt maturing within 12 months",
+      "value": 33,
+      "unit": "%",
+      "asOf": "2025-09-30",
+      "source": "GAO-26-107529, Federal Debt Management",
+      "url": "https://files.gao.gov/reports/GAO-26-107529/index.html",
+      "status": "primary",
+      "note": "Conference Board gives about 33% for Q3 FY2026 as well. Up from 24% in Sep 2014."
+    },
+    "couponsMaturingNext12m": {
+      "label": "Fixed-rate notes & bonds maturing Oct 2026 – Sep 2027",
+      "value": 2950,
+      "avgCoupon": 2.98,
+      "unit": "USD bn",
+      "asOf": "2026-09-30",
+      "source": "dollarliquidity.com (aggregates MSPD detail)",
+      "url": "https://dollarliquidity.com/en/treasury-maturities",
+      "status": "secondary",
+      "note": "Plus $575.8bn of TIPS and FRNs in the same window. Used as the check on the modeled maturity schedule."
+    }
+  },
+  "budget": {
+    "deficitFY2026": {
+      "label": "Federal deficit, FY2026",
+      "value": 1992,
+      "unit": "USD bn",
+      "asOf": "2026-09-30",
+      "source": "Treasury, Final Monthly Treasury Statement FY2026",
+      "url": "https://fiscaldata.treasury.gov/static-data/published-reports/mts/MonthlyTreasuryStatement_202609.pdf",
+      "status": "primary",
+      "parts": {
+        "receipts": 5403,
+        "outlays": 7396
+      }
+    },
+    "netInterestFY2026": {
+      "label": "Net interest outlays, FY2026",
+      "value": 1052,
+      "unit": "USD bn",
+      "asOf": "2026-09-30",
+      "source": "Treasury, Final MTS FY2026 (Net Outlays table)",
+      "url": "https://fiscaldata.treasury.gov/static-data/published-reports/mts/MonthlyTreasuryStatement_202609.pdf",
+      "status": "primary",
+      "note": "Net = gross interest on Treasury debt minus interest received by trust funds and other interest income. FY2025 was about $970bn."
+    },
+    "grossInterestFY2026": {
+      "label": "Gross interest expense on Treasury debt, FY2026",
+      "value": 1360,
+      "unit": "USD bn",
+      "asOf": "2026-09-30",
+      "source": "Treasury figure reported via ChainCatcher / Yahoo Finance",
+      "url": "https://fiscaldata.treasury.gov/datasets/interest-expense-debt-outstanding/",
+      "status": "secondary",
+      "note": "Gross includes interest paid to trust funds, which is the government paying itself. The user's '$1.17T in 10 months' is consistent with this but unconfirmed."
+    },
+    "netInterestShareOutlays": {
+      "label": "Net interest as share of total outlays, FY2026",
+      "value": 14.2,
+      "unit": "%",
+      "asOf": "2026-09-30",
+      "formula": "1052 / 7396",
+      "status": "derived",
+      "note": "CBO's Feb 2026 baseline implies 13.9% (1,039 / 7,449)."
+    },
+    "cboNetInterest": {
+      "label": "CBO projected net interest",
+      "unit": "USD bn",
+      "asOf": "2026-02-11",
+      "source": "CBO, The Budget and Economic Outlook: 2026 to 2036 (Feb 2026)",
+      "url": "https://www.cbo.gov/publication/62105",
+      "status": "primary",
+      "series": [
+        {
+          "fy": 2026,
+          "value": 1039,
+          "pctGDP": 3.3,
+          "outlays": 7449
+        },
+        {
+          "fy": 2036,
+          "value": 2144,
+          "pctGDP": 4.6,
+          "outlays": 11416
+        }
+      ],
+      "note": "Share of outlays: 13.9% (2026) → 18.8% (2036), derived. CBO: rising average interest rates account for about half the increase."
+    }
+  },
+  "fed": {
+    "_note": "H.4.1 release of Oct 29 2026 (Wednesday level, Oct 28). These numbers set the starting state for the balance-sheet identity in the flow map.",
+    "totalAssets": {
+      "label": "Fed total assets",
+      "value": 6745.635,
+      "unit": "USD bn",
+      "asOf": "2026-10-28",
+      "source": "Federal Reserve H.4.1, Oct 29 2026 (via Trading Economics excerpt)",
+      "url": "https://www.federalreserve.gov/releases/h41/current/",
+      "status": "secondary"
+    },
+    "somaTreasuries": {
+      "label": "SOMA Treasury holdings (bills + notes/bonds + TIPS)",
+      "value": 4442,
+      "unit": "USD bn",
+      "asOf": "2026-10-07",
+      "source": "NY Fed SOMA holdings (via Apify / CEIC excerpts)",
+      "url": "https://www.newyorkfed.org/markets/soma-holdings",
+      "status": "conflict",
+      "parts": {
+        "bills": 562.2,
+        "notesBonds": 3600,
+        "tips": 280
+      },
+      "note": "Bills ≈ $562–568bn in mid/late Oct. Substack posts quote 4,412bn and 4,573bn for late Oct. Use H.4.1 Table 1 to settle."
+    },
+    "somaMBS": {
+      "label": "SOMA agency MBS",
+      "value": 1890,
+      "unit": "USD bn",
+      "asOf": "2026-10-07",
+      "source": "NY Fed SOMA holdings (via Apify excerpt)",
+      "url": "https://www.newyorkfed.org/markets/soma-holdings",
+      "status": "secondary",
+      "note": "Runs off ≈ $15–16bn/month. Principal is reinvested into T-bills (Dec 2025 policy)."
+    },
+    "reserves": {
+      "label": "Reserve balances with Federal Reserve Banks",
+      "value": 2890,
+      "unit": "USD bn",
+      "asOf": "2026-10-28",
+      "source": "Federal Reserve H.4.1 (garbled excerpt)",
+      "url": "https://www.federalreserve.gov/releases/h41/current/",
+      "status": "conflict",
+      "note": "Excerpts give 2.89T (H.4.1, column unclear), 2,962.6bn week-average to Oct 21, and 3,106.8bn (Substack). High-priority check."
+    },
+    "tga": {
+      "label": "Treasury General Account (TGA)",
+      "value": 1015.632,
+      "unit": "USD bn",
+      "asOf": "2026-10-28",
+      "source": "Federal Reserve H.4.1 Oct 29 2026; matches Daily Treasury Statement closing balance",
+      "url": "https://fiscaldata.treasury.gov/datasets/daily-treasury-statement/",
+      "status": "secondary",
+      "history": [
+        {
+          "asOf": "2026-10-02",
+          "value": 871.181
+        },
+        {
+          "asOf": "2026-10-20",
+          "value": 973.653
+        },
+        {
+          "asOf": "2026-10-29",
+          "value": 1040.236
+        }
+      ],
+      "note": "Week average to Oct 28: 999.727bn (FRED WTREGEN)."
+    },
+    "reverseRepoTotal": {
+      "label": "Reverse repurchase agreements (all)",
+      "value": 325.837,
+      "unit": "USD bn",
+      "asOf": "2026-10-28",
+      "source": "Federal Reserve H.4.1 Oct 29 2026 (excerpt)",
+      "url": "https://www.federalreserve.gov/releases/h41/current/",
+      "status": "secondary",
+      "note": "Nearly all of this is the foreign official reverse repo pool (foreign central banks parking dollars). The domestic ON RRP is ≈ $0.2bn."
+    },
+    "onRrp": {
+      "label": "Overnight reverse repo (ON RRP) facility usage",
+      "value": 0.176,
+      "unit": "USD bn",
+      "asOf": "2026-10-28",
+      "source": "NY Fed reverse repo operations (via tftc.io excerpt)",
+      "url": "https://www.newyorkfed.org/markets/desk-operations/reverse-repo",
+      "status": "secondary",
+      "note": "2 counterparties, award rate 3.75%. 2026 high: $26.9bn on Jun 30 (quarter-end)."
+    },
+    "onRrpPeak": {
+      "label": "ON RRP all-time peak",
+      "value": 2553.7,
+      "unit": "USD bn",
+      "asOf": "2022-12-30",
+      "source": "NY Fed reverse repo operations",
+      "url": "https://www.newyorkfed.org/markets/desk-operations/reverse-repo",
+      "status": "recall"
+    },
+    "foreignRepoPool": {
+      "label": "Foreign official reverse repo pool (derived)",
+      "value": 325.661,
+      "unit": "USD bn",
+      "asOf": "2026-10-28",
+      "formula": "reverseRepoTotal - onRrp",
+      "status": "derived"
+    },
+    "currency": {
+      "label": "Currency in circulation (Federal Reserve notes)",
+      "value": 2430,
+      "unit": "USD bn",
+      "asOf": "2026-10-28",
+      "source": "PLACEHOLDER: last confirmed 2,416.9bn in Oct 2025 (FRED MBCURRCIR). Oct 2026 value not yet found.",
+      "url": "https://fred.stlouisfed.org/series/MBCURRCIR",
+      "status": "conflict",
+      "note": "Placeholder pending H.4.1 Table 5. Do not display without the caveat."
+    },
+    "otherLiabilitiesAndCapital": {
+      "label": "Other deposits, other liabilities & capital (net of deferred asset)",
+      "value": 84.166,
+      "unit": "USD bn",
+      "asOf": "2026-10-28",
+      "formula": "totalAssets - reserves - tga - reverseRepoTotal - currency",
+      "status": "derived",
+      "note": "Residual that forces assets = liabilities in the starting state. Includes GSE deposits and capital (~$46bn), minus the deferred asset (~$236bn), which H.4.1 books as a negative liability. Will change once reserves and currency are confirmed."
+    },
+    "totalAssetsPeak": {
+      "label": "Fed total assets, all-time peak",
+      "value": 8965,
+      "unit": "USD bn",
+      "asOf": "2022-04-13",
+      "source": "Federal Reserve H.4.1",
+      "url": "https://fred.stlouisfed.org/series/WALCL",
+      "status": "recall"
+    },
+    "deferredAsset": {
+      "label": "Fed deferred asset (cumulative unremitted losses)",
+      "value": 236,
+      "unit": "USD bn",
+      "asOf": "2026-07-01",
+      "source": "Federal Reserve, Monetary Policy Report, July 2026",
+      "url": "https://www.federalreserve.gov/monetarypolicy/2026-07-mpr-part2.htm",
+      "status": "primary",
+      "note": "Peaked above $245bn in Jan 2026 and is now shrinking slowly. Some Reserve Banks have resumed remittances (~$6bn to Treasury in 2026). CBO expects material remittances by ~2031."
+    },
+    "qtStatus": {
+      "label": "Balance-sheet policy",
+      "value": "QT ended Dec 1 2025; reserve-management bill purchases (RMPs) since Dec 12 2025",
+      "asOf": "2026-10-28",
+      "source": "FOMC implementation notes Dec 2025; SVB, CRS IF12147",
+      "url": "https://www.congress.gov/crs-product/IF12147",
+      "status": "conflict",
+      "note": "RMP pace reported as $40bn/mo from Dec 2025, then $25bn, then $10bn; one source says paused from Aug 14 2026, another says ~$10–15bn/mo. MBS principal is reinvested into bills either way. Check the latest NY Fed Desk statement."
+    }
+  },
+  "policy_rates": {
+    "_note": "Set by the Oct 28 2026 FOMC (hold, 10–2; two dissents favored a hike). The Sep 16 2026 meeting raised the range 25bp — the first hike since 2023 — under Chair Warsh.",
+    "ffTargetLow": {
+      "label": "Fed funds target range, lower bound",
+      "value": 3.75,
+      "unit": "%",
+      "asOf": "2026-10-28",
+      "source": "FOMC statement & implementation note, Oct 28 2026",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20261028a1.pdf",
+      "status": "primary"
+    },
+    "ffTargetHigh": {
+      "label": "Fed funds target range, upper bound",
+      "value": 4.0,
+      "unit": "%",
+      "asOf": "2026-10-28",
+      "source": "FOMC statement, Oct 28 2026",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20261028a1.pdf",
+      "status": "primary"
+    },
+    "iorb": {
+      "label": "Interest on reserve balances (IORB)",
+      "value": 3.9,
+      "unit": "%",
+      "asOf": "2026-10-29",
+      "source": "FOMC implementation note; FRED IORB",
+      "url": "https://fred.stlouisfed.org/series/IORB",
+      "status": "primary"
+    },
+    "onRrpRate": {
+      "label": "ON RRP offering rate (floor)",
+      "value": 3.75,
+      "unit": "%",
+      "asOf": "2026-10-29",
+      "source": "FOMC implementation note, Oct 28 2026",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20261028a1.pdf",
+      "status": "primary",
+      "note": "Per-counterparty daily limit $160bn."
+    },
+    "srfRate": {
+      "label": "Standing repo operations minimum bid rate (ceiling)",
+      "value": 4.0,
+      "unit": "%",
+      "asOf": "2026-10-29",
+      "source": "FOMC implementation note, Oct 28 2026",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20261028a1.pdf",
+      "status": "primary",
+      "note": "The facility has been renamed from Standing Repo Facility (SRF) to standing repo operations (SRP)."
+    },
+    "primaryCredit": {
+      "label": "Discount window primary credit rate",
+      "value": 4.0,
+      "unit": "%",
+      "asOf": "2026-10-29",
+      "source": "Federal Reserve, Oct 28 2026",
+      "url": "https://www.federalreserve.gov/monetarypolicy/files/monetary20261028a1.pdf",
+      "status": "secondary"
+    },
+    "effr": {
+      "label": "Effective federal funds rate",
+      "value": 3.88,
+      "unit": "%",
+      "asOf": "2026-10-16",
+      "source": "NY Fed EFFR (via secondary excerpt)",
+      "url": "https://www.newyorkfed.org/markets/reference-rates/effr",
+      "status": "secondary"
+    },
+    "sofr": {
+      "label": "SOFR",
+      "value": 3.91,
+      "unit": "%",
+      "asOf": "2026-10-27",
+      "source": "NY Fed SOFR (via Substack excerpts)",
+      "url": "https://www.newyorkfed.org/markets/reference-rates/sofr",
+      "status": "conflict",
+      "note": "Oct 27 quoted as 3.91% and as 3.95%. Oct 26 = 3.90%. Either way SOFR is at or slightly above IORB, a sign reserves are near the low end of 'ample'."
+    }
+  },
+  "market_yields": {
+    "_note": "Treasury par yield curve / H.15, Oct 30 2026. The 3-month and 5-year values were not found and are null. The UI must show them as missing, not interpolate silently.",
+    "y3m": {
+      "label": "3-month bill",
+      "value": null,
+      "unit": "%",
+      "asOf": "2026-10-30",
+      "status": "conflict",
+      "note": "Not found. The 3.87% average bill rate on the debt suggests a market rate near 3.8–4.0%, but do not use that as data.",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve"
+    },
+    "y2": {
+      "label": "2-year",
+      "value": 4.56,
+      "unit": "%",
+      "asOf": "2026-10-30",
+      "source": "Treasury par yield curve (via sofrrate.com — single source)",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve",
+      "status": "secondary"
+    },
+    "y5": {
+      "label": "5-year",
+      "value": null,
+      "unit": "%",
+      "asOf": "2026-10-30",
+      "status": "conflict",
+      "note": "Not found.",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?type=daily_treasury_yield_curve"
+    },
+    "y10": {
+      "label": "10-year",
+      "value": 4.94,
+      "unit": "%",
+      "asOf": "2026-10-30",
+      "source": "FRED DGS10 (H.15); Treasury par curve",
+      "url": "https://fred.stlouisfed.org/series/DGS10",
+      "status": "secondary"
+    },
+    "y20": {
+      "label": "20-year",
+      "value": 5.34,
+      "unit": "%",
+      "asOf": "2026-10-30",
+      "source": "FRED DGS20 (H.15)",
+      "url": "https://fred.stlouisfed.org/series/DGS20",
+      "status": "secondary"
+    },
+    "y30": {
+      "label": "30-year",
+      "value": 5.31,
+      "unit": "%",
+      "asOf": "2026-10-30",
+      "source": "FRED DGS30 (H.15)",
+      "url": "https://fred.stlouisfed.org/series/DGS30",
+      "status": "secondary"
+    }
+  },
+  "holders": {
+    "_note": "Who owns the debt. The building blocks come from different dates and bases, so the UI must label the denominator. Domestic private categories (mutual funds, pensions, insurers, banks, households) need the Fed's Z.1 Financial Accounts Table L.210, which has not been retrieved yet.",
+    "intragovernmental": {
+      "label": "Federal trust funds (intragovernmental)",
+      "value": 7746.813,
+      "asOf": "2026-09-30",
+      "status": "primary",
+      "source": "MSPD Sep 2026",
+      "url": "https://fiscaldata.treasury.gov/datasets/monthly-statement-public-debt/"
+    },
+    "fed": {
+      "label": "Federal Reserve (SOMA)",
+      "value": 4442,
+      "asOf": "2026-10-07",
+      "status": "conflict",
+      "source": "NY Fed SOMA holdings",
+      "url": "https://www.newyorkfed.org/markets/soma-holdings"
+    },
+    "foreignTotal": {
+      "label": "Foreign holders (official + private)",
+      "value": 9290,
+      "asOf": "2026-06-30",
+      "status": "secondary",
+      "source": "Treasury TIC, Major Foreign Holders (via secondary)",
+      "url": "https://ticdata.treasury.gov/resource-center/data-chart-center/tic/Documents/slt_table5.html",
+      "note": "About 41% official (central banks), 59% private. August 2026 total not found."
+    },
+    "foreignByCountry": {
+      "label": "Largest foreign holders",
+      "asOf": "2026-08-31",
+      "status": "primary",
+      "source": "Treasury TIC data for August 2026 (press release sb0662)",
+      "url": "https://home.treasury.gov/news/press-releases/sb0662",
+      "series": [
+        {
+          "country": "Japan",
+          "value": 1068.3
+        },
+        {
+          "country": "United Kingdom",
+          "value": 1009.5
+        },
+        {
+          "country": "China, mainland",
+          "value": 590.7
+        },
+        {
+          "country": "India",
+          "value": 219.7,
+          "status": "secondary"
+        }
+      ],
+      "note": "TIC records where a security is held (custody), not who ultimately owns it. UK, Belgium, Cayman and Luxembourg partly reflect custodians and hedge funds."
+    },
+    "mmfTotalAssets": {
+      "label": "Money market fund total assets",
+      "value": 7900,
+      "asOf": "2026-10-28",
+      "status": "primary",
+      "source": "ICI weekly Money Market Fund Assets",
+      "url": "https://www.ici.org/research/stats/mmf",
+      "parts": {
+        "governmentRetail": 1980,
+        "governmentInstitutional": 4530
+      },
+      "note": "MMF holdings of Treasuries specifically (≈ half of assets?) are in the ICI/SEC N-MFP monthly holdings report — TODO."
+    },
+    "stablecoinTotal": {
+      "label": "Stablecoin market cap (all)",
+      "value": 300,
+      "asOf": "2026-10-28",
+      "status": "conflict",
+      "source": "Stablecoin Beat / CoinDesk Research (via KuCoin)",
+      "url": "https://stablecoinbeat.com/charts/market-cap/",
+      "note": "Range of estimates $299–305.5bn."
+    },
+    "tetherTBills": {
+      "label": "Tether T-bill holdings",
+      "value": 114.9,
+      "asOf": "2026-09-30",
+      "status": "conflict",
+      "source": "Tether quarterly attestation (via Motley Fool excerpt)",
+      "url": "https://tether.to/en/transparency/",
+      "note": "Another source says ~$141bn total Treasury exposure, which probably includes reverse repo. Attestation date unconfirmed."
+    },
+    "usdcSupply": {
+      "label": "USDC supply",
+      "value": 71.6,
+      "asOf": "2026-10-25",
+      "status": "secondary",
+      "source": "Stablecoin Beat",
+      "url": "https://stablecoinbeat.com/charts/market-cap/",
+      "note": "Most of Circle's reserves (~84% as of Jun 30) sit in the Circle Reserve Fund, a government MMF run by BlackRock."
+    },
+    "usdtSupply": {
+      "label": "USDT supply",
+      "value": 182.4,
+      "asOf": "2026-10-25",
+      "status": "secondary",
+      "source": "Stablecoin Beat",
+      "url": "https://stablecoinbeat.com/charts/market-cap/"
+    }
+  },
+  "market_plumbing": {
+    "repoMarketSize": {
+      "label": "US repo market, total outstanding exposures",
+      "value": 12600,
+      "asOf": "2025-09-30",
+      "status": "secondary",
+      "source": "OFR (via Wolf Street)",
+      "url": "https://www.financialresearch.gov/short-term-funding-monitor/",
+      "note": "Treasury repo ≈ $8.8T of this. A Sep 2026 Wolf Street piece uses $13.5T. These are outstanding positions, not daily turnover."
+    },
+    "sofrVolume": {
+      "label": "SOFR underlying daily volume",
+      "value": 3000,
+      "unit": "USD bn/day",
+      "asOf": "2026-09-01",
+      "status": "primary",
+      "source": "NY Fed, Teller Window: 'A Framework for Understanding the U.S. Treasury Repo Market'",
+      "url": "https://tellerwindow.newyorkfed.org/2026/09/01/a-framework-for-understanding-the-u-s-treasury-repo-market/",
+      "note": "Up from ~$1T in early 2022. H1 2026 split: cleared bilateral (FICC DVP) ~$1,855bn, tri-party ~$1,280bn, GCF ~$31bn (secondary chart)."
+    },
+    "hedgeFundRepoBorrowing": {
+      "label": "Hedge fund repo borrowing (gross)",
+      "value": 3382,
+      "asOf": "2026-06-30",
+      "status": "secondary",
+      "source": "SEC Form PF (via Lighthouse Macro)",
+      "url": "https://www.sec.gov/divisions/investment/private-funds-statistics",
+      "note": "All hedge-fund repo, not just basis trades. OFR estimated the basis trade itself at ~$2T at end-2025."
+    },
+    "srfRecord": {
+      "label": "Standing repo record take-up",
+      "value": 74.6,
+      "asOf": "2025-12-31",
+      "status": "secondary",
+      "source": "Reuters (NY Fed operation results)",
+      "url": "https://www.newyorkfed.org/markets/desk-operations/repo"
+    },
+    "srfSep2026QuarterEnd": {
+      "label": "Standing repo take-up at Sep 30 2026 quarter-end",
+      "value": 1.2,
+      "asOf": "2026-09-30",
+      "status": "conflict",
+      "source": "Single blog source",
+      "url": "https://www.newyorkfed.org/markets/desk-operations/repo",
+      "note": "Wrightson had forecast ~$50bn. Verify."
+    }
+  },
+  "regulation": {
+    "geniusAct": {
+      "label": "GENIUS Act signed",
+      "value": "2025-07-18",
+      "status": "primary",
+      "source": "Public Law (GENIUS Act, S.1582)",
+      "url": "https://www.congress.gov/bill/119th-congress/senate-bill/1582",
+      "note": "Reserves must be 1:1 in: coins and currency; demand deposits; Treasury bills, notes or bonds with ≤93 days remaining maturity; repurchase agreements (maturity ≤7 days, overnight preferred) backed by such Treasury bills; government MMFs investing only in these; central bank reserve deposits. Agencies had to finalize rules by Jul 18 2026. Effective by Jan 18 2027 at the latest (or 120 days after final rules). OCC final rule: Bulletin 2026-50 (Oct 2026)."
+    },
+    "eslr": {
+      "label": "eSLR reform final rule",
+      "value": "2026-04-01",
+      "status": "primary",
+      "source": "Federal Register, Dec 1 2025 (90 FR 55248)",
+      "url": "https://www.federalregister.gov/documents/2025/12/01/2025-21626/",
+      "note": "Effective Apr 1 2026, with early adoption allowed from Jan 1 2026. Replaces the fixed 2% eSLR buffer for G-SIB holding companies with one tied to each bank's G-SIB surcharge (half of method 1). Frees balance sheet for dealers to hold and finance Treasuries."
+    },
+    "clearingMandate": {
+      "label": "SEC Treasury central clearing mandate",
+      "status": "primary",
+      "source": "SEC, Commissioner Uyeda statement Aug 2026",
+      "url": "https://www.sec.gov/newsroom/speeches-statements/uyeda-statement-update-secs-work-toward-treasury-clearing-implementation-080726-update-secs-work-toward-treasury-clearing-implementation-august-2026",
+      "dates": {
+        "cash": "2026-12-31",
+        "repo": "2027-06-30"
+      }
+    }
+  },
+  "global": {
+    "bojPolicyRate": {
+      "label": "Bank of Japan policy rate",
+      "value": 1.25,
+      "unit": "%",
+      "asOf": "2026-09-18",
+      "status": "secondary",
+      "source": "BOJ statement (via tradingeconomics/secondary)",
+      "url": "https://www.boj.or.jp/en/mopo/mpmdeci/index.htm",
+      "note": "Highest since 1995. Two dissents."
+    },
+    "jgb10y": {
+      "label": "Japan 10-year JGB yield",
+      "value": 2.829,
+      "unit": "%",
+      "asOf": "2026-10-27",
+      "status": "secondary",
+      "source": "Japan MOF close (via secondary)",
+      "url": "https://www.mof.go.jp/english/policy/jgbs/reference/interest_rate/index.htm",
+      "note": "Crossed 3% on Sep 1 2026 for the first time since 1996. Peaked ≈3.12% intraday Oct 1/6. 30y record 4.235% on Oct 5."
+    },
+    "swapLines": {
+      "label": "Standing dollar swap lines",
+      "value": "Bank of Canada, Bank of England, Bank of Japan, ECB, Swiss National Bank",
+      "status": "recall",
+      "source": "Federal Reserve, Central bank liquidity swaps",
+      "url": "https://www.federalreserve.gov/monetarypolicy/central-bank-liquidity-swaps.htm",
+      "asOf": "2026-11-03"
+    },
+    "fimaRepo": {
+      "label": "FIMA repo facility",
+      "value": "Standing since Jul 2021",
+      "status": "recall",
+      "source": "Federal Reserve",
+      "url": "https://www.federalreserve.gov/monetarypolicy/fima-repo-facility.htm",
+      "asOf": "2026-11-03"
+    }
+  },
+  "history_anchors": {
+    "_note": "Used for the 'then vs now' notes and the future historical scrubber. All of these are from memory and must be checked.",
+    "repoSpike2019": {
+      "label": "SOFR spike",
+      "value": 5.25,
+      "unit": "%",
+      "asOf": "2019-09-17",
+      "status": "recall",
+      "url": "https://www.newyorkfed.org/markets/reference-rates/sofr"
+    },
+    "reservesPeak": {
+      "label": "Reserve balances peak",
+      "value": 4270,
+      "asOf": "2021-12-15",
+      "status": "recall",
+      "url": "https://fred.stlouisfed.org/series/WRESBAL"
+    },
+    "svbFailure": {
+      "label": "Silicon Valley Bank fails",
+      "value": "2023-03-10",
+      "status": "recall",
+      "url": "https://www.federalreserve.gov/publications/files/svb-review-20230428.pdf"
+    },
+    "btfp": {
+      "label": "Bank Term Funding Program",
+      "value": "Opened 2023-03-12; stopped new loans 2024-03-11; peak ≈ $168bn",
+      "status": "recall",
+      "url": "https://www.federalreserve.gov/financial-stability/bank-term-funding-program.htm",
+      "asOf": "2024-03-11"
+    },
+    "march2020": {
+      "label": "Treasury market 'dash for cash'",
+      "value": "2020-03",
+      "status": "recall",
+      "url": "https://www.federalreserve.gov/publications/financial-stability-report.htm"
+    },
+    "april2025": {
+      "label": "April 2025 tariff-shock sell-off (basis/swap-spread unwind)",
+      "value": "2025-04",
+      "status": "recall",
+      "url": "https://www.financialresearch.gov/the-ofr-blog/"
+    }
+  }
+}

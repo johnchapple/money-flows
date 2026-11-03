@@ -1,0 +1,954 @@
+{
+  "_meta": {
+    "compiled": "2026-11-03",
+    "fields": "term, def (one plain sentence), why (one line), related (ids), aka (other names), kind: 'fact' = accounting or legal definition; 'heuristic' = market shorthand or rule of thumb, not an official measure."
+  },
+  "terms": {
+    "treasury": {
+      "term": "US Treasury",
+      "kind": "fact",
+      "def": "The government department that collects taxes, makes payments and borrows by selling securities to cover the gap.",
+      "why": "Every dollar of federal debt starts as a Treasury auction.",
+      "related": [
+        "deficit",
+        "tga",
+        "auction",
+        "quarterly-refunding"
+      ]
+    },
+    "deficit": {
+      "term": "Deficit",
+      "kind": "fact",
+      "def": "Spending minus revenue in a given year; the deficit is what adds to the debt.",
+      "why": "About $2.0T in FY2026, so Treasury must sell about that much new debt on net.",
+      "related": [
+        "treasury",
+        "gross-debt",
+        "net-interest"
+      ]
+    },
+    "gross-debt": {
+      "term": "Gross debt",
+      "kind": "fact",
+      "aka": [
+        "total public debt outstanding"
+      ],
+      "def": "All Treasury debt: what the public holds plus what government trust funds hold.",
+      "why": "The headline '$40 trillion' number; it is also roughly what the debt limit counts.",
+      "related": [
+        "debt-held-by-public",
+        "intragovernmental-debt",
+        "debt-ceiling"
+      ]
+    },
+    "debt-held-by-public": {
+      "term": "Debt held by the public",
+      "kind": "fact",
+      "def": "Treasury debt owned by anyone outside the federal government, including the Federal Reserve, foreigners, funds and households.",
+      "why": "Economists prefer this measure because it is debt the government owes to someone else.",
+      "related": [
+        "gross-debt",
+        "intragovernmental-debt",
+        "soma"
+      ]
+    },
+    "intragovernmental-debt": {
+      "term": "Intragovernmental holdings",
+      "kind": "fact",
+      "def": "Special non-tradable Treasury securities held by federal trust funds such as Social Security and Medicare.",
+      "why": "This is the government owing itself, about $7.7T; it signals future benefit obligations, not market borrowing.",
+      "related": [
+        "gross-debt",
+        "non-marketable-debt"
+      ]
+    },
+    "marketable-debt": {
+      "term": "Marketable debt",
+      "kind": "fact",
+      "def": "Treasury securities that can be bought and sold in the market: bills, notes, bonds, TIPS and FRNs.",
+      "why": "This is the about $31.8T stock that markets price, trade and finance in repo.",
+      "related": [
+        "t-bill",
+        "note",
+        "bond",
+        "tips",
+        "frn",
+        "non-marketable-debt"
+      ]
+    },
+    "non-marketable-debt": {
+      "term": "Non-marketable debt",
+      "kind": "fact",
+      "def": "Treasury debt that can't be resold: trust-fund securities, savings bonds (Series EE/I) sold to individuals, and securities issued to state and local governments.",
+      "why": "Counts toward gross debt and the debt limit, but never trades.",
+      "related": [
+        "intragovernmental-debt",
+        "marketable-debt"
+      ]
+    },
+    "t-bill": {
+      "term": "Treasury bill",
+      "kind": "fact",
+      "aka": [
+        "bill",
+        "T-bill"
+      ],
+      "def": "Short-term Treasury debt (4 to 52 weeks) sold at a discount and repaid at face value, with no coupon.",
+      "why": "Bills reprice to current rates within weeks, so their share decides how fast rate changes hit interest costs.",
+      "related": [
+        "cash-management-bill",
+        "money-market-fund",
+        "rollover-risk",
+        "turning-over-bills"
+      ]
+    },
+    "cash-management-bill": {
+      "term": "Cash management bill (CMB)",
+      "kind": "fact",
+      "def": "An off-schedule bill Treasury sells to cover short cash gaps, often around tax dates or after a debt-limit fix.",
+      "why": "CMB bursts are how Treasury rebuilds the TGA quickly, which pulls cash out of markets.",
+      "related": [
+        "t-bill",
+        "tga",
+        "debt-ceiling"
+      ]
+    },
+    "note": {
+      "term": "Treasury note",
+      "kind": "fact",
+      "def": "Treasury debt with a fixed coupon paid twice a year, maturing in 2, 3, 5, 7 or 10 years.",
+      "why": "Notes are about half of marketable debt and lock in a rate for years.",
+      "related": [
+        "bond",
+        "marketable-debt",
+        "duration"
+      ]
+    },
+    "bond": {
+      "term": "Treasury bond",
+      "kind": "fact",
+      "def": "Long-term Treasury debt with a fixed coupon, maturing in 20 or 30 years.",
+      "why": "The 'long end': it is the most sensitive to inflation and fiscal worries.",
+      "related": [
+        "note",
+        "term-premium"
+      ],
+      "aka": [
+        "the long end (10–30y part of the curve)"
+      ]
+    },
+    "tips": {
+      "term": "TIPS",
+      "kind": "fact",
+      "aka": [
+        "Treasury Inflation-Protected Securities"
+      ],
+      "def": "Treasury debt whose principal rises with CPI inflation; the coupon is a fixed 'real' rate on that growing principal.",
+      "why": "TIPS yields are the market's main reading of real interest rates.",
+      "related": [
+        "real-yield",
+        "note",
+        "bond"
+      ]
+    },
+    "frn": {
+      "term": "Floating-rate note (FRN)",
+      "kind": "fact",
+      "def": "Two-year Treasury debt whose interest resets weekly to the latest 13-week bill auction rate, plus a fixed spread.",
+      "why": "Economically it behaves like a bill, which adds to Treasury's short-rate exposure.",
+      "related": [
+        "t-bill",
+        "rollover-risk"
+      ]
+    },
+    "debt-ceiling": {
+      "term": "Debt ceiling",
+      "kind": "fact",
+      "aka": [
+        "debt limit",
+        "statutory limit",
+        "X-date (the day cash and extraordinary measures run out)"
+      ],
+      "def": "A dollar cap set by Congress on how much debt Treasury may have outstanding; currently $41.104T, set July 2025.",
+      "why": "Standoffs drain then refill the TGA, a predictable swing in market liquidity.",
+      "related": [
+        "extraordinary-measures",
+        "tga",
+        "tga-rebuild"
+      ]
+    },
+    "extraordinary-measures": {
+      "term": "Extraordinary measures",
+      "kind": "fact",
+      "def": "Accounting moves, such as pausing investments in some federal pension funds, that free room under the debt limit for a while.",
+      "why": "They let Treasury keep paying bills for months after hitting the limit.",
+      "related": [
+        "debt-ceiling"
+      ]
+    },
+    "auction": {
+      "term": "Treasury auction",
+      "kind": "fact",
+      "def": "The sale of new Treasury securities to bidders, on a fixed public calendar; everyone pays the same highest accepted yield.",
+      "why": "Weak auctions are watched as a real-time read of demand for US debt.",
+      "related": [
+        "primary-dealer",
+        "bid-to-cover",
+        "tail",
+        "quarterly-refunding"
+      ]
+    },
+    "quarterly-refunding": {
+      "term": "Quarterly Refunding",
+      "kind": "fact",
+      "def": "Treasury's announcement every three months (Feb, May, Aug, Nov) of borrowing needs and the coupon sizes it plans to sell.",
+      "why": "Shifting issuance between bills and longer debt moves term premium and market liquidity.",
+      "related": [
+        "tbac",
+        "auction",
+        "t-bill",
+        "term-premium"
+      ]
+    },
+    "tbac": {
+      "term": "TBAC",
+      "kind": "fact",
+      "aka": [
+        "Treasury Borrowing Advisory Committee"
+      ],
+      "def": "A committee of dealers and investors that advises Treasury at each refunding.",
+      "why": "TBAC suggests bills stay around 15–20% of marketable debt; they are about 22% now.",
+      "related": [
+        "quarterly-refunding",
+        "t-bill"
+      ]
+    },
+    "primary-dealer": {
+      "term": "Primary dealer",
+      "kind": "fact",
+      "def": "One of about 25 banks and broker-dealers that must bid at every Treasury auction and trade directly with the New York Fed.",
+      "why": "Dealers absorb whatever others don't buy, so their balance-sheet room matters in stress.",
+      "related": [
+        "auction",
+        "slr",
+        "repo",
+        "srf"
+      ]
+    },
+    "bid-to-cover": {
+      "term": "Bid-to-cover ratio",
+      "kind": "heuristic",
+      "def": "Total bids at an auction divided by the amount sold.",
+      "why": "A falling ratio hints at weaker demand, though one reading means little.",
+      "related": [
+        "auction",
+        "tail"
+      ]
+    },
+    "tail": {
+      "term": "Tail",
+      "kind": "heuristic",
+      "def": "When an auction clears at a higher yield than the market expected just before it.",
+      "why": "A big tail means buyers had to be paid extra, often read as a warning sign.",
+      "related": [
+        "auction",
+        "bid-to-cover"
+      ]
+    },
+    "buyback": {
+      "term": "Treasury buyback",
+      "kind": "fact",
+      "def": "Treasury buying back older, less-traded securities before maturity, usually paid for by issuing new ones.",
+      "why": "Supports market liquidity and helps Treasury smooth its cash; it doesn't shrink the debt much.",
+      "related": [
+        "auction",
+        "tga"
+      ]
+    },
+    "tga": {
+      "term": "Treasury General Account (TGA)",
+      "kind": "fact",
+      "def": "Treasury's checking account at the Federal Reserve; tax receipts and auction proceeds go in, government payments go out.",
+      "why": "When the TGA rises, bank reserves fall by the same amount, all else equal.",
+      "related": [
+        "reserves",
+        "fed-balance-sheet",
+        "tga-rebuild",
+        "net-liquidity"
+      ]
+    },
+    "tga-rebuild": {
+      "term": "TGA rebuild",
+      "kind": "heuristic",
+      "def": "A stretch, usually after a debt-limit deal, when Treasury issues extra bills to refill its cash account.",
+      "why": "Pulls hundreds of billions of reserves or RRP cash out of markets in weeks.",
+      "related": [
+        "tga",
+        "debt-ceiling",
+        "cash-management-bill",
+        "net-liquidity"
+      ]
+    },
+    "federal-reserve": {
+      "term": "Federal Reserve",
+      "kind": "fact",
+      "aka": [
+        "the Fed"
+      ],
+      "def": "The US central bank, which sets short-term interest rates and creates bank reserves.",
+      "why": "Its balance sheet is the base layer of all dollar plumbing.",
+      "related": [
+        "fed-balance-sheet",
+        "fed-funds-rate",
+        "qe",
+        "qt"
+      ]
+    },
+    "fed-balance-sheet": {
+      "term": "Fed balance sheet",
+      "kind": "fact",
+      "def": "The Fed's assets (mostly Treasuries and mortgage bonds) and liabilities (currency, reserves, TGA, reverse repos); the two sides are always equal.",
+      "why": "If one liability grows, another must shrink unless assets grow, which is the key identity of the plumbing.",
+      "related": [
+        "soma",
+        "reserves",
+        "tga",
+        "on-rrp",
+        "currency-in-circulation"
+      ]
+    },
+    "soma": {
+      "term": "SOMA",
+      "kind": "fact",
+      "aka": [
+        "System Open Market Account"
+      ],
+      "def": "The Fed's portfolio of Treasuries and agency mortgage-backed securities, run by the New York Fed.",
+      "why": "About $6.3T; it makes the Fed the single largest holder of Treasuries.",
+      "related": [
+        "fed-balance-sheet",
+        "qe",
+        "qt",
+        "reserve-management-purchases"
+      ]
+    },
+    "reserves": {
+      "term": "Bank reserves",
+      "kind": "fact",
+      "aka": [
+        "reserve balances"
+      ],
+      "def": "Deposits that banks keep at the Fed; they are the money banks use to pay each other.",
+      "why": "Reserves are the scarce input for repo and bank lending; too few and funding rates spike.",
+      "related": [
+        "fed-balance-sheet",
+        "iorb",
+        "ample-reserves",
+        "tga"
+      ]
+    },
+    "currency-in-circulation": {
+      "term": "Currency in circulation",
+      "kind": "fact",
+      "def": "Paper dollars and coins held outside the Fed and Treasury, recorded as a liability of the Fed.",
+      "why": "Grows steadily, about $2.4T, and slowly absorbs reserves.",
+      "related": [
+        "fed-balance-sheet"
+      ]
+    },
+    "on-rrp": {
+      "term": "Overnight reverse repo (ON RRP)",
+      "kind": "fact",
+      "def": "A Fed facility where money funds and others can deposit cash overnight against Treasury collateral at a set rate.",
+      "why": "It was a $2.5T cash 'reservoir' in 2022; now near zero, so new drains hit reserves directly.",
+      "related": [
+        "money-market-fund",
+        "rate-corridor",
+        "rrp-drained",
+        "reserves"
+      ]
+    },
+    "foreign-repo-pool": {
+      "term": "Foreign repo pool",
+      "kind": "fact",
+      "def": "Reverse repos the Fed offers foreign central banks so they can park dollars overnight.",
+      "why": "About $325B; it is most of the 'reverse repo' line on the Fed's balance sheet now.",
+      "related": [
+        "on-rrp",
+        "fima-repo",
+        "fed-balance-sheet"
+      ]
+    },
+    "fed-funds-rate": {
+      "term": "Federal funds rate",
+      "kind": "fact",
+      "def": "The overnight rate banks charge each other for unsecured loans of reserves; the Fed sets a target range for it (3.75–4.00% now).",
+      "why": "The anchor for almost every short-term dollar rate.",
+      "related": [
+        "iorb",
+        "rate-corridor",
+        "sofr"
+      ]
+    },
+    "iorb": {
+      "term": "Interest on reserve balances (IORB)",
+      "kind": "fact",
+      "def": "The rate the Fed pays banks on reserves (3.90% now).",
+      "why": "The Fed's main tool for steering short rates: banks won't lend reserves for less.",
+      "related": [
+        "reserves",
+        "fed-funds-rate",
+        "rate-corridor",
+        "deferred-asset"
+      ]
+    },
+    "rate-corridor": {
+      "term": "Rate corridor",
+      "kind": "fact",
+      "aka": [
+        "floor and ceiling"
+      ],
+      "def": "The band of Fed rates that boxes in overnight rates: the ON RRP rate sets the floor, standing repo the ceiling, and IORB sits in between.",
+      "why": "Where SOFR sits inside the band shows how plentiful cash is.",
+      "related": [
+        "on-rrp",
+        "iorb",
+        "srf",
+        "sofr"
+      ]
+    },
+    "srf": {
+      "term": "Standing repo (SRF / SRP)",
+      "kind": "fact",
+      "aka": [
+        "Standing Repo Facility",
+        "standing repo operations"
+      ],
+      "def": "A Fed facility that lends cash overnight to dealers and banks against Treasuries or mortgage bonds at the top of the corridor.",
+      "why": "Caps repo rate spikes; heavy use (a $74.6B record at end-2025) signals cash is tight.",
+      "related": [
+        "rate-corridor",
+        "repo",
+        "quarter-end",
+        "primary-dealer"
+      ]
+    },
+    "discount-window": {
+      "term": "Discount window",
+      "kind": "fact",
+      "def": "The Fed's lending facility for banks, secured by a wide range of collateral.",
+      "why": "A backstop that banks are reluctant to use because borrowing can look like a sign of trouble.",
+      "related": [
+        "srf",
+        "btfp"
+      ]
+    },
+    "fima-repo": {
+      "term": "FIMA repo facility",
+      "kind": "fact",
+      "def": "Lets foreign central banks borrow dollars overnight from the Fed using their Treasuries as collateral, instead of selling them.",
+      "why": "Prevents forced foreign selling of Treasuries during a dollar crunch.",
+      "related": [
+        "swap-lines",
+        "foreign-official",
+        "foreign-repo-pool"
+      ]
+    },
+    "swap-lines": {
+      "term": "Central bank swap lines",
+      "kind": "fact",
+      "def": "Agreements under which the Fed swaps dollars for another central bank's currency so it can lend dollars to its own banks.",
+      "why": "The global lender-of-last-resort channel for offshore dollar stress (2008, 2020).",
+      "related": [
+        "eurodollar",
+        "cross-currency-basis",
+        "fima-repo"
+      ]
+    },
+    "qe": {
+      "term": "Quantitative easing (QE)",
+      "kind": "fact",
+      "def": "The Fed buying large amounts of Treasuries and mortgage bonds with newly created reserves.",
+      "why": "It grows reserves and removes duration from the market, pushing long yields down.",
+      "related": [
+        "qt",
+        "soma",
+        "reserves",
+        "duration"
+      ]
+    },
+    "qt": {
+      "term": "Quantitative tightening (QT)",
+      "kind": "fact",
+      "def": "The Fed shrinking its portfolio by letting securities mature without replacing them.",
+      "why": "It drained the ON RRP first, then reserves; it ended Dec 1, 2025.",
+      "related": [
+        "qe",
+        "soma",
+        "reserve-management-purchases"
+      ],
+      "aka": [
+        "QT taper (slowing QT before stopping)"
+      ]
+    },
+    "reserve-management-purchases": {
+      "term": "Reserve management purchases (RMPs)",
+      "kind": "fact",
+      "def": "Fed purchases of T-bills meant only to keep reserves ample as currency and the TGA grow, not to ease policy.",
+      "why": "Mechanically they add reserves like QE, but they buy bills rather than duration, which is why the Fed says they are not QE.",
+      "related": [
+        "qe",
+        "qt",
+        "ample-reserves",
+        "t-bill"
+      ]
+    },
+    "ample-reserves": {
+      "term": "Ample reserves",
+      "kind": "heuristic",
+      "def": "The Fed's target state where reserves are plentiful enough that small changes don't move short rates much.",
+      "why": "'No longer ample' means repo rates start trading above IORB, as they have at times in late 2026.",
+      "related": [
+        "reserves",
+        "sofr",
+        "iorb",
+        "reserve-management-purchases"
+      ]
+    },
+    "deferred-asset": {
+      "term": "Deferred asset",
+      "kind": "fact",
+      "def": "An IOU the Fed books when its interest costs exceed its income; it must earn this back before sending profits to Treasury again.",
+      "why": "About $236B. Until it's paid down, the Fed sends Treasury almost none of the $55–110B a year in profits it remitted in 2019–21.",
+      "related": [
+        "iorb",
+        "fed-balance-sheet"
+      ],
+      "aka": [
+        "Fed remittances"
+      ]
+    },
+    "repo": {
+      "term": "Repo",
+      "kind": "fact",
+      "aka": [
+        "repurchase agreement",
+        "reverse repo (the cash lender's side of the same trade)"
+      ],
+      "def": "A short-term loan in which one side sells a Treasury and agrees to buy it back tomorrow at a slightly higher price, like a pawn shop for bonds.",
+      "why": "Trillions a day of repo let investors hold Treasuries with borrowed cash.",
+      "related": [
+        "sofr",
+        "tri-party-repo",
+        "cleared-repo",
+        "bilateral-repo",
+        "haircut"
+      ]
+    },
+    "sofr": {
+      "term": "SOFR",
+      "kind": "fact",
+      "aka": [
+        "Secured Overnight Financing Rate"
+      ],
+      "def": "The average rate on overnight repo backed by Treasuries, published daily by the New York Fed from about $3T of trades.",
+      "why": "It replaced LIBOR as the benchmark for loans and derivatives; SOFR above IORB signals tight cash.",
+      "related": [
+        "repo",
+        "rate-corridor",
+        "ample-reserves"
+      ]
+    },
+    "tri-party-repo": {
+      "term": "Tri-party repo",
+      "kind": "fact",
+      "def": "Repo where a clearing bank (BNY) holds the collateral and handles settlement between the two sides.",
+      "why": "Where money funds lend; it is also how the ON RRP and standing repo settle.",
+      "related": [
+        "repo",
+        "money-market-fund",
+        "cleared-repo"
+      ]
+    },
+    "cleared-repo": {
+      "term": "Cleared repo (FICC)",
+      "kind": "fact",
+      "aka": [
+        "sponsored repo",
+        "DVP repo"
+      ],
+      "def": "Repo that goes through the Fixed Income Clearing Corporation (FICC), a central counterparty, which lets offsetting trades be netted.",
+      "why": "Netting saves dealer balance sheet; the SEC mandate pushes most Treasury repo here by mid-2027.",
+      "related": [
+        "repo",
+        "central-clearing-mandate",
+        "bilateral-repo"
+      ]
+    },
+    "bilateral-repo": {
+      "term": "Bilateral (uncleared) repo",
+      "kind": "fact",
+      "def": "Repo negotiated directly between two firms with no clearing house, often with little or no haircut.",
+      "why": "Where much hedge-fund leverage sits, and the least visible part of the market.",
+      "related": [
+        "repo",
+        "haircut",
+        "basis-trade"
+      ]
+    },
+    "haircut": {
+      "term": "Haircut",
+      "kind": "fact",
+      "def": "The discount a lender applies to collateral; a 2% haircut means lending $98 against $100 of bonds.",
+      "why": "Low haircuts allow high leverage, and rising haircuts force deleveraging.",
+      "related": [
+        "repo",
+        "basis-trade"
+      ]
+    },
+    "money-market-fund": {
+      "term": "Money market fund (MMF)",
+      "kind": "fact",
+      "def": "A fund holding very short, safe assets (bills, repo, ON RRP) that savers treat like cash; about $7.9T.",
+      "why": "MMFs choose between bills, private repo and the ON RRP based on which pays most, and that choice moves liquidity.",
+      "related": [
+        "t-bill",
+        "on-rrp",
+        "repo",
+        "t-bill-and-chill"
+      ]
+    },
+    "bank-deposits": {
+      "term": "Bank deposits",
+      "kind": "fact",
+      "def": "Money households and firms hold at commercial banks; it is a liability of the bank, backed in part by reserves.",
+      "why": "When a deposit holder buys a bill, deposits and reserves both shrink as cash moves to the TGA.",
+      "related": [
+        "reserves",
+        "tga",
+        "money-market-fund"
+      ]
+    },
+    "unrealized-losses": {
+      "term": "Unrealized losses",
+      "kind": "fact",
+      "def": "Drops in the market value of bonds a bank still holds; they don't count against capital unless the bonds are sold, or are marked as available for sale.",
+      "why": "Rate hikes created large losses on bank bond holdings, which turned into a run at SVB in 2023.",
+      "related": [
+        "btfp",
+        "bank-deposits",
+        "duration"
+      ]
+    },
+    "btfp": {
+      "term": "Bank Term Funding Program (BTFP)",
+      "kind": "fact",
+      "def": "An emergency Fed program (2023–24) that lent to banks against Treasuries valued at face value rather than market value.",
+      "why": "It stopped the 2023 bank runs by making underwater bonds full collateral.",
+      "related": [
+        "unrealized-losses",
+        "discount-window"
+      ]
+    },
+    "slr": {
+      "term": "Supplementary leverage ratio (SLR / eSLR)",
+      "kind": "fact",
+      "def": "A capital rule requiring big banks to hold capital against all assets, even safe Treasuries and reserves.",
+      "why": "It limited how many Treasuries dealers could hold; the April 2026 reform loosened it.",
+      "related": [
+        "primary-dealer",
+        "repo",
+        "basis-trade"
+      ]
+    },
+    "basis-trade": {
+      "term": "Basis trade",
+      "kind": "fact",
+      "def": "Hedge funds buy cash Treasuries, sell matching futures, and fund the bonds in repo, earning the small price gap many times over with leverage.",
+      "why": "About $2T in size; when it unwinds quickly (2020, April 2025) Treasuries get dumped all at once.",
+      "related": [
+        "repo",
+        "haircut",
+        "swap-spread",
+        "bilateral-repo"
+      ]
+    },
+    "swap-spread": {
+      "term": "Swap spread",
+      "kind": "fact",
+      "def": "The difference between an interest-rate swap rate and the Treasury yield of the same maturity.",
+      "why": "Negative swap spreads show Treasuries are cheap because dealers lack room to hold them; leveraged trades bet on this.",
+      "related": [
+        "basis-trade",
+        "slr"
+      ]
+    },
+    "central-clearing-mandate": {
+      "term": "Treasury clearing mandate",
+      "kind": "fact",
+      "def": "An SEC rule requiring most Treasury cash trades (by Dec 31, 2026) and repo (by Jun 30, 2027) to go through a central clearing house.",
+      "why": "Aims to make the market safer and more nettable, and changes how hedge funds and dealers finance positions.",
+      "related": [
+        "cleared-repo",
+        "repo",
+        "basis-trade"
+      ]
+    },
+    "tic-data": {
+      "term": "TIC data",
+      "kind": "fact",
+      "aka": [
+        "Treasury International Capital"
+      ],
+      "def": "Treasury's monthly survey of cross-border holdings and flows of securities.",
+      "why": "The source for 'Japan holds $1.07T'; it records where securities are held, not who ultimately owns them.",
+      "related": [
+        "foreign-official",
+        "carry-trade"
+      ]
+    },
+    "foreign-official": {
+      "term": "Foreign official holders",
+      "kind": "fact",
+      "def": "Foreign central banks and governments that hold Treasuries, mostly as currency reserves.",
+      "why": "Now about 41% of foreign holdings, down from most; private foreign buyers are more price-sensitive.",
+      "related": [
+        "tic-data",
+        "fima-repo",
+        "foreign-repo-pool"
+      ]
+    },
+    "eurodollar": {
+      "term": "Eurodollars / offshore dollars",
+      "kind": "fact",
+      "def": "Dollar deposits and loans held at banks outside the US, outside direct Fed control.",
+      "why": "Trillions of offshore dollar debt means global stress becomes a scramble for dollars.",
+      "related": [
+        "cross-currency-basis",
+        "swap-lines"
+      ]
+    },
+    "cross-currency-basis": {
+      "term": "Cross-currency basis",
+      "kind": "fact",
+      "def": "The extra cost of borrowing dollars by swapping another currency, compared with borrowing them directly.",
+      "why": "A widening basis is the price signal of a global dollar shortage.",
+      "related": [
+        "eurodollar",
+        "swap-lines",
+        "dxy"
+      ]
+    },
+    "carry-trade": {
+      "term": "Yen carry trade",
+      "kind": "heuristic",
+      "def": "Borrowing in low-rate yen to invest in higher-yielding assets, including US Treasuries.",
+      "why": "When Japanese rates rise or the yen jumps, carry unwinds can force selling of US assets.",
+      "related": [
+        "boj",
+        "tic-data",
+        "dxy"
+      ]
+    },
+    "boj": {
+      "term": "Bank of Japan (BOJ)",
+      "kind": "fact",
+      "def": "Japan's central bank; its policy rate is 1.25% after the Sep 2026 hike, the highest since 1995.",
+      "why": "Higher JGB yields give Japanese investors, the largest foreign holders of Treasuries, a reason to stay home.",
+      "related": [
+        "carry-trade",
+        "tic-data"
+      ]
+    },
+    "stablecoin": {
+      "term": "Stablecoin",
+      "kind": "fact",
+      "def": "A crypto token meant to stay worth $1, backed by a reserve of cash and short Treasuries held by the issuer.",
+      "why": "About $300B in supply; issuers like Tether and Circle are now among the larger T-bill holders.",
+      "related": [
+        "genius-act",
+        "t-bill",
+        "money-market-fund"
+      ]
+    },
+    "genius-act": {
+      "term": "GENIUS Act",
+      "kind": "fact",
+      "def": "The July 2025 US law regulating payment stablecoins; reserves must be 1:1 in cash, deposits, Treasuries maturing within 93 days, short repo, or government MMFs.",
+      "why": "It makes stablecoin growth a structural source of demand for T-bills.",
+      "related": [
+        "stablecoin",
+        "t-bill"
+      ]
+    },
+    "net-liquidity": {
+      "term": "Fed net liquidity",
+      "kind": "heuristic",
+      "def": "A trader rule of thumb: Fed total assets minus the TGA minus the ON RRP.",
+      "why": "Popular for explaining stock and bitcoin moves; it is not an official measure and its correlation with prices is debated.",
+      "related": [
+        "fed-balance-sheet",
+        "tga",
+        "on-rrp",
+        "liquidity"
+      ]
+    },
+    "liquidity": {
+      "term": "Liquidity (market sense)",
+      "kind": "heuristic",
+      "def": "Loose shorthand for how much cash and easy funding is sloshing around for investors to buy assets with.",
+      "why": "Used in many incompatible ways: reserves, money supply, credit conditions, market depth. Always ask which one.",
+      "related": [
+        "net-liquidity",
+        "reserves",
+        "repo"
+      ]
+    },
+    "real-yield": {
+      "term": "Real yield",
+      "kind": "fact",
+      "def": "The interest rate after inflation, read directly from TIPS yields.",
+      "why": "High real yields raise the cost of holding non-yielding assets like gold or bitcoin, at least in theory.",
+      "related": [
+        "tips",
+        "term-premium"
+      ]
+    },
+    "dxy": {
+      "term": "Dollar index (DXY)",
+      "kind": "fact",
+      "def": "The dollar's value against a basket of six major currencies, mostly the euro.",
+      "why": "A strong dollar tightens conditions for anyone abroad with dollar debts.",
+      "related": [
+        "cross-currency-basis",
+        "eurodollar",
+        "carry-trade"
+      ]
+    },
+    "term-premium": {
+      "term": "Term premium",
+      "kind": "heuristic",
+      "def": "The extra yield investors demand to lock money in a long bond instead of rolling bills; it can only be estimated with models.",
+      "why": "'Term premium is rising' is how markets express worry about supply, inflation or fiscal risk.",
+      "related": [
+        "yield-curve",
+        "bond",
+        "bond-vigilantes"
+      ]
+    },
+    "yield-curve": {
+      "term": "Yield curve",
+      "kind": "fact",
+      "def": "Yields on Treasuries plotted from shortest to longest maturity.",
+      "why": "Its slope shows market expectations for growth, inflation and Fed policy.",
+      "related": [
+        "term-premium",
+        "duration",
+        "bond"
+      ]
+    },
+    "duration": {
+      "term": "Duration",
+      "kind": "fact",
+      "def": "How much a bond's price moves when yields change; a duration of 8 means about an 8% price drop for each 1-point rise in yields.",
+      "why": "Who holds the duration is who takes the losses when rates rise.",
+      "related": [
+        "qe",
+        "unrealized-losses",
+        "yield-curve"
+      ]
+    },
+    "bond-vigilantes": {
+      "term": "Bond vigilantes",
+      "kind": "heuristic",
+      "def": "A nickname for investors who sell government bonds and push yields up to protest loose fiscal or monetary policy.",
+      "why": "A narrative, not an organized group, but rising term premium is how it would show up.",
+      "related": [
+        "term-premium",
+        "fiscal-dominance",
+        "bond"
+      ]
+    },
+    "fiscal-dominance": {
+      "term": "Fiscal dominance",
+      "kind": "heuristic",
+      "def": "A situation where government debt is so large that the central bank feels pressure to keep rates low to keep interest costs manageable.",
+      "why": "Economists disagree on whether the US is near it; it is a core 'debasement' argument in the bitcoin world.",
+      "related": [
+        "net-interest",
+        "bond-vigilantes",
+        "federal-reserve"
+      ]
+    },
+    "rollover-risk": {
+      "term": "Rollover risk",
+      "kind": "fact",
+      "def": "The risk that maturing debt must be refinanced at higher rates, or in a market that doesn't want it.",
+      "why": "About a third of marketable debt matures within a year. The weighted average maturity is about 71 months.",
+      "related": [
+        "t-bill",
+        "turning-over-bills"
+      ],
+      "aka": [
+        "WAM (weighted average maturity, ~71 months)"
+      ]
+    },
+    "turning-over-bills": {
+      "term": "Turning over bills",
+      "kind": "heuristic",
+      "aka": [
+        "rolling bills"
+      ],
+      "def": "Paying off maturing bills by selling new ones, done every week, worth trillions a year.",
+      "why": "Routine, but it means bill rates feed through to Treasury's interest bill within months.",
+      "related": [
+        "t-bill",
+        "rollover-risk"
+      ]
+    },
+    "net-interest": {
+      "term": "Net interest",
+      "kind": "fact",
+      "def": "Interest the government pays on debt held by the public, minus interest it earns; about $1.05T in FY2026.",
+      "why": "About 14% of federal spending, and CBO projects it rising toward 19% by 2036.",
+      "related": [
+        "deficit",
+        "fiscal-dominance",
+        "rollover-risk"
+      ]
+    },
+    "quarter-end": {
+      "term": "Quarter-end / year-end effects",
+      "kind": "fact",
+      "def": "Banks, especially foreign ones, shrink their balance sheets on reporting dates, pulling back from repo.",
+      "why": "Causes predictable repo rate spikes and standing repo usage on the last day of each quarter.",
+      "related": [
+        "srf",
+        "repo",
+        "slr"
+      ]
+    },
+    "rrp-drained": {
+      "term": "\"The RRP is drained\"",
+      "kind": "heuristic",
+      "def": "Shorthand for the ON RRP falling from $2.5T (2022) to near zero by 2025.",
+      "why": "With the cushion gone, any new TGA build or QT drains bank reserves directly.",
+      "related": [
+        "on-rrp",
+        "reserves",
+        "tga",
+        "net-liquidity"
+      ]
+    },
+    "t-bill-and-chill": {
+      "term": "\"T-bill and chill\"",
+      "kind": "heuristic",
+      "def": "Slang for parking cash in T-bills or money funds to earn about 4% with no risk.",
+      "why": "Explains the growth of money funds to $7.9T and the strong demand for bills.",
+      "related": [
+        "t-bill",
+        "money-market-fund"
+      ]
+    }
+  }
+}
