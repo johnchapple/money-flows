@@ -2,7 +2,7 @@
 
 An interactive explainer of US federal debt and dollar flows, set up like a strategy game's codex. The finished product will be a single self-contained HTML page (vanilla JS + SVG).
 
-**Status:** Phases 0–3 are built: data verified against primary sources, Part I (the debt), Part II (the plumbing) and Part III (connections: phrase decoder, rate corridor, crypto bridge, global dollar). Phase 4 (polish and final verification) is next. Open `index.html` in a browser; it needs no server and no build step.
+**Status:** All four phases are built. Part I (the debt), Part II (the plumbing) and Part III (connections), plus a codex and a sources & methodology section. Data last verified against primary sources on 2026-11-04 (`docs/verification.md`). Open `index.html` in a browser; it needs no server and no build step.
 
 | File | What it is |
 |---|---|
@@ -21,6 +21,8 @@ An interactive explainer of US federal debt and dollar flows, set up like a stra
 | `scripts/fetch-history.mjs` | Rebuilds `data/history.json` |
 | `scripts/fetch-rates.mjs` | Rebuilds `data/rates-history.json` |
 | `scripts/sync-data.mjs` | Copies `data/*.json` into `index.html` |
+| `scripts/verify-figures.mjs` | Re-fetches 164 figures from their primary sources and compares them with `data.json`. Writes `docs/verification.md` and records the result in `data.json` |
+| `docs/verification.md` | Latest verification report, including the figures that can't be machine-checked |
 | `scripts/validate-data.mjs` | Checks that glossary links resolve, every figure has source and date fields, and the identities balance |
 
 To refresh the data (needs network access to api.fiscaldata.treasury.gov, fred.stlouisfed.org, www.federalreserve.gov and markets.newyorkfed.org), pull the latest figures for comparing by hand with `data/data.json`:
@@ -53,6 +55,12 @@ After editing any data file, copy the data into the page:
 node scripts/sync-data.mjs
 ```
 
+Re-verify against the sources (exits non-zero on any mismatch):
+
+```bash
+node scripts/verify-figures.mjs
+```
+
 Then run the checks:
 
 ```bash
@@ -62,3 +70,9 @@ node scripts/validate-data.mjs
 ```bash
 node --test
 ```
+
+## Quality checks (Phase 4)
+
+- **Balance-sheet tests** (`node --test`): every scenario step keeps Fed assets = liabilities, moves reserves and deposits together and keeps every bucket non-negative. The refinancing simulator is tested for its starting run-rate, conservation and convergence.
+- **Accessibility:** axe-core reports no violations in light, dark and mobile modes, including with a scenario and a glossary popover open. There is a skip link and arrow-key scenario tabs. Buckets, bars and sliders are keyboard-operable, Escape closes popovers and tooltips, and every focusable element shows a visible focus ring.
+- **Mobile:** no horizontal page scroll on iPhone 13, Pixel 7 or iPad Mini. Controls meet the 24px target size (the map has enlarged invisible hit areas). The flow map becomes a list under 640px, and the maturity wall scrolls inside its own frame.

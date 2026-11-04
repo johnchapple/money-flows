@@ -11,7 +11,90 @@
       "recall": "A well-known historical figure entered from memory. Needs checking against the source.",
       "conflict": "Sources disagree. `note` explains how."
     },
-    "access_note": "First compiled 2026-11-03 from web-search excerpts while primary hosts were blocked. Re-checked the same day against the primary APIs and documents (Fiscal Data API, H.4.1 HTML, FRED, NY Fed markets API) once access was granted. 'primary' now means read directly from the source. Still unreachable: ticdata.treasury.gov, home.treasury.gov, newyorkfed.org (non-API pages), ici.org, financialresearch.gov, issuer sites (Tether, Circle). Update 2026-11-04: ticdata.treasury.gov and home.treasury.gov are now reachable (TIC is primary). www.newyorkfed.org, www.ici.org and www.financialresearch.gov are still refused by the proxy (403 on CONNECT). Update 2026-11-04 (later): www.newyorkfed.org and www.financialresearch.gov now reachable; NY Fed markets API used for SOFR volume. www.ici.org answers 403 itself (bot protection; not bypassed). Still refused by proxy: data.financialresearch.gov, www.sec.gov, tether.to, www.circle.com."
+    "access_note": "First compiled 2026-11-03 from web-search excerpts while primary hosts were blocked. Re-checked the same day against the primary APIs and documents (Fiscal Data API, H.4.1 HTML, FRED, NY Fed markets API) once access was granted. 'primary' now means read directly from the source. Still unreachable: ticdata.treasury.gov, home.treasury.gov, newyorkfed.org (non-API pages), ici.org, financialresearch.gov, issuer sites (Tether, Circle). Update 2026-11-04: ticdata.treasury.gov and home.treasury.gov are now reachable (TIC is primary). www.newyorkfed.org, www.ici.org and www.financialresearch.gov are still refused by the proxy (403 on CONNECT). Update 2026-11-04 (later): www.newyorkfed.org and www.financialresearch.gov now reachable; NY Fed markets API used for SOFR volume. www.ici.org answers 403 itself (bot protection; not bypassed). Still refused by proxy: data.financialresearch.gov, www.sec.gov, tether.to, www.circle.com.",
+    "verification": {
+      "date": "2026-11-04",
+      "checks": 164,
+      "matched": 164,
+      "notMachineChecked": 28,
+      "checkedPaths": [
+        "debt.totalPublicDebt",
+        "debt.debtHeldByPublic",
+        "debt.intragovernmental",
+        "debt.marketableTotal",
+        "debt.nonMarketableTotal",
+        "composition.bills",
+        "composition.notes",
+        "composition.bonds",
+        "composition.tips",
+        "composition.frn",
+        "composition.ffb",
+        "rates_on_debt.avgRateMarketable",
+        "rates_on_debt.avgRateAllInterestBearing",
+        "rates_on_debt.avgRateMarketable2022",
+        "debt.totalPublicDebtLatest",
+        "debt.totalPublicDebtOct16",
+        "debt.crossed40T",
+        "debt.debtLimit",
+        "debt.debtSubjectToLimit",
+        "fed.tga",
+        "budget.grossInterestFY2026",
+        "budget.netInterestFY2026",
+        "budget.deficitFY2026",
+        "issuance.auctionStats",
+        "fed.totalAssets",
+        "fed.somaMBS",
+        "fed.currency",
+        "fed.reverseRepoTotal",
+        "fed.reserves",
+        "fed.somaTreasuries",
+        "fed.deferredAsset",
+        "fed.otherLiabilitiesAndCapital",
+        "issuance.recentAuctionYields",
+        "issuance.couponMix",
+        "issuance.borrowingEstimates",
+        "rates_on_debt.couponsMaturingNext12m",
+        "rates_on_debt.shareMaturingWithin12m",
+        "fed.onRrp",
+        "fed.foreignRepoPool",
+        "holders.fedSep30",
+        "holders.bankDeposits",
+        "policy_rates.sofr",
+        "policy_rates.effr",
+        "policy_rates.ffTargetLow",
+        "policy_rates.ffTargetHigh",
+        "policy_rates.iorb",
+        "policy_rates.onRrpRate",
+        "policy_rates.srfRate",
+        "market_yields.y3m",
+        "market_yields.y2",
+        "market_yields.y5",
+        "market_yields.y10",
+        "market_yields.y20",
+        "market_yields.y30",
+        "market_plumbing.srfRecord",
+        "market_plumbing.srfSep2026QuarterEnd",
+        "history_anchors.repoSpike2019",
+        "connections.termPremium",
+        "connections.realYield10",
+        "connections.dollarIndex",
+        "connections.bitcoin",
+        "connections.swapLinesNow",
+        "connections.swapLinesPeak2008",
+        "connections.swapLinesPeak2020",
+        "fed.onRrpPeak",
+        "fed.totalAssetsPeak",
+        "history_anchors.reservesPeak",
+        "holders.bySector",
+        "holders.z1Total",
+        "holders.foreignTotal",
+        "holders.foreignByCountry",
+        "holders.foreignTotalTIC",
+        "market_plumbing.sofrVolume",
+        "fed.billPurchases"
+      ],
+      "report": "docs/verification.md"
+    }
   },
   "debt": {
     "totalPublicDebt": {
@@ -273,24 +356,22 @@
     },
     "shareMaturingWithin12m": {
       "label": "Share of marketable debt maturing within 12 months",
-      "value": 33,
+      "value": 33.4,
       "unit": "%",
-      "asOf": "2025-09-30",
-      "source": "GAO-26-107529, Federal Debt Management",
-      "url": "https://files.gao.gov/reports/GAO-26-107529/index.html",
-      "status": "primary",
-      "note": "Conference Board gives about 33% for Q3 FY2026 as well. Up from 24% in Sep 2014."
+      "asOf": "2026-09-30",
+      "status": "derived",
+      "formula": "Σ outstanding with maturity Oct 2026–Sep 2027 ÷ marketable total, from MSPD Table III (data/maturities.json)",
+      "note": "GAO-26-107529 reports 33% for Sep 2025 (secondary; files.gao.gov unreachable)."
     },
     "couponsMaturingNext12m": {
       "label": "Fixed-rate notes & bonds maturing Oct 2026 – Sep 2027",
-      "value": 2950,
-      "avgCoupon": 2.98,
+      "value": 2946.2,
+      "avgCoupon": 2.983,
       "unit": "USD bn",
       "asOf": "2026-09-30",
-      "source": "dollarliquidity.com (aggregates MSPD detail)",
-      "url": "https://dollarliquidity.com/en/treasury-maturities",
-      "status": "secondary",
-      "note": "Plus $575.8bn of TIPS and FRNs in the same window. Used as the check on the modeled maturity schedule."
+      "status": "derived",
+      "note": "dollarliquidity.com reported $2,950bn at 2.98%, consistent. TIPS + FRNs in the same window: $575.8bn (MSPD).",
+      "formula": "notes + bonds maturing Oct 2026–Sep 2027, MSPD Table III (scripts/build-maturities-mspd.mjs)"
     }
   },
   "budget": {
@@ -329,8 +410,8 @@
         "publicIssues": 1068.5,
         "governmentAccountSeries": 291.9
       },
-      "first10Months": 1170.1,
-      "note": "Gross includes interest paid to trust funds (the government paying itself). Fiscal year to Jul 31: $1,170.1bn, which confirms the \"$1.17T in 10 months\" figure."
+      "first10Months": 1170,
+      "note": "Gross includes interest paid to trust funds (the government paying itself). Fiscal year to Jul 31: $1,170.0bn, which confirms the \"$1.17T in 10 months\" figure."
     },
     "netInterestShareOutlays": {
       "label": "Net interest as share of total outlays, FY2026",
@@ -347,7 +428,7 @@
       "asOf": "2026-02-11",
       "source": "CBO, The Budget and Economic Outlook: 2026 to 2036 (Feb 2026)",
       "url": "https://www.cbo.gov/publication/62105",
-      "status": "primary",
+      "status": "secondary",
       "series": [
         {
           "fy": 2026,
@@ -362,7 +443,7 @@
           "outlays": 11416
         }
       ],
-      "note": "Share of outlays: 13.9% (2026) → 18.8% (2036), derived. CBO: rising average interest rates account for about half the increase."
+      "note": "Share of outlays: 13.9% (2026) → 18.8% (2036), derived. CBO: rising average interest rates account for about half the increase. Read via a search excerpt; the host was unreachable from this environment, so not opened directly."
     },
     "primaryDeficitFY2026": {
       "label": "Primary deficit, FY2026 (deficit excluding net interest)",
@@ -429,7 +510,7 @@
       "status": "primary",
       "history": [
         {
-          "asOf": "2026-10-01",
+          "asOf": "2026-09-30",
           "value": 984.046
         },
         {
@@ -548,7 +629,8 @@
       "asOf": "2026-10-29",
       "source": "NY Fed Treasury operations; FOMC implementation notes",
       "url": "https://markets.newyorkfed.org/api/tsy/all/results/summary/last/200.json",
-      "status": "primary"
+      "status": "primary",
+      "note": "The Dec 2025 start of bill purchases and their monthly sizes are verified against NY Fed operation results. The Dec 1 2025 end date of QT is from FOMC implementation notes read via search excerpts."
     },
     "otherAssets": {
       "label": "Other Fed assets",
@@ -638,7 +720,7 @@
     },
     "ffTargetHigh": {
       "label": "Fed funds target range, upper bound",
-      "value": 4.0,
+      "value": 4,
       "unit": "%",
       "asOf": "2026-10-28",
       "source": "FOMC statement, Oct 28 2026",
@@ -666,7 +748,7 @@
     },
     "srfRate": {
       "label": "Standing repo operations minimum bid rate (ceiling)",
-      "value": 4.0,
+      "value": 4,
       "unit": "%",
       "asOf": "2026-10-29",
       "source": "FOMC implementation note, Oct 28 2026",
@@ -676,7 +758,7 @@
     },
     "primaryCredit": {
       "label": "Discount window primary credit rate",
-      "value": 4.0,
+      "value": 4,
       "unit": "%",
       "asOf": "2026-10-29",
       "source": "Federal Reserve, Oct 28 2026",
@@ -814,7 +896,7 @@
         {
           "country": "China, mainland",
           "value": 590.7,
-          "prev": 618.0
+          "prev": 618
         },
         {
           "country": "Belgium",
@@ -828,7 +910,7 @@
         },
         {
           "country": "Cayman Islands",
-          "value": 463.0,
+          "value": 463,
           "prev": 460.1
         },
         {
@@ -873,13 +955,13 @@
         },
         {
           "country": "Norway",
-          "value": 214.0,
+          "value": 214,
           "prev": 206.9
         },
         {
           "country": "Brazil",
           "value": 168.4,
-          "prev": 168.0
+          "prev": 168
         },
         {
           "country": "Saudi Arabia",
@@ -1118,7 +1200,7 @@
       "percentiles": {
         "p1": 3.9,
         "p25": 3.92,
-        "p75": 4.0,
+        "p75": 4,
         "p99": 4.03
       },
       "note": "SOFR covers tri-party, GCF and FICC-cleared bilateral repo. BGCR (tri-party + GCF) was $1,250bn, so cleared bilateral ≈ $2,018bn (derived). A quarter of SOFR volume traded at or above 4.00%, the standing repo rate."
@@ -1155,28 +1237,29 @@
     "geniusAct": {
       "label": "GENIUS Act signed",
       "value": "2025-07-18",
-      "status": "primary",
+      "status": "secondary",
       "source": "Public Law (GENIUS Act, S.1582)",
       "url": "https://www.congress.gov/bill/119th-congress/senate-bill/1582",
-      "note": "Reserves must be 1:1 in: coins and currency; demand deposits; Treasury bills, notes or bonds with ≤93 days remaining maturity; repurchase agreements (maturity ≤7 days, overnight preferred) backed by such Treasury bills; government MMFs investing only in these; central bank reserve deposits. Agencies had to finalize rules by Jul 18 2026. Effective by Jan 18 2027 at the latest (or 120 days after final rules). OCC final rule: Bulletin 2026-50 (Oct 2026)."
+      "note": "Reserves must be 1:1 in: coins and currency; demand deposits; Treasury bills, notes or bonds with ≤93 days remaining maturity; repurchase agreements (maturity ≤7 days, overnight preferred) backed by such Treasury bills; government MMFs investing only in these; central bank reserve deposits. Agencies had to finalize rules by Jul 18 2026. Effective by Jan 18 2027 at the latest (or 120 days after final rules). OCC final rule: Bulletin 2026-50 (Oct 2026). Read via a search excerpt; the host was unreachable from this environment, so not opened directly."
     },
     "eslr": {
       "label": "eSLR reform final rule",
       "value": "2026-04-01",
-      "status": "primary",
+      "status": "secondary",
       "source": "Federal Register, Dec 1 2025 (90 FR 55248)",
       "url": "https://www.federalregister.gov/documents/2025/12/01/2025-21626/",
-      "note": "Effective Apr 1 2026, with early adoption allowed from Jan 1 2026. Replaces the fixed 2% eSLR buffer for G-SIB holding companies with one tied to each bank's G-SIB surcharge (half of method 1). Frees balance sheet for dealers to hold and finance Treasuries."
+      "note": "Effective Apr 1 2026, with early adoption allowed from Jan 1 2026. Replaces the fixed 2% eSLR buffer for G-SIB holding companies with one tied to each bank's G-SIB surcharge (half of method 1). Frees balance sheet for dealers to hold and finance Treasuries. Read via a search excerpt; the host was unreachable from this environment, so not opened directly."
     },
     "clearingMandate": {
       "label": "SEC Treasury central clearing mandate",
-      "status": "primary",
+      "status": "secondary",
       "source": "SEC, Commissioner Uyeda statement Aug 2026",
       "url": "https://www.sec.gov/newsroom/speeches-statements/uyeda-statement-update-secs-work-toward-treasury-clearing-implementation-080726-update-secs-work-toward-treasury-clearing-implementation-august-2026",
       "dates": {
         "cash": "2026-12-31",
         "repo": "2027-06-30"
-      }
+      },
+      "note": "Read via a search excerpt; the host was unreachable from this environment, so not opened directly."
     }
   },
   "global": {

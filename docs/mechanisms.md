@@ -229,7 +229,7 @@ Rechecked 2026-11-03 against primary sources. Items marked ✅ are resolved, wit
 6. ✅ **Yields, Nov 2**: 3m 4.21, 2y 4.59, 5y 4.70, 10y 4.91, 20y 5.31, 30y 5.28. The 3-month bill sits above the top of the funds range, pricing in another hike.
 7. ✅ **SOFR**: 3.95% on Nov 2 (FRED).
 8. ✅ **Gross debt in August**: $39,891.8B on Aug 10 (your ≈$39.9T). First above $40T on **Aug 18, 2026**. $40,175.6B on Aug 31.
-9. ✅ **Interest in the first 10 months**: $1,170.1B gross through July (Interest Expense dataset). Full FY2026 $1,360.4B gross, $1,052B net (MTS).
+9. ✅ **Interest in the first 10 months**: $1,170.0B gross through July (Interest Expense dataset). Full FY2026 $1,360.4B gross, $1,052B net (MTS).
 10. ✅ **Fed total assets**: $6,745.6B (Oct 28).
 11. ⬜ **Tether T-bills**: $114.9B vs ~$141B. Issuer sites are still unreachable.
 12. ✅ **Standing repo on Sep 30 2026**: $1.2B (FRED RPONTTLD). Record $74.6B on Dec 31 2025.
@@ -259,3 +259,8 @@ Rechecked 2026-11-03 against primary sources. Items marked ✅ are resolved, wit
 30. No free daily series for the cross-currency basis was found, so the global-dollar section describes it without a chart.
 31. The refunding policy statement (auction sizes) was due 8:30 a.m. ET Nov 4 2026 and isn't yet reflected. Check whether the coupon sizes in data.issuance.couponMix changed.
 32. Still secondary because hosts are unreachable: ICI money-fund assets (ici.org returns 403 to automated clients), OFR repo size (data.financialresearch.gov refused by the proxy), Form PF hedge-fund repo (sec.gov refused), and Tether/Circle reserves (tether.to and circle.com refused).
+
+### Phase 4 notes
+33. Verification (2026-11-04): 164/164 automated checks match their primary sources (see docs/verification.md). Two data errors were found and fixed. A TGA value labeled Oct 1 was really the Sep 30 closing balance ($984.0B; Oct 1 closed at $893.7B). Interest through July is $1,170.0B, not $1,170.1B.
+34. Downgraded to secondary because their hosts were unreachable: GENIUS Act, eSLR and clearing-mandate dates (congress.gov, federalregister.gov, sec.gov) and CBO projections (cbo.gov). GAO's 33% is replaced by the MSPD-derived 33.4%.
+35. On tablets, the map's thin Fed segments have 22px hit areas spaced 30 SVG units apart; that relies on the WCAG 2.2 spacing exception.
