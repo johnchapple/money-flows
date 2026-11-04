@@ -11,7 +11,7 @@
       "recall": "A well-known historical figure entered from memory. Needs checking against the source.",
       "conflict": "Sources disagree. `note` explains how."
     },
-    "access_note": "First compiled 2026-11-03 from web-search excerpts while primary hosts were blocked. Re-checked the same day against the primary APIs and documents (Fiscal Data API, H.4.1 HTML, FRED, NY Fed markets API) once access was granted. 'primary' now means read directly from the source. Still unreachable: ticdata.treasury.gov, home.treasury.gov, newyorkfed.org (non-API pages), ici.org, financialresearch.gov, issuer sites (Tether, Circle). Update 2026-11-04: ticdata.treasury.gov and home.treasury.gov are now reachable (TIC is primary). www.newyorkfed.org, www.ici.org and www.financialresearch.gov are still refused by the proxy (403 on CONNECT)."
+    "access_note": "First compiled 2026-11-03 from web-search excerpts while primary hosts were blocked. Re-checked the same day against the primary APIs and documents (Fiscal Data API, H.4.1 HTML, FRED, NY Fed markets API) once access was granted. 'primary' now means read directly from the source. Still unreachable: ticdata.treasury.gov, home.treasury.gov, newyorkfed.org (non-API pages), ici.org, financialresearch.gov, issuer sites (Tether, Circle). Update 2026-11-04: ticdata.treasury.gov and home.treasury.gov are now reachable (TIC is primary). www.newyorkfed.org, www.ici.org and www.financialresearch.gov are still refused by the proxy (403 on CONNECT). Update 2026-11-04 (later): www.newyorkfed.org and www.financialresearch.gov now reachable; NY Fed markets API used for SOFR volume. www.ici.org answers 403 itself (bot protection; not bypassed). Still refused by proxy: data.financialresearch.gov, www.sec.gov, tether.to, www.circle.com."
   },
   "debt": {
     "totalPublicDebt": {
@@ -1104,13 +1104,24 @@
     },
     "sofrVolume": {
       "label": "SOFR underlying daily volume",
-      "value": 3000,
+      "value": 3268,
       "unit": "USD bn/day",
-      "asOf": "2026-09-01",
+      "asOf": "2026-11-02",
+      "source": "NY Fed reference rates (markets API)",
+      "url": "https://markets.newyorkfed.org/api/rates/secured/sofr/last/1.json",
       "status": "primary",
-      "source": "NY Fed, Teller Window: 'A Framework for Understanding the U.S. Treasury Repo Market'",
-      "url": "https://tellerwindow.newyorkfed.org/2026/09/01/a-framework-for-understanding-the-u-s-treasury-repo-market/",
-      "note": "Up from ~$1T in early 2022. H1 2026 split: cleared bilateral (FICC DVP) ~$1,855bn, tri-party ~$1,280bn, GCF ~$31bn (secondary chart)."
+      "parts": {
+        "triParty_TGCR": 1218,
+        "broadGC_BGCR": 1250,
+        "clearedBilateral_derived": 2018
+      },
+      "percentiles": {
+        "p1": 3.9,
+        "p25": 3.92,
+        "p75": 4.0,
+        "p99": 4.03
+      },
+      "note": "SOFR covers tri-party, GCF and FICC-cleared bilateral repo. BGCR (tri-party + GCF) was $1,250bn, so cleared bilateral ≈ $2,018bn (derived). A quarter of SOFR volume traded at or above 4.00%, the standing repo rate."
     },
     "hedgeFundRepoBorrowing": {
       "label": "Hedge fund repo borrowing (gross)",
@@ -1344,6 +1355,138 @@
         }
       ],
       "note": "Yields peaked in early October 2026 (same week as the JGB 30y record) and fell back by Nov 2 (10y 4.91%)."
+    },
+    "borrowingEstimates": {
+      "label": "Privately-held net marketable borrowing estimates",
+      "asOf": "2026-11-02",
+      "status": "primary",
+      "source": "Treasury press release sb0675, \"Treasury Announces Marketable Borrowing Estimates\" (Nov 2 2026)",
+      "url": "https://home.treasury.gov/news/press-releases/sb0675",
+      "series": [
+        {
+          "quarter": "Jul–Sep 2026 (actual)",
+          "borrowing": 742,
+          "endCash": 984
+        },
+        {
+          "quarter": "Oct–Dec 2026",
+          "borrowing": 618,
+          "endCash": 850
+        },
+        {
+          "quarter": "Jan–Mar 2027",
+          "borrowing": 800,
+          "endCash": 1000
+        }
+      ],
+      "note": "Excludes SOMA rollovers. The refunding policy statement (auction sizes) is scheduled for 8:30 a.m. ET Nov 4 2026; not yet incorporated."
+    },
+    "auctionStats": {
+      "label": "Recent coupon auction results",
+      "asOf": "2026-10-08",
+      "status": "primary",
+      "source": "Treasury auction results (Fiscal Data API, auctions_query)",
+      "url": "https://fiscaldata.treasury.gov/datasets/treasury-securities-auctions-data/",
+      "series": [
+        {
+          "date": "2026-10-06",
+          "term": "3-year",
+          "highYield": 4.932,
+          "bidToCover": 2.62,
+          "dealers": 6.121,
+          "indirect": 32.826,
+          "direct": 18.048,
+          "total": 59.378
+        },
+        {
+          "date": "2026-10-07",
+          "term": "10-year (reopening)",
+          "highYield": 5.3,
+          "bidToCover": 2.77,
+          "dealers": 0.984,
+          "indirect": 31.063,
+          "direct": 6.618,
+          "total": 39.926
+        },
+        {
+          "date": "2026-10-08",
+          "term": "30-year (reopening)",
+          "highYield": 5.618,
+          "bidToCover": 2.54,
+          "dealers": 1.491,
+          "indirect": 15.866,
+          "direct": 4.583,
+          "total": 22.523
+        }
+      ],
+      "note": "USD bn accepted. Indirect bidders are mostly foreign central banks and investors bidding through dealers; direct bidders bid for their own account. Totals include SOMA add-ons where applicable."
+    }
+  },
+  "connections": {
+    "_note": "Figures for Part III: phrase decoder, rate corridor, crypto bridge, global dollar. All via FRED.",
+    "termPremium": {
+      "label": "10-year term premium (Kim-Wright model estimate)",
+      "value": 0.91,
+      "unit": "%",
+      "asOf": "2026-10-30",
+      "source": "Federal Reserve Board (Kim-Wright) via FRED THREEFYTP10",
+      "url": "https://fred.stlouisfed.org/series/THREEFYTP10",
+      "status": "primary",
+      "note": "A model estimate, not an observed price. Other models (e.g. the NY Fed ACM model) give different levels. It was −0.20% in Jan 2020."
+    },
+    "realYield10": {
+      "label": "10-year TIPS (real) yield",
+      "value": 2.62,
+      "unit": "%",
+      "asOf": "2026-11-02",
+      "source": "Treasury via FRED DFII10",
+      "url": "https://fred.stlouisfed.org/series/DFII10",
+      "status": "primary"
+    },
+    "dollarIndex": {
+      "label": "Nominal broad US dollar index",
+      "value": 121.67,
+      "unit": "index (Jan 2006 = 100)",
+      "asOf": "2026-10-30",
+      "source": "Federal Reserve H.10 via FRED DTWEXBGS",
+      "url": "https://fred.stlouisfed.org/series/DTWEXBGS",
+      "status": "primary"
+    },
+    "bitcoin": {
+      "label": "Bitcoin price (Coinbase)",
+      "value": 76934,
+      "unit": "USD",
+      "asOf": "2026-11-03",
+      "source": "Coinbase via FRED CBBTCUSD",
+      "url": "https://fred.stlouisfed.org/series/CBBTCUSD",
+      "status": "primary"
+    },
+    "swapLinesNow": {
+      "label": "Central bank liquidity swaps outstanding",
+      "value": 0.156,
+      "unit": "USD bn",
+      "asOf": "2026-10-28",
+      "source": "Federal Reserve H.4.1 via FRED SWPT",
+      "url": "https://fred.stlouisfed.org/series/SWPT",
+      "status": "primary"
+    },
+    "swapLinesPeak2008": {
+      "label": "Swap lines peak (2008)",
+      "value": 583.135,
+      "unit": "USD bn",
+      "asOf": "2008-12-17",
+      "source": "FRED SWPT",
+      "url": "https://fred.stlouisfed.org/series/SWPT",
+      "status": "primary"
+    },
+    "swapLinesPeak2020": {
+      "label": "Swap lines peak (2020)",
+      "value": 448.946,
+      "unit": "USD bn",
+      "asOf": "2020-05-27",
+      "source": "FRED SWPT",
+      "url": "https://fred.stlouisfed.org/series/SWPT",
+      "status": "primary"
     }
   }
 }

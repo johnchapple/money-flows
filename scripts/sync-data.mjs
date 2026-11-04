@@ -14,6 +14,6 @@ if (begin < 0 || end < 0) throw new Error('DATA markers not found in index.html'
 const headerEnd = html.indexOf('*/', begin) + 2;
 const mat = JSON.parse(readFileSync(join(root, 'data/maturities.json'), 'utf8'));
 const MAT = JSON.stringify({ _meta: { ...mat._meta, checks: undefined }, allMonths: mat.allMonths });
-const block = `\nconst DATA = ${read('data/data.json')};\nconst GLOSSARY = ${read('data/glossary.json')};\nconst HISTORY = ${read('data/history.json')};\nconst MATURITIES = ${MAT};\n`;
+const block = `\nconst DATA = ${read('data/data.json')};\nconst GLOSSARY = ${read('data/glossary.json')};\nconst HISTORY = ${read('data/history.json')};\nconst MATURITIES = ${MAT};\nconst RATES = ${read('data/rates-history.json')};\n`;
 writeFileSync(page, html.slice(0, headerEnd) + block + html.slice(end));
 console.log(`index.html: DATA block updated (${(block.length / 1024).toFixed(0)} KB)`);

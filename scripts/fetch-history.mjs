@@ -28,6 +28,14 @@ const series = {
   dealers:      { id: 'BOGZ1FL663061105Q', scale: 1e-3, label: 'Broker-dealers: Treasury securities, net (Z.1)' },
   households:   { id: 'BOGZ1LM153061105Q', scale: 1e-3, label: 'Households & nonprofits (incl. hedge funds): Treasury securities (Z.1)' },
   fedTreasuries:{ id: 'WSHOTSL', scale: 1e-3, label: 'Fed: Treasury securities held outright (Wednesday)' },
+  y10:          { id: 'DGS10', scale: 1, unit: '%', label: '10-year Treasury yield' },
+  y30:          { id: 'DGS30', scale: 1, unit: '%', label: '30-year Treasury yield' },
+  y2:           { id: 'DGS2', scale: 1, unit: '%', label: '2-year Treasury yield' },
+  termPremium:  { id: 'THREEFYTP10', scale: 1, unit: '%', label: '10-year term premium (Kim-Wright model estimate)' },
+  realYield:    { id: 'DFII10', scale: 1, unit: '%', label: '10-year TIPS (real) yield' },
+  dollar:       { id: 'DTWEXBGS', scale: 1, unit: 'index', label: 'Nominal broad US dollar index (Jan 2006 = 100)' },
+  bitcoin:      { id: 'CBBTCUSD', scale: 1, unit: 'USD', label: 'Bitcoin price, Coinbase (USD)' },
+  swaps:        { id: 'SWPT', scale: 1e-3, label: 'Central bank liquidity swaps outstanding (Wednesday)' },
 };
 
 async function fred(id) {
@@ -43,11 +51,20 @@ function monthly(rows, agg) {
 const out = { _meta: { fetched: new Date().toISOString().slice(0, 10), unit: 'USD bn unless unit says %', start: START, note: 'Monthly sample: the last observation in each month (standing repo: the monthly maximum). Z.1 series are quarterly (first day of the quarter = end-of-quarter level).' }, series: {} };
 for (const [k, s] of Object.entries(series)) {
   try {
-    const rows = monthly(await fred(s.id), s.agg).map(([d, v]) => [d, s.unit ? Math.round(v * 100) / 100 : Math.round(v * s.scale * 10) / 10]);
+    const rows = monthly(await fred(s.id), s.agg).map(([d, v]) => [d, s.unit === 'USD' ? Math.round(v) : s.unit ? Math.round(v * 100) / 100 : Math.round(v * s.scale * 10) / 10]);
     out.series[k] = { label: s.label, unit: s.unit || 'USD bn', source: `FRED ${s.id}`, url: `https://fred.stlouisfed.org/series/${s.id}`, data: rows };
     console.log('ok  ', k, rows.length, rows.at(-1));
   } catch (e) { console.log('FAIL', k, e.message); }
 }
+// Fed "net liquidity" (trader heuristic): Wednesday total assets − Wednesday TGA − ON RRP that Wednesday.
+try {
+  const [A, T, R] = await Promise.all([fred('WALCL'), fred('WDTGAL'), fred('RRPONTSYD')]);
+  const tga = new Map(T), rrp = new Map(R);
+  const weekly = A.filter(([d]) => tga.has(d)).map(([d, a]) => [d, (a - tga.get(d)) / 1e3 - (rrp.get(d) ?? 0)]);
+  out.series.netLiquidity = { label: 'Fed net liquidity = total assets − TGA − ON RRP (Wednesdays; trader heuristic)', unit: 'USD bn', source: 'FRED WALCL, WDTGAL, RRPONTSYD', url: 'https://fred.stlouisfed.org/series/WALCL',
+    data: monthly(weekly).map(([d, v]) => [d, Math.round(v * 10) / 10]) };
+  console.log('ok   netLiquidity', out.series.netLiquidity.data.at(-1));
+} catch (e) { console.log('FAIL netLiquidity', e.message); }
 // Marketable debt outstanding, monthly (MSPD Table I)
 try {
   const u = 'https://api.fiscaldata.treasury.gov/services/api/fiscal_service/v1/debt/mspd/mspd_table_1?filter=security_type_desc:eq:Total%20Marketable,record_date:gte:2015-01-01&sort=record_date&page[size]=500&fields=record_date,total_mil_amt';

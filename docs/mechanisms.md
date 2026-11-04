@@ -244,7 +244,7 @@ Rechecked 2026-11-03 against primary sources. Items marked ✅ are resolved, wit
 19. When money funds buy bills with cash they would otherwise lend in **private repo** (not the ON RRP), does the drain fall on reserves one for one, or do dealers replace the funding in ways that change the split? The flow map currently treats "private repo" as ultimately backed by bank deposits, so reserves fall.
 20. Does the **foreign official repo pool** pay the ON RRP rate, or a rate tied to it? What has kept it at about $325B?
 21. Is the Fed's **deferred asset** still shrinking after the Sep 2026 hike? Table 6 shows $232.5B on Oct 28, down from ~$236B in July, so it is shrinking slowly. ✅ partly answered.
-22. What is Treasury's current **TGA target** (end-of-quarter cash balance)? The TGA fell from $1,052B (Oct 27) to $931B (Nov 2), driven by month-end payments.
+22. ✅ **TGA target**: Treasury's Nov 2 2026 borrowing estimates (press release sb0675) assume $850B at end-December 2026 and $1.000T at end-March 2027, with $618B and $800B of net borrowing. The quarter ended Sep 30 with $984B.
 23. **GENIUS Act final rules**: did the OCC final rule (Bulletin 2026-50) keep the 93-day limit unchanged, and what is the binding effective date?
 24. **Net T-bill demand from stablecoins**: how much is new demand versus displaced demand from money funds and banks? Is there research from the Fed, BIS or TBAC to cite?
 25. **eSLR reform details**: is the new buffer exactly 50% of the method-1 G-SIB surcharge?
@@ -253,3 +253,9 @@ Rechecked 2026-11-03 against primary sources. Items marked ✅ are resolved, wit
 
 ### Part I model notes
 28. The refinancing simulator rolls about a third of the bill stock each month (calibrated to the Sep 30 schedule: 36% of bills mature in October). It treats FRNs as bills and counts TIPS at their real coupon. Its starting run-rate ($1,054B a year, from MSPD coupons and bill yields) is close to actual FY2026 interest on public issues ($1,068.5B). The MSPD-based average rates (bills 3.76%, notes 3.31%) differ slightly from Treasury's published average interest rates (3.87%, 3.38%), probably because of weighting and method. Which one is the better simulator input?
+
+### Part III notes
+29. The term premium shown is the Kim-Wright model estimate (FRED THREEFYTP10). The NY Fed's ACM estimate differs in level. Should the page show both?
+30. No free daily series for the cross-currency basis was found, so the global-dollar section describes it without a chart.
+31. The refunding policy statement (auction sizes) was due 8:30 a.m. ET Nov 4 2026 and isn't yet reflected. Check whether the coupon sizes in data.issuance.couponMix changed.
+32. Still secondary because hosts are unreachable: ICI money-fund assets (ici.org returns 403 to automated clients), OFR repo size (data.financialresearch.gov refused by the proxy), Form PF hedge-fund repo (sec.gov refused), and Tether/Circle reserves (tether.to and circle.com refused).
