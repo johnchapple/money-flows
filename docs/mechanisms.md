@@ -267,4 +267,4 @@ Rechecked 2026-11-03 against primary sources. Items marked ✅ are resolved, wit
 
 ### Learning path ("Start here")
 36. Eight lessons in the tested engine (LESSONS in index.html): IOUs and reserves → TGA → borrowing with bills → short vs long debt → the Fed's balance sheet (QE/QT) → the ON RRP → repo and leverage → the rate corridor. The toy balance sheets are simplified on purpose: banks' equity, the Treasury's "net position" as the balancing line, no currency. Each lesson says which simplification it makes only where it matters.
-37. Ideas not yet built: (a) a "guided mode" on the full map that dims everything except the buckets a scenario step touches; (b) a short glossary quiz at the end; (c) the historical slider (2007 → today) as a final "watch it happen" lesson.
+37. Built: focus mode on the full map (on by default, with a toggle) fades every bucket a scenario step doesn't touch. Ideas not yet built: (b) a short glossary quiz at the end; (c) the historical slider (2007 → today) as a final "watch it happen" lesson.

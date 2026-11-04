@@ -72,6 +72,9 @@ hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
 #map .seg rect { fill: var(--fill); stroke: var(--ink-2); stroke-width: 1; }
 #map .seg.zero rect { stroke-dasharray: 2 2; }
 #map .node, #map .seg { cursor: pointer; }
+#map .node, #map .seg, #map .tbox, #map .hub { transition: opacity .3s; }
+#map.focus .dim { opacity: .22; }
+#map.focus .pipe, #map.focus .pipe-core { opacity: .45; }
 #map .hitpad { fill: transparent !important; stroke: none !important; }
 #map [data-id]:focus { outline: none; }
 #map [data-id]:focus-visible circle, #map [data-id]:focus-visible rect { stroke: var(--accent) !important; stroke-width: 3 !important; }
@@ -953,7 +956,7 @@ const rOf = (v) => Math.max(2.5, 0.55 * Math.sqrt(Math.max(v, 0)));
 // ---------- state ----------
 const S0 = initialState(DATA);
 let cur = { ...S0 }, shown = { ...S0 }, sel = null, scen = null, variant = null, step = 0, built = null;
-let lastDelta = {};
+let lastDelta = {}; let lastFlows = []; let guided = true;
 
 // ---------- map geometry ----------
 const TOP = 160, HMAX = 330, AX = 395, LX = 505, CW = 100;
@@ -1088,6 +1091,11 @@ function render(s) {
     e.t1.textContent = B[id].short; e.t2.textContent = fmtC(s[id]);
     e.dl.textContent = '';
   }
+  // focus mode: during a scenario step, fade everything the step doesn't touch
+  const involved = new Set([...Object.keys(lastDelta), ...lastFlows.flatMap(([a, b]) => [FLOW_ALIAS[a] || a, FLOW_ALIAS[b] || b])]);
+  const focusOn = guided && scen && step > 0 && involved.size > 0;
+  svg.classList.toggle('focus', focusOn);
+  for (const [id, info] of Object.entries({ ...built.segEls, ...built.nodeEls })) info.g.classList.toggle('dim', focusOn && !involved.has(id) && sel !== id);
   // deltas & highlight
   for (const [id, info] of Object.entries({ ...built.segEls, ...built.nodeEls })) {
     const dv = lastDelta[id] || 0; info.g.classList.toggle('chg', Math.abs(dv) > 1e-9); info.g.classList.toggle('neg', dv < 0);
@@ -1230,7 +1238,7 @@ function startScenario(i, vId) {
   for (let j = 1; j < built.run.states.length; j++) { const errs = checkStep(built.run.states[j - 1], built.run.states[j]); if (errs.length) console.error(scen.id, 'step', j, errs); }
   document.querySelectorAll('#sc-list [role=tab]').forEach((b) => { b.setAttribute('aria-selected', b.dataset.i == i); b.tabIndex = b.dataset.i == i ? 0 : -1; });
   $('#sc-box').setAttribute('aria-labelledby', 'tab-' + scen.id);
-  lastDelta = diff(S0, built.run.states[0]);
+  lastDelta = diff(S0, built.run.states[0]); lastFlows = [];
   goTo(built.run.states[0]); renderScenario();
 }
 function diff(a, b) { const d = {}; for (const k in b) if (Math.abs(b[k] - a[k]) > 1e-9 && !k.startsWith('R.')) d[k] = b[k] - a[k]; return d; }
@@ -1239,6 +1247,7 @@ function setStep(n) {
   const prev = built.run.states[step], next = built.run.states[n];
   lastDelta = diff(prev, next);
   const flows = n === step + 1 ? (built.run.steps[n - 1].flows || []) : [];
+  lastFlows = n ? (built.run.steps[n - 1].flows || []) : [];
   step = n; goTo(next, flows); renderScenario();
 }
 function renderScenario() {
@@ -1262,12 +1271,14 @@ function renderScenarioInner() {
     <div class="stepnav"><span class="pos">step ${step} of ${nSteps}</span>
       <button type="button" id="sb" ${step === 0 ? 'disabled' : ''} aria-label="Previous step">← back</button>
       <button type="button" id="sf" ${step === nSteps ? 'disabled' : ''} aria-label="Next step">${step === 0 ? 'start →' : 'next →'}</button>
-      <button type="button" id="sr">reset</button></div>
+      <button type="button" id="sr">reset</button>
+      <label class="note" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="guided" ${guided ? 'checked' : ''} style="width:18px;height:18px;accent-color:var(--accent)"> Fade what doesn't move</label></div>
     <ol class="steps">${run.steps.map((s, i) => `<li class="${i + 1 === step ? 'cur' : ''}" data-s="${i + 1}"><span class="stitle">${s.t}</span><div class="sbody">${gl(s.x)}</div></li>`).join('')}</ol>
     ${rows ? `<table class="deltas"><caption class="sr">Changes in this step</caption><thead><tr><th>bucket</th><th>before</th><th>after</th><th>change</th></tr></thead><tbody>${rows}</tbody></table>` : ''}
     <p class="note mono">check: assets ${fmtB(t.assets)} − liabilities ${fmtB(t.liabs)} = ${Math.abs(t.assets - t.liabs) < 0.005 ? '0.00' : (t.assets - t.liabs).toFixed(3)} ${errs.length ? '<b style="color:var(--out)">' + errs.join('; ') + '</b>' : '· reserves and deposits moved together ✓'}</p>`;
   $('#sf').onclick = () => setStep(step + 1); $('#sb').onclick = () => setStep(step - 1);
-  $('#sr').onclick = () => { scen = null; lastDelta = {}; document.querySelectorAll('#sc-list [role=tab]').forEach((b) => b.setAttribute('aria-selected', 'false')); goTo({ ...S0 }); buildScenarioListText(); };
+  $('#guided').onchange = (e) => { guided = e.target.checked; render(shown); };
+  $('#sr').onclick = () => { scen = null; lastDelta = {}; lastFlows = []; document.querySelectorAll('#sc-list [role=tab]').forEach((b) => b.setAttribute('aria-selected', 'false')); goTo({ ...S0 }); buildScenarioListText(); };
   $('#sc-box').querySelectorAll('[data-v]').forEach((b) => b.onclick = () => startScenario(SCENARIOS.indexOf(sc), b.dataset.v));
   $('#sc-box').querySelectorAll('li[data-s]').forEach((li) => li.onclick = (e) => { if (!e.target.closest('a')) setStep(+li.dataset.s); });
   fillComputed();
