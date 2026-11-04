@@ -233,12 +233,12 @@ Rechecked 2026-11-03 against primary sources. Items marked ✅ are resolved, wit
 10. ✅ **Fed total assets**: $6,745.6B (Oct 28).
 11. ⬜ **Tether T-bills**: $114.9B vs ~$141B. Issuer sites are still unreachable.
 12. ✅ **Standing repo on Sep 30 2026**: $1.2B (FRED RPONTTLD). Record $74.6B on Dec 31 2025.
-13. ⬜ **TIC by country for Aug 2026**: ticdata.treasury.gov and home.treasury.gov are still blocked. Country figures stay secondary. Total foreign holdings now from Z.1: $9,269B (Q2).
+13. ✅ **TIC by country, Aug 2026** (ticdata.treasury.gov, Table 5): total $9,331.7B, official $3,755.6B (40.2%). Japan 1,068.3, UK 1,009.5, China 590.7, Belgium 490.5, Canada 464.6, Cayman 463.0.
 14. ✅ **Money funds' Treasury holdings**: $3,281.6B (Z.1, Q2 2026). ✅ Z.1 sector breakdown added (section 8).
 15. ✅ **History anchors**: ON RRP peak $2,553.7B (Dec 30 2022); Fed assets peak $8,965.5B (Apr 13 2022); reserves peak $4,275.8B (week of Dec 8 2021); SOFR 5.25% (Sep 17 2019). ⬜ BTFP peak (~$168B) still from memory.
 16. ✅ **Average-rate low**: 1.424% in Jan 2022. My recalled 1.56% was wrong.
 17. ⬜ **Fed holdings, Z.1 vs H.4.1**: Z.1 shows $4,082.7B in Q2 2026, H.4.1 $4,488.1B on Jun 24 2026. Is the gap valuation, inflation compensation, or a sector definition?
-18. ⬜ **Stablecoin supply** (~$300B) and **ICI money-fund assets** ($7.9T): secondary sources. ici.org is unreachable.
+18. ⬜ **Stablecoin supply** (~$300B), **Tether reserves**, **ICI money-fund assets** ($7.9T), **hedge-fund repo** (Form PF) and **OFR repo size**: still secondary. On 2026-11-04 the proxy still refused www.ici.org, www.financialresearch.gov, www.newyorkfed.org, www.sec.gov, tether.to and www.circle.com.
 
 ### Mechanisms (questions, not claims)
 19. When money funds buy bills with cash they would otherwise lend in **private repo** (not the ON RRP), does the drain fall on reserves one for one, or do dealers replace the funding in ways that change the split? The flow map currently treats "private repo" as ultimately backed by bank deposits, so reserves fall.
@@ -249,4 +249,7 @@ Rechecked 2026-11-03 against primary sources. Items marked ✅ are resolved, wit
 24. **Net T-bill demand from stablecoins**: how much is new demand versus displaced demand from money funds and banks? Is there research from the Fed, BIS or TBAC to cite?
 25. **eSLR reform details**: is the new buffer exactly 50% of the method-1 G-SIB surcharge?
 26. **Standing repo central clearing**: has it started, and on what dates?
-27. **Debt-ceiling timing**: does the current headroom (~$860B on Oct 22) pull the 2027 hit date earlier than May 2027?
+27. **Debt-ceiling timing**: headroom was $797.7B on Nov 2 (DTS Table III-C). At ~$8.4B/day of gross growth that runs out in roughly 3 months, though growth is uneven and extraordinary measures add room. Is the NTU/CRFB projection (May to mid-2027) out of date?
+
+### Part I model notes
+28. The refinancing simulator rolls about a third of the bill stock each month (calibrated to the Sep 30 schedule: 36% of bills mature in October). It treats FRNs as bills and counts TIPS at their real coupon. Its starting run-rate ($1,054B a year, from MSPD coupons and bill yields) is close to actual FY2026 interest on public issues ($1,068.5B). The MSPD-based average rates (bills 3.76%, notes 3.31%) differ slightly from Treasury's published average interest rates (3.87%, 3.38%), probably because of weighting and method. Which one is the better simulator input?

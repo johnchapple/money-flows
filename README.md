@@ -2,7 +2,7 @@
 
 An interactive explainer of US federal debt and dollar flows, set up like a strategy game's codex. The finished product will be a single self-contained HTML page (vanilla JS + SVG).
 
-**Status:** Phase 0 (data, verified against primary sources) and Phase 2 (the plumbing flow map) are built. Phase 1 (the debt section) is next. Open `index.html` in a browser; it needs no server and no build step.
+**Status:** Phases 0–2 are built: data verified against primary sources, Part I (the debt) and Part II (the plumbing). Phase 3 (phrase decoder, fuller codex) and Phase 4 (polish and final verification) come next. Open `index.html` in a browser; it needs no server and no build step.
 
 | File | What it is |
 |---|---|
