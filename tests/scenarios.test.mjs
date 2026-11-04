@@ -38,3 +38,33 @@ for (const sc of SCENARIOS) {
     });
   }
 }
+
+// ---------- Part I refinancing simulator ----------
+const { simulateInterest, MATURITIES } = ctx;
+const mix = DATA.issuance.couponMix.series.map((s) => [s.months, s.share]);
+const base = { short: 4.21, long: 4.77, billShare: 0.246, months: 120, deficit: false, primaryDeficit: 940, mix };
+
+test('simulator: starting run-rate matches coupons on the books (~$1.07T)', () => {
+  const r = simulateInterest(MATURITIES.allMonths, base);
+  assert.ok(r[0].interest > 1040 && r[0].interest < 1100, `start ${r[0].interest}`);
+  assert.ok(Math.abs(r[0].D + DATA.composition.ffb.value - DATA.debt.marketableTotal.value) < 0.5, `debt ${r[0].D} (MSPD detail excludes FFB)`);
+});
+test('simulator: without new borrowing the debt stays constant and the bill share holds', () => {
+  const r = simulateInterest(MATURITIES.allMonths, base);
+  for (const x of r.slice(1)) {
+    assert.ok(Math.abs(x.D - r[0].D) < 1e-6, `debt drifted at month ${x.t}`);
+    assert.ok(Math.abs(x.B / x.D - 0.246) < 1e-9 || x.B / x.D > 0.246, `bill share at month ${x.t}: ${x.B / x.D}`);
+    assert.ok(Math.abs(x.B + x.coupons - x.D) < 1e-6, `bills + coupons ≠ debt at month ${x.t}`);
+  }
+});
+test('simulator: once every existing security has matured, the average rate equals the new rates', () => {
+  const r = simulateInterest(MATURITIES.allMonths, { ...base, short: 4.5, long: 4.5, months: 372 });
+  assert.ok(Math.abs(r[372].avg - 4.5) < 1e-6, `avg after 31y ${r[372].avg}`);
+});
+test('simulator: higher short rates raise cost faster than higher long rates in year 1', () => {
+  const b = simulateInterest(MATURITIES.allMonths, base);
+  const s = simulateInterest(MATURITIES.allMonths, { ...base, short: base.short + 1 });
+  const l = simulateInterest(MATURITIES.allMonths, { ...base, long: base.long + 1 });
+  assert.ok(s[12].interest - b[12].interest > l[12].interest - b[12].interest);
+  assert.ok(l[120].interest - b[120].interest > s[120].interest - b[120].interest);
+});

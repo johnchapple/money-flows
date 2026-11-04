@@ -73,6 +73,19 @@ function bucket(keyFn, filter = () => true) {
   }));
 }
 const monthly = bucket((s) => s.maturity.slice(0, 7), (s) => new Date(s.maturity) <= limit);
+// Compact month-by-month schedule for the refinancing simulator: one row per month from the record
+// month to the last maturity, [amount, couponDollars] for each instrument in `families` order.
+const allMonths = (() => {
+  const start = date.slice(0, 7), idx = (ym) => (+ym.slice(0, 4) - +start.slice(0, 4)) * 12 + (+ym.slice(5, 7) - +start.slice(5, 7));
+  const rows = [];
+  for (const s of sec.values()) {
+    if (!s.outstanding) continue;
+    const i = idx(s.maturity.slice(0, 7)); rows[i] ??= families.map(() => [0, 0]);
+    const f = families.indexOf(s.fam); rows[i][f][0] += s.outstanding; rows[i][f][1] += s.outstanding * (s.coupon ?? 0);
+  }
+  for (let i = 0; i < rows.length; i++) rows[i] = (rows[i] || families.map(() => [0, 0])).map(([a, c]) => [round(a, 2), round(c, 2)]);
+  return { start, families, rows };
+})();
 const yearly = bucket((s) => s.maturity.slice(0, 4));
 
 // Checks against Table I totals in data.json and against the earlier model.
@@ -103,6 +116,7 @@ const out = {
   },
   monthly,
   yearly,
+  allMonths,
 };
 writeFileSync(join(root, 'data/maturities.json'), JSON.stringify(out, null, 1) + '\n');
 console.table(checks);

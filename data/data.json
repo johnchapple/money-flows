@@ -11,7 +11,7 @@
       "recall": "A well-known historical figure entered from memory. Needs checking against the source.",
       "conflict": "Sources disagree. `note` explains how."
     },
-    "access_note": "First compiled 2026-11-03 from web-search excerpts while primary hosts were blocked. Re-checked the same day against the primary APIs and documents (Fiscal Data API, H.4.1 HTML, FRED, NY Fed markets API) once access was granted. 'primary' now means read directly from the source. Still unreachable: ticdata.treasury.gov, home.treasury.gov, newyorkfed.org (non-API pages), ici.org, financialresearch.gov, issuer sites (Tether, Circle)."
+    "access_note": "First compiled 2026-11-03 from web-search excerpts while primary hosts were blocked. Re-checked the same day against the primary APIs and documents (Fiscal Data API, H.4.1 HTML, FRED, NY Fed markets API) once access was granted. 'primary' now means read directly from the source. Still unreachable: ticdata.treasury.gov, home.treasury.gov, newyorkfed.org (non-API pages), ici.org, financialresearch.gov, issuer sites (Tether, Circle). Update 2026-11-04: ticdata.treasury.gov and home.treasury.gov are now reachable (TIC is primary). www.newyorkfed.org, www.ici.org and www.financialresearch.gov are still refused by the proxy (403 on CONNECT)."
   },
   "debt": {
     "totalPublicDebt": {
@@ -55,7 +55,9 @@
         "debtHeldByPublic": 32719.902,
         "intragovernmental": 7782.179
       },
-      "note": "Down from $40,593.6bn on Oct 29: daily debt dips around month-end redemptions and trust-fund flows."
+      "note": "Down from $40,593.6bn on Oct 29: daily debt dips around month-end redemptions and trust-fund flows.",
+      "exactDollars": 40502080966097.14,
+      "exactPublicDollars": 32719901942674.43
     },
     "totalPublicDebtOct16": {
       "label": "Total public debt outstanding",
@@ -109,22 +111,23 @@
     },
     "debtLimit": {
       "label": "Statutory debt limit",
-      "value": 41104,
+      "value": 41103.996,
       "unit": "USD bn",
-      "asOf": "2025-07-04",
-      "source": "One Big Beautiful Bill Act (P.L. 119-21) raised the limit by $5T; CRFB debt-ceiling Q&A",
-      "url": "https://www.crfb.org/papers/qa-everything-you-should-know-about-debt-ceiling",
-      "status": "secondary"
+      "asOf": "2026-11-02",
+      "source": "Treasury, Daily Treasury Statement Table III-C (statutory limit set by P.L. 119-21, Jul 4 2025)",
+      "url": "https://fiscaldata.treasury.gov/datasets/daily-treasury-statement/",
+      "status": "primary"
     },
     "debtSubjectToLimit": {
       "label": "Debt subject to limit",
-      "value": 40244,
+      "value": 40306.275,
       "unit": "USD bn",
-      "asOf": "2026-10-22",
-      "source": "Treasury, Debt to the Penny / DTS Table III-C (via tensorust.com excerpt)",
+      "asOf": "2026-11-02",
+      "source": "Treasury, Daily Treasury Statement Table III-C (Fiscal Data API)",
       "url": "https://fiscaldata.treasury.gov/datasets/daily-treasury-statement/",
-      "status": "secondary",
-      "note": "Slightly below total public debt because some debt (e.g. unamortized discount, Federal Financing Bank) is excluded. Headroom ≈ $860bn. NTU projects the limit is reached around May 2027; CRFB says mid-to-late 2027."
+      "status": "primary",
+      "formula": "total public debt 40,502.081 − debt not subject to limit (0.474 + 191.741 + 3.591)",
+      "note": "Headroom under the $41,103.996bn limit: $797.7bn on Nov 2 2026. Excluded from the limit: mainly unamortized discount on bills and zero-coupon bonds, plus Federal Financing Bank debt."
     },
     "crossed40T": {
       "label": "First day gross debt exceeded $40T",
@@ -135,6 +138,14 @@
       "url": "https://fiscaldata.treasury.gov/datasets/debt-to-the-penny/",
       "status": "primary",
       "note": "$39,891.8bn on Aug 10 (the \"≈$39.9T\" reference); $40,175.6bn on Aug 31."
+    },
+    "dailyGrowthPublic": {
+      "label": "Average daily increase in debt held by the public, trailing ~3 months (estimate)",
+      "value": 7.492,
+      "unit": "USD bn/day",
+      "asOf": "2026-11-02",
+      "formula": "(32719.902 - 32038.116) / 91 days (Aug 3 → Nov 2 2026, Debt to the Penny)",
+      "status": "derived"
     }
   },
   "composition": {
@@ -352,6 +363,14 @@
         }
       ],
       "note": "Share of outlays: 13.9% (2026) → 18.8% (2036), derived. CBO: rising average interest rates account for about half the increase."
+    },
+    "primaryDeficitFY2026": {
+      "label": "Primary deficit, FY2026 (deficit excluding net interest)",
+      "value": 940,
+      "unit": "USD bn",
+      "asOf": "2026-09-30",
+      "formula": "deficitFY2026 1,992 − netInterestFY2026 1,052",
+      "status": "derived"
     }
   },
   "fed": {
@@ -776,31 +795,135 @@
       "note": "Official = 41.1%."
     },
     "foreignByCountry": {
-      "label": "Largest foreign holders",
+      "label": "Major foreign holders of Treasury securities",
       "asOf": "2026-08-31",
       "status": "primary",
-      "source": "Treasury TIC data for August 2026 (press release sb0662)",
-      "url": "https://home.treasury.gov/news/press-releases/sb0662",
+      "source": "Treasury TIC, Table 5: Major Foreign Holders of Treasury Securities",
+      "url": "https://ticdata.treasury.gov/resource-center/data-chart-center/tic/Documents/slt_table5.txt",
       "series": [
         {
           "country": "Japan",
-          "value": 1068.3
+          "value": 1068.3,
+          "prev": 1103.9
         },
         {
           "country": "United Kingdom",
-          "value": 1009.5
+          "value": 1009.5,
+          "prev": 998.3
         },
         {
           "country": "China, mainland",
-          "value": 590.7
+          "value": 590.7,
+          "prev": 618.0
+        },
+        {
+          "country": "Belgium",
+          "value": 490.5,
+          "prev": 470.7
+        },
+        {
+          "country": "Canada",
+          "value": 464.6,
+          "prev": 426.3
+        },
+        {
+          "country": "Cayman Islands",
+          "value": 463.0,
+          "prev": 460.1
+        },
+        {
+          "country": "Luxembourg",
+          "value": 448.2,
+          "prev": 442.1
+        },
+        {
+          "country": "France",
+          "value": 363.4,
+          "prev": 348.4
+        },
+        {
+          "country": "Ireland",
+          "value": 352.1,
+          "prev": 350.2
+        },
+        {
+          "country": "Taiwan",
+          "value": 298.4,
+          "prev": 296.1
+        },
+        {
+          "country": "Switzerland",
+          "value": 285.8,
+          "prev": 284.8
+        },
+        {
+          "country": "Singapore",
+          "value": 277.9,
+          "prev": 277.7
+        },
+        {
+          "country": "Hong Kong",
+          "value": 261.5,
+          "prev": 258.3
         },
         {
           "country": "India",
           "value": 219.7,
-          "status": "secondary"
+          "prev": 202.6
+        },
+        {
+          "country": "Norway",
+          "value": 214.0,
+          "prev": 206.9
+        },
+        {
+          "country": "Brazil",
+          "value": 168.4,
+          "prev": 168.0
+        },
+        {
+          "country": "Saudi Arabia",
+          "value": 141.2,
+          "prev": 142.4
+        },
+        {
+          "country": "Korea, South",
+          "value": 134.2,
+          "prev": 131.5
+        },
+        {
+          "country": "United Arab Emirates",
+          "value": 116.1,
+          "prev": 110.1
+        },
+        {
+          "country": "Bermuda",
+          "value": 111.8,
+          "prev": 109.1
+        },
+        {
+          "country": "All other",
+          "value": 1852.3,
+          "prev": 1842.7
         }
       ],
-      "note": "TIC records where a security is held (custody), not who ultimately owns it. UK, Belgium, Cayman and Luxembourg partly reflect custodians and hedge funds."
+      "total": 9331.7,
+      "official": 3755.6,
+      "officialBills": 312.2,
+      "prevMonth": "2026-07",
+      "history": {
+        "Japan": {
+          "2025-08": 1183.9,
+          "2026-02": 1239.3
+        },
+        "China, mainland": {
+          "2025-08": 699.7
+        },
+        "United Kingdom": {
+          "2025-08": 901.3
+        }
+      },
+      "note": "TIC records where a security is held (custody), not who ultimately owns it. The UK, Belgium, Luxembourg and Cayman Islands partly reflect custodians and hedge funds. Official (central banks and governments) = 40.2% of the total."
     },
     "mmfTotalAssets": {
       "label": "Money market fund total assets",
@@ -948,6 +1071,25 @@
       "source": "Federal Reserve H.8 via FRED DPSACBW027SBOG (seasonally adjusted)",
       "url": "https://fred.stlouisfed.org/series/DPSACBW027SBOG",
       "status": "primary"
+    },
+    "foreignTotalTIC": {
+      "label": "Foreign holders, TIC total",
+      "value": 9331.7,
+      "asOf": "2026-08-31",
+      "status": "primary",
+      "source": "Treasury TIC, Table 5",
+      "url": "https://ticdata.treasury.gov/resource-center/data-chart-center/tic/Documents/slt_table5.txt",
+      "parts": {
+        "official": 3755.6
+      }
+    },
+    "fedSep30": {
+      "label": "Fed Treasury holdings, Sep 30 2026",
+      "value": 4564.161,
+      "asOf": "2026-09-30",
+      "status": "primary",
+      "source": "Federal Reserve H.4.1 via FRED WSHOTSL",
+      "url": "https://fred.stlouisfed.org/series/WSHOTSL"
     }
   },
   "market_plumbing": {
@@ -1107,6 +1249,101 @@
       "value": "2025-04",
       "status": "recall",
       "url": "https://www.financialresearch.gov/the-ofr-blog/"
+    }
+  },
+  "issuance": {
+    "couponMix": {
+      "label": "Nominal coupon auction sizes per month (average of new issues and reopenings)",
+      "asOf": "2026-10-22",
+      "status": "primary",
+      "source": "Treasury auction results (Fiscal Data API, auctions_query), Aug–Oct 2026",
+      "url": "https://fiscaldata.treasury.gov/datasets/treasury-securities-auctions-data/",
+      "series": [
+        {
+          "tenor": "2y",
+          "months": 24,
+          "perMonth": 69,
+          "share": 0.216
+        },
+        {
+          "tenor": "3y",
+          "months": 36,
+          "perMonth": 58,
+          "share": 0.1815
+        },
+        {
+          "tenor": "5y",
+          "months": 60,
+          "perMonth": 70,
+          "share": 0.2191
+        },
+        {
+          "tenor": "7y",
+          "months": 84,
+          "perMonth": 44,
+          "share": 0.1377
+        },
+        {
+          "tenor": "10y",
+          "months": 120,
+          "perMonth": 40.5,
+          "share": 0.1268
+        },
+        {
+          "tenor": "20y",
+          "months": 240,
+          "perMonth": 14.5,
+          "share": 0.0454
+        },
+        {
+          "tenor": "30y",
+          "months": 360,
+          "perMonth": 23.5,
+          "share": 0.0736
+        }
+      ],
+      "total": 319.5,
+      "note": "10y: $42bn new issue, $39bn reopenings; 20y: $16bn / $13bn; 30y: $25bn / $22bn. Plus 2-year FRNs ($28bn/month) and TIPS. Sizes have been unchanged since 2024; the Aug 2026 refunding kept the guidance of no changes \"for at least the next several quarters\"."
+    },
+    "recentAuctionYields": {
+      "label": "Recent auction high yields",
+      "asOf": "2026-10-08",
+      "status": "primary",
+      "source": "Treasury auction results (Fiscal Data API)",
+      "url": "https://fiscaldata.treasury.gov/datasets/treasury-securities-auctions-data/",
+      "series": [
+        {
+          "date": "2026-09-22",
+          "tenor": "2y",
+          "yield": 4.787
+        },
+        {
+          "date": "2026-09-23",
+          "tenor": "5y",
+          "yield": 5.033
+        },
+        {
+          "date": "2026-09-24",
+          "tenor": "7y",
+          "yield": 5.085
+        },
+        {
+          "date": "2026-10-06",
+          "tenor": "3y",
+          "yield": 4.932
+        },
+        {
+          "date": "2026-10-07",
+          "tenor": "10y (reopening)",
+          "yield": 5.3
+        },
+        {
+          "date": "2026-10-08",
+          "tenor": "30y (reopening)",
+          "yield": 5.618
+        }
+      ],
+      "note": "Yields peaked in early October 2026 (same week as the JGB 30y record) and fell back by Nov 2 (10y 4.91%)."
     }
   }
 }
