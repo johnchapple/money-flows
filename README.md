@@ -2,7 +2,7 @@
 
 An interactive explainer of US federal debt and dollar flows, set up like a strategy game's codex. The finished product will be a single self-contained HTML page (vanilla JS + SVG).
 
-**Status:** All four phases are built. Part I (the debt), Part II (the plumbing) and Part III (connections), plus a codex and a sources & methodology section. Data last verified against primary sources on 2026-11-04 (`docs/verification.md`). Open `index.html` in a browser; it needs no server and no build step.
+**Status:** All four phases are built, plus a **Start here** path for newcomers: eight hands-on lessons with toy balance sheets, live "in real life" numbers and a self-check question each. Then come Part I (the debt), Part II (the plumbing), Part III (connections), a codex and sources & methodology. Data last verified against primary sources on 2026-11-04 (`docs/verification.md`). Open `index.html` in a browser; it needs no server and no build step.
 
 | File | What it is |
 |---|---|
@@ -73,6 +73,6 @@ node --test
 
 ## Quality checks (Phase 4)
 
-- **Balance-sheet tests** (`node --test`): every scenario step keeps Fed assets = liabilities, moves reserves and deposits together and keeps every bucket non-negative. The refinancing simulator is tested for its starting run-rate, conservation and convergence.
+- **Balance-sheet tests** (`node --test`): every toy balance sheet in the lessons balances after every action, and linked lines stay equal (a bank's reserves = the Fed's reserve liability to it). Every scenario step keeps Fed assets = liabilities, moves reserves and deposits together and keeps every bucket non-negative. The refinancing simulator is tested for its starting run-rate, conservation and convergence.
 - **Accessibility:** axe-core reports no violations in light, dark and mobile modes, including with a scenario and a glossary popover open. There is a skip link and arrow-key scenario tabs. Buckets, bars and sliders are keyboard-operable, Escape closes popovers and tooltips, and every focusable element shows a visible focus ring.
 - **Mobile:** no horizontal page scroll on iPhone 13, Pixel 7 or iPad Mini. Controls meet the 24px target size (the map has enlarged invisible hit areas). The flow map becomes a list under 640px, and the maturity wall scrolls inside its own frame.

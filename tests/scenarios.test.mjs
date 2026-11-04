@@ -68,3 +68,17 @@ test('simulator: higher short rates raise cost faster than higher long rates in 
   assert.ok(s[12].interest - b[12].interest > l[12].interest - b[12].interest);
   assert.ok(l[120].interest - b[120].interest > s[120].interest - b[120].interest);
 });
+
+// ---------- "Start here" lessons ----------
+const { LESSONS, lessonStates, checkLedger } = ctx;
+for (const L of LESSONS) {
+  test(`lesson ${L.id}: every toy balance sheet balances after every action`, () => {
+    if (!L.entities) return; // widget-only lesson
+    const st = lessonStates(L);
+    st.forEach((s, i) => assert.equal(checkLedger(L, s).join('; '), '', `after ${i ? 'action ' + i + ': ' + L.actions[i - 1].label : 'start'}`));
+  });
+  test(`lesson ${L.id}: has text, a quiz with a valid answer and glossary terms that exist`, () => {
+    assert.ok(L.text.length >= 2 && L.quiz && L.quiz.options[L.quiz.correct] != null);
+    for (const g of L.g) assert.ok(g in ctx.GLOSSARY.terms, `unknown glossary term ${g}`);
+  });
+}

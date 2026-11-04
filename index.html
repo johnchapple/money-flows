@@ -222,6 +222,53 @@ dl.phrases .go { font-size: .85rem; }
 .caveat ul { margin: .3rem 0; padding-left: 1.1rem; }
 .caveat li { margin-bottom: .3rem; }
 
+/* Start here: lessons */
+#learn h2 { border-top: 0; padding-top: 0; margin-top: 2.5rem; }
+.lesson-nav { list-style: none; padding: 0; margin: 1rem 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 4px; counter-reset: ln; }
+.lesson-nav li button { width: 100%; text-align: left; font-size: .82rem; line-height: 1.25; padding: .4rem .5rem; color: var(--ink-2); border-color: var(--rule-2); min-height: 44px; }
+.lesson-nav li button .n { font: .75rem var(--mono); color: var(--ink-3); display: block; }
+.lesson-nav li button[aria-current="step"] { border-color: var(--accent); color: var(--ink); box-shadow: inset 3px 0 0 var(--accent); }
+.lesson-nav li button.done .n::after { content: " ✓"; color: var(--accent); }
+.lesson { border-top: 1px solid var(--rule); padding-top: .8rem; }
+.lesson h3 { font-style: normal; font-size: 1.3rem; margin: .3rem 0 .6rem; }
+.lesson h3 .n { font: .85rem var(--mono); color: var(--ink-3); display: block; margin-bottom: .2rem; }
+.lesson .analogy { border-left: 2px solid var(--accent); padding: 2px 0 2px 12px; color: var(--ink-2); font-style: italic; margin: 1rem 0; }
+.ledgers { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin: 1rem 0; }
+.ledger { border: 1px solid var(--rule); padding: 8px 10px; font-size: .8rem; line-height: 1.35; }
+.ledger h4 { margin: 0 0 4px; font-size: .9rem; font-weight: normal; font-style: italic; }
+.ledger .side { font: 10px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); margin-top: 6px; border-bottom: 1px solid var(--rule-2); }
+.ledger .ln { display: grid; grid-template-columns: 1fr auto; gap: 6px; padding: 1px 0; }
+.ledger .ln .v { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; }
+.ledger .ln.up { background: var(--accent-soft); } .ledger .ln.down { background: var(--out-soft); }
+.ledger .ln .dv { font: .72rem var(--mono); margin-left: 4px; }
+.ledger .ln.up .dv { color: var(--accent); } .ledger .ln.down .dv { color: var(--out); }
+.ledger .ln.zero { color: var(--ink-3); }
+.ledger .tot { border-top: 1px solid var(--rule); margin-top: 4px; padding-top: 2px; display: flex; justify-content: space-between; font: .72rem var(--mono); color: var(--ink-3); }
+.ledger .tot .ok { color: var(--accent); }
+.actions { display: flex; flex-direction: column; gap: 6px; margin: .8rem 0; }
+.actions .act { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.actions .act .st { font: .75rem var(--mono); color: var(--ink-3); min-width: 3.2rem; }
+.actions .act button.donebtn { color: var(--ink-3); border-style: dashed; }
+.result { border: 1px solid var(--rule); padding: 10px 12px; margin: .6rem 0 1rem; font-size: .95rem; }
+.result .flow { font: .8rem var(--mono); color: var(--ink-2); margin-bottom: .3rem; }
+.reallife { background: var(--panel); padding: 10px 12px; margin: 1rem 0; font-size: .92rem; }
+.reallife .k { font: 10.5px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); display: block; margin-bottom: 2px; }
+fieldset.quiz { border: 1px solid var(--rule); padding: 10px 14px 12px; margin: 1rem 0; }
+fieldset.quiz legend { padding: 0 6px; font-size: .95rem; }
+fieldset.quiz label { display: flex; gap: 8px; align-items: baseline; padding: 6px 0; cursor: pointer; font-size: .95rem; min-height: 32px; }
+fieldset.quiz input { width: 18px; height: 18px; accent-color: var(--accent); flex: none; }
+fieldset.quiz .fb { margin-top: .5rem; font-size: .92rem; }
+fieldset.quiz .fb.right b { color: var(--accent); } fieldset.quiz .fb.wrong b { color: var(--out); }
+.words { font-size: .85rem; color: var(--ink-2); margin: .8rem 0; }
+.lesson-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; border-top: 1px solid var(--rule); padding-top: .8rem; margin-top: 1rem; }
+.rw table.data td.n { width: 6rem; }
+.rw input[type=range] { width: 100%; height: 28px; accent-color: var(--accent); }
+.mini-corr { width: 100%; height: auto; display: block; margin: .6rem 0; }
+.mini-corr text { font: 11px var(--mono); fill: var(--ink-2); }
+.part-intro { border: 1px solid var(--rule); padding: 10px 14px; margin: .6rem 0 1.4rem; font-size: .92rem; }
+.part-intro .k { font: 10.5px var(--mono); text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); }
+.part-intro p { margin: .2rem 0; }
+
 /* mobile list view of the map */
 #maplist { display: none; list-style: none; padding: 0; margin: 0; }
 #maplist li { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 8px 0; border-bottom: 1px solid var(--rule-2); cursor: pointer; }
@@ -274,18 +321,28 @@ button { min-height: 24px; }
 </style>
 </head>
 <body>
-<a class="skip" href="#debt">Skip to content</a>
+<a class="skip" href="#learn">Skip to content</a>
 <header class="col">
   <h1>The Debt &amp; The Plumbing</h1>
   <p class="sub">How much the US owes, and how dollars move between the Treasury, the Fed, banks, money funds, dealers, foreigners and stablecoins.</p>
   <p class="meta">Figures as of late Oct – Nov 2, 2026 (each one is dated where it appears). Sources: Treasury Fiscal Data, Federal Reserve H.4.1, H.8 and Z.1, NY Fed, FRED. See <a href="#sources">Sources &amp; methodology</a>.</p>
-  <nav class="toc" aria-label="Contents"><a href="#debt">I · The Debt</a><a href="#plumbing">II · The Plumbing</a><a href="#connections">III · Connections</a><a href="#phrases">Phrases</a><a href="#crypto">Crypto bridge</a><a href="#codex">Codex</a><a href="#sources">Sources</a></nav>
+  <nav class="toc" aria-label="Contents"><a href="#learn"><b>Start here</b></a><a href="#debt">I · The Debt</a><a href="#plumbing">II · The Plumbing</a><a href="#connections">III · Connections</a><a href="#phrases">Phrases</a><a href="#crypto">Crypto bridge</a><a href="#codex">Codex</a><a href="#sources">Sources</a></nav>
 </header>
 
 <main>
+<section id="learn" aria-labelledby="h-learn">
+ <div class="col">
+  <h2 id="h-learn">Start here · How the plumbing works, in 8 steps</h2>
+  <p>This page covers a lot of jargon. If terms like "reserves", "the TGA" or "repo" are new, take these eight short lessons first, about 10 minutes in all. Each adds one idea to the last, uses toy numbers you can play with, and ends with a quick check. Already comfortable? Skip to <a href="#debt">the debt</a>, <a href="#plumbing">the plumbing map</a> or <a href="#phrases">the phrase decoder</a>.</p>
+  <ol class="lesson-nav" id="lesson-nav" aria-label="Lessons"></ol>
+  <article id="lesson" class="lesson" aria-live="polite"></article>
+ </div>
+</section>
+
 <section id="debt" aria-labelledby="h-debt">
  <div class="col">
   <h2 id="h-debt">Part I · The Debt</h2>
+  <div class="part-intro"><p><span class="k">In one sentence</span><br>How much the US owes, what kinds of IOUs make it up, when they come due, and why that decides how fast interest costs move.</p><p><span class="k">Builds on</span><br><a href="#learn-3">Lesson 3 (borrowing)</a> and <a href="#learn-4">lesson 4 (short vs long)</a>.</p></div>
   <div class="seg-toggle" role="group" aria-label="Which measure of the debt">
     <button type="button" data-hm="gross" aria-pressed="true">Gross debt</button>
     <button type="button" data-hm="public" aria-pressed="false">Held by the public</button>
@@ -352,6 +409,7 @@ button { min-height: 24px; }
 <section id="plumbing" aria-labelledby="h-plumb">
   <div class="col">
     <h2 id="h-plumb">Part II · The Plumbing</h2>
+    <div class="part-intro"><p><span class="k">In one sentence</span><br>The same accounts as in the lessons, at real size: how dollars move between the Fed, the Treasury, banks, money funds and markets.</p><p><span class="k">Builds on</span><br><a href="#learn-1">Lessons 1–2</a> (reserves, TGA), <a href="#learn-5">5–6</a> (Fed balance sheet, ON RRP) and <a href="#learn-7">7</a> (repo). <span class="k">New here?</span> Try the scenarios in this order: 2, 1, 3, 4, 7, 6, 5.</p></div>
     <p>When the government borrows, spends or taxes, the dollars don't appear or vanish. They move between a handful of big accounts, and most of those accounts sit in one place: the <a class="t" data-t="federal-reserve">Federal Reserve</a>.</p>
     <p>The Fed's <a class="t" data-t="fed-balance-sheet">balance sheet</a> is the centre of the map. On the left are its assets, mostly Treasuries and mortgage bonds. On the right is what it owes: <a class="t" data-t="currency-in-circulation">paper currency</a>, banks' <a class="t" data-t="reserves">reserves</a>, the Treasury's checking account and overnight deposits from money funds. The two columns are always the same height. That's not a policy, it's accounting.</p>
     <p>The <a class="t" data-t="tga">Treasury General Account</a> is the government's checking account at the Fed. When taxes come in or new bonds are sold, it fills up. Because Fed assets don't change, something else on the right has to shrink, usually bank reserves. When the government spends, the money flows back.</p>
@@ -386,6 +444,7 @@ button { min-height: 24px; }
 <section id="connections" aria-labelledby="h-conn">
  <div class="col">
   <h2 id="h-conn">Part III · Connections</h2>
+  <div class="part-intro"><p><span class="k">In one sentence</span><br>Decodes the phrases in headlines and links the plumbing to interest rates, crypto and the global dollar.</p><p><span class="k">Builds on</span><br>All eight lessons, especially <a href="#learn-8">lesson 8 (the corridor)</a>. Each phrase links back to the part of the page that explains it.</p></div>
   <p>The same few accounts explain most of the headlines. Below are phrases you'll hear, decoded. Each one says whether it describes an accounting <span class="tag">fact</span>, a rule of thumb (<span class="tag h">heuristic</span>), or a <span class="tag h">narrative</span> that people argue about, and points to the live number behind it.</p>
   <h3 id="phrases">Phrases you'll hear</h3>
   <dl class="phrases" id="phrase-list"></dl>
@@ -668,6 +727,177 @@ function simulateInterest(M, opts) {
     out.push({ t, D, B, coupons: cStock, interest: (B * rb + cDol) / 100, avg: (B * rb + cDol) / D });
   }
   return out;
+}
+
+// ---------- "Start here" lessons: toy balance sheets ----------
+// Each entity: { name, owns: { key: [label, amount] }, owes: { key: [label, amount] } }. "owes" includes net worth / equity,
+// so every entity must balance. links: lines that are two views of the same money and must stay equal
+// ([[entity, side, key], [entity, side, key] | [[...], [...]] for sums]).
+// actions: { label, d: [[entity, side, key, delta]], flow (what moved), why (explanation) }.
+const E = (name, owns, owes, extra = {}) => ({ name, owns, owes, ...extra });
+const LESSONS = [
+  { id: 'iou', title: 'Money is a list of IOUs', g: ['bank-deposits', 'reserves', 'federal-reserve'],
+    text: ['When you have $1,000 "in the bank", the bank owes you $1,000. Your deposit is the bank\'s IOU to you: an asset for you, a debt for the bank.',
+      'Banks hold their own money in accounts at the Federal Reserve, the banks\' bank. Those balances are called <b>reserves</b>, and they are how banks pay each other.',
+      'Each box below is a balance sheet: what it <b>owns</b> on top and what it <b>owes</b> underneath, including what is left over for its owners (net worth or equity). The two halves always add up to the same total. Press the button and watch.'],
+    analogy: 'Think of the Fed as the bank where banks keep their accounts. You can\'t open one; your bank can.',
+    entities: {
+      you: E('You', { dep: ['Deposit at Bank A', 1000] }, { nw: ['Net worth', 1000] }),
+      friend: E('Your friend', { dep: ['Deposit at Bank B', 500] }, { nw: ['Net worth', 500] }),
+      bankA: E('Bank A', { res: ['Reserves at the Fed', 300], loans: ['Loans & bonds', 900] }, { dep: ['Deposits: you', 1000], eq: ['Equity', 200] }),
+      bankB: E('Bank B', { res: ['Reserves at the Fed', 200], loans: ['Loans & bonds', 400] }, { dep: ['Deposits: your friend', 500], eq: ['Equity', 100] }),
+      fed: E('Federal Reserve', { tsy: ['Treasury bonds', 500] }, { resA: ['Reserves: Bank A', 300], resB: ['Reserves: Bank B', 200] }),
+    },
+    links: [[['bankA', 'owns', 'res'], ['fed', 'owes', 'resA']], [['bankB', 'owns', 'res'], ['fed', 'owes', 'resB']], [['you', 'owns', 'dep'], ['bankA', 'owes', 'dep']], [['friend', 'owns', 'dep'], ['bankB', 'owes', 'dep']]],
+    actions: [{ label: 'Pay your friend $100', d: [['you', 'owns', 'dep', -100], ['you', 'owes', 'nw', -100], ['friend', 'owns', 'dep', 100], ['friend', 'owes', 'nw', 100], ['bankA', 'owes', 'dep', -100], ['bankA', 'owns', 'res', -100], ['bankB', 'owes', 'dep', 100], ['bankB', 'owns', 'res', 100], ['fed', 'owes', 'resA', -100], ['fed', 'owes', 'resB', 100]],
+      flow: 'Bank A → Bank B: $100 of reserves, moved on the Fed\'s books.',
+      why: 'Your deposit fell and your friend\'s rose. Behind the scenes, Bank A paid Bank B with reserves. The Fed just moved $100 from one bank\'s account to the other\'s. <b>Total reserves didn\'t change</b>: payments between people only move reserves around.' }],
+    quiz: { q: 'After the payment, total reserves held by all banks are…', options: ['higher', 'lower', 'unchanged'], correct: 2,
+      explain: 'Unchanged. Reserves moved from Bank A to Bank B. Only actions involving the Fed\'s own balance sheet, or the government\'s account there, change the total. That\'s the next lesson.' },
+    real: (D, { fmtB, fmtC, date, pct }) => `US banks held <b>${fmtB(D.fed.reserves.value, 0)}</b> of reserves on ${date(D.fed.reserves.asOf)}, backing <b>${fmtC(D.holders.bankDeposits.value)}</b> of deposits.`,
+    next: ['#plumbing', 'See reserves on the full map'] },
+  { id: 'tga', title: 'The government has a checking account too', g: ['tga', 'treasury'],
+    text: ['The US Treasury keeps its cash in an account at the Fed called the <b>Treasury General Account (TGA)</b>. Taxes go in. Salaries, benefits and contract payments go out.',
+      'Here is the key twist. The TGA is not at a commercial bank, so <b>when money moves into the TGA, it leaves the banking system</b>. When the government spends, it comes back.'],
+    analogy: 'Imagine a bathtub (bank reserves) with a second tub next to it (the TGA). Taxes pour water from one tub into the other; spending pours it back.',
+    entities: {
+      you: E('You', { dep: ['Bank deposit', 1000] }, { nw: ['Net worth', 1000] }),
+      bank: E('Your bank', { res: ['Reserves at the Fed', 300], loans: ['Loans & bonds', 900] }, { dep: ['Deposits: you', 1000], eq: ['Equity', 200] }),
+      fed: E('Federal Reserve', { tsy: ['Treasury bonds', 500] }, { res: ['Reserves (banks)', 300], tga: ['TGA (Treasury\'s account)', 200] }),
+      treasury: E('US Treasury', { tga: ['Cash in the TGA', 200] }, { debt: ['Treasury securities', 1000], np: ['Net position (past deficits)', -800] }),
+    },
+    links: [[['bank', 'owns', 'res'], ['fed', 'owes', 'res']], [['fed', 'owes', 'tga'], ['treasury', 'owns', 'tga']], [['you', 'owns', 'dep'], ['bank', 'owes', 'dep']]],
+    actions: [
+      { label: 'Pay $100 in taxes', d: [['you', 'owns', 'dep', -100], ['you', 'owes', 'nw', -100], ['bank', 'owes', 'dep', -100], ['bank', 'owns', 'res', -100], ['fed', 'owes', 'res', -100], ['fed', 'owes', 'tga', 100], ['treasury', 'owns', 'tga', 100], ['treasury', 'owes', 'np', 100]],
+        flow: 'Your bank → the TGA: $100 of reserves leave the banking system.',
+        why: 'Your deposit fell by $100, so your bank handed over $100 of reserves, which landed in the TGA. On the Fed\'s balance sheet one liability shrank (reserves) and another grew (the TGA). Fed assets didn\'t change.' },
+      { label: 'The Treasury pays a $100 salary to you', d: [['treasury', 'owns', 'tga', -100], ['treasury', 'owes', 'np', -100], ['fed', 'owes', 'tga', -100], ['fed', 'owes', 'res', 100], ['bank', 'owns', 'res', 100], ['bank', 'owes', 'dep', 100], ['you', 'owns', 'dep', 100], ['you', 'owes', 'nw', 100]],
+        flow: 'The TGA → your bank: $100 of reserves come back.',
+        why: 'Spending reverses it: the TGA shrinks and reserves and deposits grow. So the TGA <b>balance</b> is what matters. When it rises, reserves fall; when it falls, reserves rise.' }],
+    quiz: { q: 'On tax day, millions of people pay taxes. What happens to bank reserves?', options: ['They rise', 'They fall', 'Nothing'], correct: 1,
+      explain: 'They fall: the money moves from banks\' accounts at the Fed into the TGA. That\'s why money markets sometimes tighten around April 15.' },
+    real: (D, { fmtB, fmtC, date, pct }) => `The TGA held <b>${fmtB(D.fed.tga.history.at(-1).value, 0)}</b> on ${date(D.fed.tga.history.at(-1).asOf)}. It can swing by more than $100B in a few days around tax dates and month-ends. Treasury plans to end December with $850B in it.`,
+    next: ['scen:tax', 'Try "Tax day, then a TGA rebuild" on the full map'] },
+  { id: 'borrow', title: 'Borrowing: selling Treasury bills', g: ['deficit', 't-bill', 'auction', 'money-market-fund', 'gross-debt'],
+    text: ['When the government spends more than it collects (a <b>deficit</b>), it borrows by selling <b>Treasury securities</b>: IOUs that pay interest. The shortest ones, <b>bills</b>, are repaid within a year.',
+      'A big buyer of bills is a <b>money market fund</b>, which pools savers\' cash and lends it out very short-term. Step 1 sells a bill; step 2 spends the money.'],
+    analogy: 'A bill is like a short IOU card: "Treasury will pay you $100 in 3 months." You pay slightly less than $100 today; the difference is your interest.',
+    entities: {
+      you: E('You', { dep: ['Bank deposit', 1000] }, { nw: ['Net worth', 1000] }),
+      mmf: E('Money market fund', { dep: ['Cash at the bank', 300], bills: ['Treasury bills', 0] }, { shares: ['Owed to its savers', 300] }),
+      bank: E('Bank', { res: ['Reserves at the Fed', 400], loans: ['Loans & bonds', 1100] }, { dep: ['Deposits: you + the fund', 1300], eq: ['Equity', 200] }),
+      fed: E('Federal Reserve', { tsy: ['Treasury bonds', 600] }, { res: ['Reserves (banks)', 400], tga: ['TGA', 200] }),
+      treasury: E('US Treasury', { tga: ['Cash in the TGA', 200] }, { debt: ['Treasury securities', 1000], np: ['Net position (past deficits)', -800] }),
+    },
+    links: [[['bank', 'owns', 'res'], ['fed', 'owes', 'res']], [['fed', 'owes', 'tga'], ['treasury', 'owns', 'tga']], [['bank', 'owes', 'dep'], [['you', 'owns', 'dep'], ['mmf', 'owns', 'dep']]]],
+    actions: [
+      { label: 'Treasury sells a $100 bill to the fund', d: [['mmf', 'owns', 'dep', -100], ['mmf', 'owns', 'bills', 100], ['bank', 'owes', 'dep', -100], ['bank', 'owns', 'res', -100], ['fed', 'owes', 'res', -100], ['fed', 'owes', 'tga', 100], ['treasury', 'owns', 'tga', 100], ['treasury', 'owes', 'debt', 100]],
+        flow: 'Fund → TGA: $100 of cash. Treasury → fund: a $100 bill.',
+        why: 'The fund swapped cash for a bill. Its cash came out of the bank, so reserves fell and the TGA rose, exactly like paying taxes. The debt went up by $100.' },
+      { label: 'Treasury spends the $100 (pays you)', d: [['treasury', 'owns', 'tga', -100], ['treasury', 'owes', 'np', -100], ['fed', 'owes', 'tga', -100], ['fed', 'owes', 'res', 100], ['bank', 'owns', 'res', 100], ['bank', 'owes', 'dep', 100], ['you', 'owns', 'dep', 100], ['you', 'owes', 'nw', 100]],
+        flow: 'TGA → your bank: $100 comes back.',
+        why: 'After both steps, reserves are back where they started. The fund holds a $100 bill, you have $100 more, and the government owes $100 more. <b>Borrowing then spending adds debt but doesn\'t permanently remove reserves.</b> Only cash sitting in the TGA does.' }],
+    quiz: { q: 'After the sale AND the spending, compared with the start…', options: ['debt +$100, reserves unchanged', 'debt +$100, reserves −$100', 'debt unchanged, reserves +$100'], correct: 0,
+      explain: 'Debt is $100 higher, but reserves are back to where they began, because the money was spent. Reserves only stay lower if the TGA keeps the cash.' },
+    real: (D, { fmtB, fmtC, date, pct }) => `The deficit was <b>${fmtB(D.budget.deficitFY2026.value, 0)}</b> in FY2026. Treasury expects to borrow <b>${fmtB(D.issuance.borrowingEstimates.series[1].borrowing, 0)}</b> from investors in Oct–Dec 2026. Marketable debt totals <b>${fmtC(D.debt.marketableTotal.value)}</b>.`,
+    next: ['scen:bills', 'Try "Treasury sells $100B of bills" on the full map'] },
+  { id: 'rates', title: 'Short debt vs long debt', g: ['note', 'bond', 'rollover-risk', 'turning-over-bills'], widget: 'rates',
+    text: ['Treasury can borrow for a few weeks (bills) or for up to 30 years (notes and bonds). The difference that matters: <b>how long the interest rate is locked in</b>.',
+      'A bill is repaid within months, and Treasury borrows again at whatever the rate is then. A 10-year note keeps its rate for ten years, whatever happens. Move the slider to see what a rate change does to each.'],
+    analogy: 'A bill is like a variable-rate mortgage that resets every few months; a 10-year note is a fixed-rate mortgage.',
+    quiz: { q: 'Market rates jump 2 points tomorrow. Whose interest bill rises first?', options: ['The borrower who used 10-year notes', 'The borrower who used bills', 'Both at the same time'], correct: 1,
+      explain: 'The bill borrower: its debt comes due within months and is reborrowed at the new rate. The note borrower is protected until the note matures, but then pays the new rate too.' },
+    real: (D, { fmtB, fmtC, date, pct }) => `<b>${pct(D.composition.bills.share)}</b> of marketable debt is bills, and <b>${pct(D.rates_on_debt.shareMaturingWithin12m.value)}</b> of it comes due within a year. The average rate Treasury pays rose from <b>${D.rates_on_debt.avgRateMarketable2022.value}%</b> (Jan 2022) to <b>${D.rates_on_debt.avgRateMarketable.value}%</b> (Sep 2026) as old cheap debt was replaced.`,
+    next: ['#sim', 'Try the refinancing simulator'] },
+  { id: 'fed', title: 'The Fed\'s balance sheet always balances', g: ['fed-balance-sheet', 'qe', 'qt', 'soma'],
+    text: ['The Fed can create reserves. When it <b>buys</b> a bond, it pays by adding reserves to the seller\'s bank account: both its assets and its liabilities grow. That is <b>quantitative easing (QE)</b>.',
+      '<b>Quantitative tightening (QT)</b> is the reverse. When a bond the Fed owns matures and the Fed doesn\'t replace it, Treasury repays the Fed and then borrows again from investors. The end result: reserves leave the system.'],
+    analogy: 'QE swaps a bond in a bank\'s vault for a deposit at the Fed. QT swaps it back.',
+    entities: {
+      bank: E('Bank', { res: ['Reserves at the Fed', 300], bonds: ['Treasury bonds', 500] }, { dep: ['Deposits', 700], eq: ['Equity', 100] }),
+      fed: E('Federal Reserve', { tsy: ['Treasury bonds', 500] }, { res: ['Reserves (banks)', 300], tga: ['TGA', 200] }),
+      treasury: E('US Treasury', { tga: ['Cash in the TGA', 200] }, { debt: ['Treasury securities', 1000], np: ['Net position (past deficits)', -800] }),
+    },
+    links: [[['bank', 'owns', 'res'], ['fed', 'owes', 'res']], [['fed', 'owes', 'tga'], ['treasury', 'owns', 'tga']]],
+    actions: [
+      { label: 'QE: the Fed buys $100 of bonds from the bank', d: [['fed', 'owns', 'tsy', 100], ['fed', 'owes', 'res', 100], ['bank', 'owns', 'bonds', -100], ['bank', 'owns', 'res', 100]],
+        flow: 'Bank → Fed: a $100 bond. Fed → bank: $100 of new reserves.',
+        why: 'The Fed\'s balance sheet grew by $100 on both sides. The bank swapped a bond for reserves. New reserves exist that didn\'t before.' },
+      { label: 'QT: a $100 bond held by the Fed matures', d: [['treasury', 'owns', 'tga', -100], ['treasury', 'owes', 'debt', -100], ['fed', 'owns', 'tsy', -100], ['fed', 'owes', 'tga', -100]],
+        flow: 'TGA → Fed: Treasury repays the $100 bond.',
+        why: 'Treasury repaid the Fed from its TGA, so both the Fed\'s bonds and the TGA fell by $100. The Fed\'s balance sheet is smaller. But Treasury now needs that cash back…' },
+      { label: 'Treasury borrows the $100 again from the bank', d: [['treasury', 'owns', 'tga', 100], ['treasury', 'owes', 'debt', 100], ['fed', 'owes', 'tga', 100], ['fed', 'owes', 'res', -100], ['bank', 'owns', 'res', -100], ['bank', 'owns', 'bonds', 100]],
+        flow: 'Bank → TGA: $100 of reserves. Treasury → bank: a new $100 bond.',
+        why: 'Treasury sold a new bond to the bank, which paid with reserves. Back where we began: QT exactly undid QE. The bank holds the bond and the extra reserves are gone.' }],
+    quiz: { q: 'The Fed buys $100 of bonds from a bank. What happens to the Fed\'s total assets and to bank reserves?', options: ['Both rise by $100', 'Assets rise, reserves fall', 'Neither changes'], correct: 0,
+      explain: 'Both rise: the Fed pays for the bond by creating $100 of reserves. Assets and liabilities grow together.' },
+    real: (D, { fmtB, fmtC, date, pct }) => `The Fed's balance sheet is <b>${fmtC(D.fed.totalAssets.value)}</b> (${date(D.fed.totalAssets.asOf)}), down from a peak of <b>${fmtC(D.fed.totalAssetsPeak.value)}</b> in ${date(D.fed.totalAssetsPeak.asOf)}. QT ended on Dec 1, 2025. Since Dec 12 the Fed has bought <b>${fmtB(D.fed.billPurchases.value, 0)}</b> of bills to keep reserves ample.`,
+    next: ['scen:qt', 'Try "Fed QT" on the full map'] },
+  { id: 'rrp', title: 'The parking lot: the ON RRP', g: ['on-rrp', 'rrp-drained', 'money-market-fund'],
+    text: ['Money funds can\'t hold reserves (only banks can), but they can lend cash to the Fed overnight through the <b>overnight reverse repo facility (ON RRP)</b>. Think of it as a parking lot for spare cash.',
+      'Where the buyer\'s cash comes from matters. Try both buttons: the fund buys one bill with parked ON RRP cash and another with cash from its bank account. Watch what happens to bank reserves each time.'],
+    analogy: 'If cash comes out of the parking lot, the roads (bank reserves) don\'t get emptier. If it comes off the roads, they do.',
+    entities: {
+      mmf: E('Money market fund', { dep: ['Cash at the bank', 100], rrp: ['Parked at the Fed (ON RRP)', 200], bills: ['Treasury bills', 0] }, { shares: ['Owed to its savers', 300] }),
+      bank: E('Bank', { res: ['Reserves at the Fed', 300], loans: ['Loans & bonds', 500] }, { depF: ['Deposits: the fund', 100], depO: ['Deposits: everyone else', 600], eq: ['Equity', 100] }),
+      fed: E('Federal Reserve', { tsy: ['Treasury bonds', 700] }, { res: ['Reserves (banks)', 300], rrp: ['ON RRP (funds)', 200], tga: ['TGA', 200] }),
+      treasury: E('US Treasury', { tga: ['Cash in the TGA', 200] }, { debt: ['Treasury securities', 1000], np: ['Net position (past deficits)', -800] }),
+    },
+    links: [[['bank', 'owns', 'res'], ['fed', 'owes', 'res']], [['fed', 'owes', 'tga'], ['treasury', 'owns', 'tga']], [['mmf', 'owns', 'rrp'], ['fed', 'owes', 'rrp']], [['mmf', 'owns', 'dep'], ['bank', 'owes', 'depF']]],
+    actions: [
+      { label: 'Fund buys a $100 bill with ON RRP cash', d: [['mmf', 'owns', 'rrp', -100], ['mmf', 'owns', 'bills', 100], ['fed', 'owes', 'rrp', -100], ['fed', 'owes', 'tga', 100], ['treasury', 'owns', 'tga', 100], ['treasury', 'owes', 'debt', 100]],
+        flow: 'ON RRP → TGA: $100 moves between two Fed accounts.',
+        why: 'The cash moved from the ON RRP to the TGA, both at the Fed. <b>Bank reserves didn\'t move at all.</b> This is how Treasury sold lots of bills in 2023–24 without draining reserves.' },
+      { label: 'Fund buys a $100 bill with bank cash', d: [['mmf', 'owns', 'dep', -100], ['mmf', 'owns', 'bills', 100], ['bank', 'owes', 'depF', -100], ['bank', 'owns', 'res', -100], ['fed', 'owes', 'res', -100], ['fed', 'owes', 'tga', 100], ['treasury', 'owns', 'tga', 100], ['treasury', 'owes', 'debt', 100]],
+        flow: 'Bank → TGA: $100 of reserves.',
+        why: 'Same bill, but this time the cash came from a bank account, so <b>bank reserves fell by $100</b>. Once the parking lot is empty, every new TGA dollar comes out of reserves.' }],
+    quiz: { q: 'In 2026 the ON RRP is nearly empty. Treasury builds up its TGA by $200B. Bank reserves will most likely…', options: ['fall by about $200B', 'stay the same', 'rise by about $200B'], correct: 0,
+      explain: 'Fall by about $200B. With no parked cash left to draw on, the money has to come out of bank reserves (unless the Fed adds reserves by buying bills).' },
+    real: (D, { fmtB, fmtC, date, pct }) => `The ON RRP held <b>${fmtB(D.fed.onRrpPeak.value, 0)}</b> at its peak on ${date(D.fed.onRrpPeak.asOf)}. On ${date(D.fed.onRrp.asOf)} it held <b>${fmtB(D.fed.onRrp.value, 2)}</b>. That's what "the RRP is drained" means.`,
+    next: ['scen:bills:rrp', 'Replay 2023 on the full map'] },
+  { id: 'repo', title: 'Repo: a pawn shop for bonds', g: ['repo', 'haircut', 'sofr', 'basis-trade'],
+    text: ['In a <b>repo</b>, someone who owns a Treasury bond pledges it as collateral and borrows cash overnight. Tomorrow they repay with a little interest and get the bond back. Trillions of dollars a day change hands this way.',
+      'Lenders keep a safety margin, the <b>haircut</b>: they lend a bit less than the bond is worth. Borrowed cash can buy more bonds, which is how hedge funds build big positions with little money of their own.'],
+    analogy: 'A pawn shop: hand over a $1,000 watch, walk out with $980, and come back tomorrow to buy it back.',
+    entities: {
+      hf: E('Hedge fund', { bond: ['Bond #1 (pledged)', 1000], bond2: ['Bond #2', 0], cash: ['Cash', 0] }, { repo: ['Repo loan', 0], eq: ['Equity', 1000] }),
+      mmf: E('Money market fund (lender)', { cash: ['Cash', 1000], repo: ['Repo loan to hedge fund', 0] }, { shares: ['Owed to its savers', 1000] }),
+    },
+    links: [[['hf', 'owes', 'repo'], ['mmf', 'owns', 'repo']]],
+    actions: [
+      { label: 'Pledge bond #1 and borrow $980 overnight', d: [['hf', 'owns', 'cash', 980], ['hf', 'owes', 'repo', 980], ['mmf', 'owns', 'cash', -980], ['mmf', 'owns', 'repo', 980]],
+        flow: 'Fund → hedge fund: $980 cash. Hedge fund → fund: bond #1 as collateral.',
+        why: 'The fund lent $980 against a $1,000 bond: a 2% haircut. If the hedge fund doesn\'t repay, the fund keeps the bond. The bond still belongs to the hedge fund unless it defaults.' },
+      { label: 'Use the $980 to buy bond #2', d: [['hf', 'owns', 'cash', -980], ['hf', 'owns', 'bond2', 980]],
+        flow: 'Hedge fund → a seller: $980 for bond #2.',
+        why: 'Now the hedge fund holds $1,980 of bonds with only $1,000 of its own money. That\'s leverage. Repeat with bond #2 and it can go further. Basis-trade funds run this at 50× and more.' },
+      { label: 'Bond prices fall 1%', d: [['hf', 'owns', 'bond', -10], ['hf', 'owns', 'bond2', -9.8], ['hf', 'owes', 'eq', -19.8]],
+        flow: 'No cash moves, but the hedge fund\'s equity drops.',
+        why: 'A 1% price drop cost the fund $19.80, about 2% of its equity, because it holds twice as many bonds as its money covers. At 50× leverage, a 1% drop would wipe out half its equity. Lenders then demand more collateral, which can force sales: a <b>basis trade unwind</b>.' }],
+    quiz: { q: 'Why does the lender give only $980 against a $1,000 bond?', options: ['To earn more interest', 'As a cushion in case the bond\'s price falls before repayment', 'Because the law caps repo at 98%'], correct: 1,
+      explain: 'The haircut protects the lender: if the borrower defaults and the bond has lost value, the lender can still sell it for at least what it lent.' },
+    real: (D, { fmtB, fmtC, date, pct }) => `About <b>${fmtC(D.market_plumbing.sofrVolume.value)}</b> of Treasury repo traded on ${date(D.market_plumbing.sofrVolume.asOf)}. Its average rate is called <b>SOFR</b>: ${D.policy_rates.sofr.value}%. Hedge funds owed about ${fmtC(D.market_plumbing.hedgeFundRepoBorrowing.value)} in repo in mid-2026 (secondary source).`,
+    next: ['scen:basis', 'Try "Basis trade unwind" on the full map'] },
+  { id: 'corridor', title: 'The Fed\'s floor and ceiling', g: ['rate-corridor', 'iorb', 'srf', 'ample-reserves', 'fed-funds-rate'], widget: 'corridor',
+    text: ['The Fed doesn\'t order banks to charge a rate. It sets a <b>floor</b> (what it pays money funds at the ON RRP) and a <b>ceiling</b> (what it charges to lend cash against Treasuries at its standing repo). Nobody lends cash for less than the floor or borrows for more than the ceiling. In between sits the rate it pays banks on reserves (<b>IORB</b>).',
+      'Market rates like SOFR float inside that range. <b>Where they sit tells you how plentiful cash is.</b> Near the floor, cash is abundant. Pushing toward the ceiling, cash is getting scarce.'],
+    analogy: 'Like a thermostat with a minimum and maximum setting: the room temperature (market rate) moves, but only within the band.',
+    quiz: { q: 'Today SOFR is 3.95%, IORB is 3.90% and the ceiling is 4.00%. Cash is…', options: ['abundant: near the floor', 'getting scarce: above IORB, near the ceiling', 'impossible to tell'], correct: 1,
+      explain: 'Getting scarce. SOFR above the reserve rate means cash is in demand. It\'s one reason the Fed has been buying bills to add reserves.' },
+    real: (D, { fmtB, fmtC, date, pct }) => `Floor ${D.policy_rates.onRrpRate.value}% · IORB ${D.policy_rates.iorb.value}% · SOFR ${D.policy_rates.sofr.value}% · ceiling ${D.policy_rates.srfRate.value}% (${date(D.policy_rates.sofr.asOf)}).`,
+    next: ['#corridor-h', 'See the corridor since 2024'] },
+];
+function lessonStates(L) { // [start, after action 1, ...]; deep-copies entities
+  const clone = (ents) => JSON.parse(JSON.stringify(ents));
+  const out = [clone(L.entities || {})];
+  for (const a of L.actions || []) { const s = clone(out[out.length - 1]); for (const [e, side, k, dv] of a.d) { if (!s[e] || !s[e][side][k]) throw new Error(`${L.id}: unknown line ${e}.${side}.${k}`); s[e][side][k][1] = Math.round((s[e][side][k][1] + dv) * 100) / 100; } out.push(s); }
+  return out;
+}
+function checkLedger(L, s) {
+  const errs = [], tot = (o) => Object.values(o).reduce((t, [, v]) => t + v, 0), val = ([e, side, k]) => s[e][side][k][1];
+  for (const [id, e] of Object.entries(s)) if (Math.abs(tot(e.owns) - tot(e.owes)) > 1e-6) errs.push(`${id} does not balance: owns ${tot(e.owns)} vs owes ${tot(e.owes)}`);
+  for (const [a, b] of L.links || []) { const vb = Array.isArray(b[0]) ? b.reduce((t, x) => t + val(x), 0) : val(b); if (Math.abs(val(a) - vb) > 1e-6) errs.push(`link ${a.join('.')} = ${val(a)} but ${JSON.stringify(b)} = ${vb}`); }
+  return errs;
 }
 /* ENGINE:END */
 </script>
@@ -1517,6 +1747,85 @@ function fillPart3() {
 }
 renderPhrases(); renderCorridorHist(); renderMultiples(); fillPart3();
 addEventListener('resize', () => { clearTimeout(window.__rc); window.__rc = setTimeout(renderCorridorHist, 150); });
+
+// =================== START HERE · LESSONS ===================
+const LH = { fmtB, fmtC, date, pct };
+let lessonIx = 0; const lessonStep = LESSONS.map(() => 0);
+const doneSet = (() => { try { return new Set(JSON.parse(localStorage.getItem('mf-learn') || '[]')); } catch (e) { return new Set(); } })();
+const saveDone = () => { try { localStorage.setItem('mf-learn', JSON.stringify([...doneSet])); } catch (e) {} };
+const money = (v) => { const a = Math.abs(v), s = Number.isInteger(Math.round(a * 100) / 100) ? a.toLocaleString('en-US') : a.toLocaleString('en-US', { minimumFractionDigits: 1, maximumFractionDigits: 2 }); return (v < 0 ? '−$' : '$') + s; };
+function renderLessonNav() {
+  $('#lesson-nav').innerHTML = LESSONS.map((L, i) => `<li><button type="button" data-li="${i}" ${i === lessonIx ? 'aria-current="step"' : ''} class="${doneSet.has(L.id) ? 'done' : ''}"><span class="n">${i + 1} of ${LESSONS.length}</span>${L.title}</button></li>`).join('');
+}
+function ledgerHtml(L, s, prev) {
+  return `<div class="ledgers">${Object.entries(s).map(([id, e]) => {
+    const side = (k, title) => `<div class="side">${title}</div>` + Object.entries(e[k]).map(([key, [label, v]]) => {
+      const dv = prev ? v - prev[id][k][key][1] : 0, cls = Math.abs(dv) > 1e-9 ? (dv > 0 ? 'up' : 'down') : v === 0 ? 'zero' : '';
+      return `<div class="ln ${cls}"><span>${label}</span><span class="v">${money(v)}${Math.abs(dv) > 1e-9 ? `<span class="dv">${dv > 0 ? '+' : '−'}${money(Math.abs(dv)).slice(1)}</span>` : ''}</span></div>`;
+    }).join('');
+    const tot = (k) => Object.values(e[k]).reduce((t, [, v]) => t + v, 0);
+    return `<div class="ledger" role="group" aria-label="${e.name} balance sheet"><h4>${e.name}</h4>${side('owns', 'Owns (assets)')}${side('owes', 'Owes (incl. net worth)')}<div class="tot"><span>${money(tot('owns'))} = ${money(tot('owes'))}</span><span class="ok">balanced ✓</span></div></div>`;
+  }).join('')}</div>`;
+}
+function ratesWidget() {
+  return `<div class="rw"><label for="rw-r">Market rate after the change: <output id="rw-o">6.00%</output></label><input type="range" id="rw-r" min="0" max="8" step="0.25" value="6">
+    <table class="data"><caption class="sr">Interest per year on $100 borrowed two ways</caption><thead><tr><th>Interest per year on $100, borrowed at 4% before the change</th><th>Year 1</th><th>Year 2</th><th>Year 10</th><th>Year 11</th></tr></thead><tbody id="rw-b"></tbody></table>
+    <p class="note">Bill: a 3-month bill reborrowed every quarter, so the old rate lasts one more quarter and then everything moves. Note: a 10-year note sold just before the change keeps its 4% coupon until it matures after year 10.</p></div>`;
+}
+function wireRates() {
+  const r = $('#rw-r'); if (!r) return;
+  const upd = () => { const n = +r.value; $('#rw-o').textContent = n.toFixed(2) + '%';
+    const f = (v) => '$' + v.toFixed(2);
+    $('#rw-b').innerHTML = `<tr><td>Bills (rolled)</td><td class="n">${f(0.25 * 4 + 0.75 * n)}</td><td class="n">${f(n)}</td><td class="n">${f(n)}</td><td class="n">${f(n)}</td></tr><tr><td>10-year note</td><td class="n">${f(4)}</td><td class="n">${f(4)}</td><td class="n">${f(4)}</td><td class="n">${f(n)}</td></tr>`; };
+  r.addEventListener('input', upd); upd();
+}
+function corridorWidget() {
+  const P = DATA.policy_rates, lo = 3.6, hi = 4.15, W = 640, X = (v) => 20 + (v - lo) / (hi - lo) * (W - 40);
+  const marks = [['floor (ON RRP)', P.onRrpRate.value, 0], ['IORB', P.iorb.value, 1], ['SOFR (market)', P.sofr.value, 2], ['ceiling (standing repo)', P.srfRate.value, 3]];
+  return `<svg class="mini-corr" viewBox="0 0 ${W} 96" role="img" aria-label="Floor ${P.onRrpRate.value}%, IORB ${P.iorb.value}%, SOFR ${P.sofr.value}%, ceiling ${P.srfRate.value}%">
+    <rect x="${X(P.onRrpRate.value)}" y="40" width="${X(P.srfRate.value) - X(P.onRrpRate.value)}" height="16" fill="var(--fill-2)"/>
+    ${marks.map(([n, v, i]) => `<line x1="${X(v)}" x2="${X(v)}" y1="${i % 2 ? 56 : 24}" y2="${i % 2 ? 76 : 40}" stroke="var(--ink-2)"/><circle cx="${X(v)}" cy="48" r="5" fill="${n.startsWith('SOFR') ? 'var(--accent)' : 'var(--ink)'}"/><text x="${X(v)}" y="${i % 2 ? 90 : 16}" text-anchor="${i === 3 ? 'end' : i === 0 ? 'start' : 'middle'}">${n} ${v.toFixed(2)}%</text>`).join('')}</svg>`;
+}
+function renderLesson() {
+  const L = LESSONS[lessonIx], st = L.entities ? lessonStates(L) : null, k = lessonStep[lessonIx];
+  const acts = L.actions || [];
+  const last = k ? acts[k - 1] : null;
+  $('#lesson').innerHTML = `<h3 id="lesson-h" tabindex="-1"><span class="n">Lesson ${lessonIx + 1} of ${LESSONS.length}</span>${L.title}</h3>
+    ${L.text.map((t) => `<p>${t}</p>`).join('')}
+    <p class="analogy">${L.analogy}</p>
+    ${L.widget === 'rates' ? ratesWidget() : L.widget === 'corridor' ? corridorWidget() : ''}
+    ${acts.length ? `<div class="actions" role="group" aria-label="Try it">${acts.map((a, i) => `<div class="act"><span class="st">step ${i + 1}</span><button type="button" data-act="${i}" ${i !== k ? 'disabled' : ''} class="${i < k ? 'donebtn' : ''}">${i < k ? '✓ ' : ''}${a.label}</button></div>`).join('')}${k ? '<div class="act"><span class="st"></span><button type="button" id="act-reset">Start over</button></div>' : ''}</div>` : ''}
+    ${last ? `<div class="result" role="status"><div class="flow">${last.flow}</div>${last.why}</div>` : ''}
+    ${st ? ledgerHtml(L, st[k], k ? st[k - 1] : null) : ''}
+    ${st ? `<p class="note">Toy numbers. Highlighted lines changed in the last step (blue = up, rust = down). Every balance sheet still balances, and matching lines on two balance sheets (a bank's reserves and the Fed's reserve liability, say) stay equal.</p>` : ''}
+    <div class="reallife"><span class="k">In real life, today</span>${L.real(DATA, LH)}</div>
+    <fieldset class="quiz"><legend>Check yourself: ${L.quiz.q}</legend>${L.quiz.options.map((o, i) => `<label><input type="radio" name="q-${L.id}" value="${i}"> ${o}</label>`).join('')}
+      <button type="button" id="q-check">Check answer</button><div class="fb" id="q-fb" aria-live="polite"></div></fieldset>
+    <p class="words">New words: ${L.g.map((g) => `<a class="t" data-t="${g}">${G[g].term}</a>`).join(' · ')}</p>
+    <div class="lesson-foot"><button type="button" id="l-prev" ${lessonIx ? '' : 'disabled'}>← Previous lesson</button>
+      <a href="${L.next[0].startsWith('#') ? L.next[0] : '#plumbing'}" ${L.next[0].startsWith('scen:') ? `data-scen="${L.next[0].slice(5)}"` : ''}>${L.next[1]} →</a>
+      <button type="button" id="l-next">${lessonIx < LESSONS.length - 1 ? 'Next lesson →' : 'Finish: explore the page →'}</button></div>`;
+  $('#lesson').querySelectorAll('[data-act]').forEach((b) => b.onclick = () => { lessonStep[lessonIx] = +b.dataset.act + 1; renderLesson(); const nb = $(`#lesson [data-act="${lessonStep[lessonIx]}"]`); (nb || $('#lesson .result'))?.focus?.(); if (!nb) { const r = $('#lesson .result'); if (r) { r.tabIndex = -1; r.focus(); } } });
+  const rs = $('#act-reset'); if (rs) rs.onclick = () => { lessonStep[lessonIx] = 0; renderLesson(); $('#lesson [data-act="0"]').focus(); };
+  $('#q-check').onclick = () => {
+    const sel = $(`#lesson input[name="q-${L.id}"]:checked`), fb = $('#q-fb');
+    if (!sel) { fb.className = 'fb'; fb.textContent = 'Pick an answer first.'; return; }
+    const ok = +sel.value === L.quiz.correct; fb.className = 'fb ' + (ok ? 'right' : 'wrong');
+    fb.innerHTML = `<b>${ok ? 'Right.' : 'Not quite.'}</b> ${L.quiz.explain}`;
+    doneSet.add(L.id); saveDone(); renderLessonNav();
+  };
+  $('#l-prev').onclick = () => goLesson(lessonIx - 1, true);
+  $('#l-next').onclick = () => { doneSet.add(L.id); saveDone(); if (lessonIx < LESSONS.length - 1) goLesson(lessonIx + 1, true); else { renderLessonNav(); $('#debt').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' }); } };
+  wireRates();
+}
+function goLesson(i, focus) {
+  lessonIx = Math.max(0, Math.min(LESSONS.length - 1, i)); renderLessonNav(); renderLesson();
+  try { history.replaceState(null, '', '#learn-' + (lessonIx + 1)); } catch (e) {}
+  if (focus) { const h = $('#lesson-h'); h.focus({ preventScroll: true }); $('#learn').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' }); }
+}
+$('#lesson-nav').addEventListener('click', (e) => { const b = e.target.closest('[data-li]'); if (b) goLesson(+b.dataset.li, true); });
+addEventListener('hashchange', () => { const m = location.hash.match(/^#learn-(\d+)$/); if (m) goLesson(+m[1] - 1, true); });
+{ const m = location.hash.match(/^#learn-(\d+)$/); goLesson(m ? +m[1] - 1 : (() => { const first = LESSONS.findIndex((L) => !doneSet.has(L.id)); return first < 0 ? 0 : first; })(), false); }
 
 // theme toggle
 $('#theme').onclick = () => { const r = document.documentElement, dark = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches; r.dataset.theme = dark ? 'light' : 'dark'; try { localStorage.setItem('theme', r.dataset.theme); } catch (e) {} };

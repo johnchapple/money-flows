@@ -264,3 +264,7 @@ Rechecked 2026-11-03 against primary sources. Items marked ✅ are resolved, wit
 33. Verification (2026-11-04): 164/164 automated checks match their primary sources (see docs/verification.md). Two data errors were found and fixed. A TGA value labeled Oct 1 was really the Sep 30 closing balance ($984.0B; Oct 1 closed at $893.7B). Interest through July is $1,170.0B, not $1,170.1B.
 34. Downgraded to secondary because their hosts were unreachable: GENIUS Act, eSLR and clearing-mandate dates (congress.gov, federalregister.gov, sec.gov) and CBO projections (cbo.gov). GAO's 33% is replaced by the MSPD-derived 33.4%.
 35. On tablets, the map's thin Fed segments have 22px hit areas spaced 30 SVG units apart; that relies on the WCAG 2.2 spacing exception.
+
+### Learning path ("Start here")
+36. Eight lessons in the tested engine (LESSONS in index.html): IOUs and reserves → TGA → borrowing with bills → short vs long debt → the Fed's balance sheet (QE/QT) → the ON RRP → repo and leverage → the rate corridor. The toy balance sheets are simplified on purpose: banks' equity, the Treasury's "net position" as the balancing line, no currency. Each lesson says which simplification it makes only where it matters.
+37. Ideas not yet built: (a) a "guided mode" on the full map that dims everything except the buckets a scenario step touches; (b) a short glossary quiz at the end; (c) the historical slider (2007 → today) as a final "watch it happen" lesson.
