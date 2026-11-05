@@ -10,7 +10,7 @@ import { ensureProxy } from './lib/net.mjs';
 ensureProxy();
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const START = '2015-01-01';
+const START = '2007-01-01';
 const series = {
   fedAssets:    { id: 'WALCL', scale: 1e-3, label: 'Fed total assets (Wednesday)' },
   reserves:     { id: 'WRESBAL', scale: 1e-3, label: 'Reserve balances (week average)' },
@@ -28,6 +28,10 @@ const series = {
   dealers:      { id: 'BOGZ1FL663061105Q', scale: 1e-3, label: 'Broker-dealers: Treasury securities, net (Z.1)' },
   households:   { id: 'BOGZ1LM153061105Q', scale: 1e-3, label: 'Households & nonprofits (incl. hedge funds): Treasury securities (Z.1)' },
   fedTreasuries:{ id: 'WSHOTSL', scale: 1e-3, label: 'Fed: Treasury securities held outright (Wednesday)' },
+  fedMBS:       { id: 'WSHOMCB', scale: 1e-3, label: 'Fed: mortgage-backed securities (Wednesday)' },
+  tgaWed:       { id: 'WDTGAL', scale: 1e-3, label: 'Treasury General Account (Wednesday)' },
+  reservesWed:  { id: 'WRBWFRBL', scale: 1e-3, label: 'Reserve balances (Wednesday)' },
+  rrpAllWed:    { id: 'WLRRAL', scale: 1e-3, label: 'Reverse repos, all (Wednesday)' },
   y10:          { id: 'DGS10', scale: 1, unit: '%', label: '10-year Treasury yield' },
   y30:          { id: 'DGS30', scale: 1, unit: '%', label: '30-year Treasury yield' },
   y2:           { id: 'DGS2', scale: 1, unit: '%', label: '2-year Treasury yield' },

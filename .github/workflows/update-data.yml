@@ -1,0 +1,42 @@
+name: update-data
+
+# Weekly refresh of every figure that has a machine-readable primary source, then rebuild, test and commit.
+# Runs Friday morning UTC, after the Thursday H.4.1 release. Can also be started by hand (Actions tab → Run workflow).
+on:
+  schedule:
+    - cron: '17 9 * * 5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Update figures in data/data.json
+        run: node scripts/update-data.mjs
+      - name: Rebuild maturity schedule (latest MSPD)
+        run: node scripts/build-maturities-mspd.mjs
+      - name: Rebuild history series
+        run: |
+          node scripts/fetch-history.mjs
+          node scripts/fetch-rates.mjs
+      - name: Copy data into the page
+        run: node scripts/sync-data.mjs
+      - name: Checks
+        run: |
+          node scripts/validate-data.mjs
+          node --test
+      - name: Commit
+        run: |
+          git config user.name "data-update bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data index.html
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "Automatic data update $(date -u +%Y-%m-%d)"
+          git push

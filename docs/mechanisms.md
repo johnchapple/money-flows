@@ -268,3 +268,8 @@ Rechecked 2026-11-03 against primary sources. Items marked ✅ are resolved, wit
 ### Learning path ("Start here")
 36. Eight lessons in the tested engine (LESSONS in index.html): IOUs and reserves → TGA → borrowing with bills → short vs long debt → the Fed's balance sheet (QE/QT) → the ON RRP → repo and leverage → the rate corridor. The toy balance sheets are simplified on purpose: banks' equity, the Treasury's "net position" as the balancing line, no currency. Each lesson says which simplification it makes only where it matters.
 37. Built: focus mode on the full map (on by default, with a toggle) fades every bucket a scenario step doesn't touch. Ideas not yet built: (b) a short glossary quiz at the end; (c) the historical slider (2007 → today) as a final "watch it happen" lesson.
+
+### Wrap-up (2026-11-05)
+38. Automatic weekly update (scripts/update-data.mjs + .github/workflows/update-data.yml) covers every machine-readable primary figure. verify-figures.mjs remains a pinned snapshot check.
+39. Built from the stretch list: the time machine (Fed balance sheet since 2007, Wednesday-level H.4.1 series) and a US/Japan/UK comparison (IMF debt/GDP, OECD 10y yields). Not built: maturity-profile comparison (needs UK DMO / Japan MOF).
+40. New primary figures: money-fund total assets (Z.1, MMMFFAQ027S) and Japan 10y yield (OECD monthly, IRLTLT01JPM156N). ICI weekly and the MOF daily JGB close remain secondary. Access routes for the rest: docs/data-access.md.

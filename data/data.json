@@ -1173,6 +1173,16 @@
       "status": "primary",
       "source": "Federal Reserve H.4.1 via FRED WSHOTSL",
       "url": "https://fred.stlouisfed.org/series/WSHOTSL"
+    },
+    "mmfTotalAssetsZ1": {
+      "label": "Money market funds: total financial assets (Z.1)",
+      "value": 8441.374,
+      "unit": "USD bn",
+      "asOf": "2026-06-30",
+      "source": "Fed Financial Accounts Z.1 via FRED MMMFFAQ027S",
+      "url": "https://fred.stlouisfed.org/series/MMMFFAQ027S",
+      "status": "primary",
+      "note": "Quarterly and broader than ICI's weekly figure (includes all money fund assets on Z.1 basis). ICI weekly ($7.9T, Oct 28) remains secondary."
     }
   },
   "market_plumbing": {
@@ -1299,6 +1309,52 @@
       "source": "Federal Reserve",
       "url": "https://www.federalreserve.gov/monetarypolicy/fima-repo-facility.htm",
       "asOf": "2026-11-03"
+    },
+    "jgb10yMonthly": {
+      "label": "Japan 10-year government bond yield (monthly average)",
+      "value": 3.05,
+      "unit": "%",
+      "asOf": "2026-09-30",
+      "source": "OECD Main Economic Indicators via FRED IRLTLT01JPM156N",
+      "url": "https://fred.stlouisfed.org/series/IRLTLT01JPM156N",
+      "status": "primary"
+    },
+    "countryCompare": {
+      "label": "US, Japan and UK compared",
+      "asOf": "2026-09-30",
+      "status": "primary",
+      "source": "IMF World Economic Outlook (debt) and OECD (10-year yields) via FRED",
+      "url": "https://fred.stlouisfed.org/series/GGGDTAUSA188N",
+      "series": [
+        {
+          "country": "United States",
+          "debtId": "GGGDTAUSA188N",
+          "debtPctGDP": 120.786,
+          "debtYear": 2024,
+          "y10Id": "IRLTLT01USM156N",
+          "y10": 4.99,
+          "y10Month": "2026-09"
+        },
+        {
+          "country": "Japan",
+          "debtId": "GGGDTAJPA188N",
+          "debtPctGDP": 239.971,
+          "debtYear": 2023,
+          "y10Id": "IRLTLT01JPM156N",
+          "y10": 3.05,
+          "y10Month": "2026-09"
+        },
+        {
+          "country": "United Kingdom",
+          "debtId": "GGGDTAGBA188N",
+          "debtPctGDP": 101.227,
+          "debtYear": 2024,
+          "y10Id": "IRLTLT01GBM156N",
+          "y10": 5.2421,
+          "y10Month": "2026-09"
+        }
+      ],
+      "note": "General government gross debt (all levels of government, IMF definition, so the US figure is higher than federal debt held by the public). Yields are monthly averages. Average maturity of each country's debt (UK gilts are much longer-dated than US Treasuries) is not included: it needs the UK Debt Management Office and Japan's Ministry of Finance, which were not reachable."
     }
   },
   "history_anchors": {
