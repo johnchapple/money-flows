@@ -13,9 +13,9 @@
     },
     "access_note": "First compiled 2026-11-03 from web-search excerpts while primary hosts were blocked. Re-checked the same day against the primary APIs and documents (Fiscal Data API, H.4.1 HTML, FRED, NY Fed markets API) once access was granted. 'primary' now means read directly from the source. Still unreachable: ticdata.treasury.gov, home.treasury.gov, newyorkfed.org (non-API pages), ici.org, financialresearch.gov, issuer sites (Tether, Circle). Update 2026-11-04: ticdata.treasury.gov and home.treasury.gov are now reachable (TIC is primary). www.newyorkfed.org, www.ici.org and www.financialresearch.gov are still refused by the proxy (403 on CONNECT). Update 2026-11-04 (later): www.newyorkfed.org and www.financialresearch.gov now reachable; NY Fed markets API used for SOFR volume. www.ici.org answers 403 itself (bot protection; not bypassed). Still refused by proxy: data.financialresearch.gov, www.sec.gov, tether.to, www.circle.com.",
     "verification": {
-      "date": "2026-11-04",
-      "checks": 164,
-      "matched": 164,
+      "date": "2026-11-05",
+      "checks": 170,
+      "matched": 170,
       "notMachineChecked": 28,
       "checkedPaths": [
         "debt.totalPublicDebt",
@@ -53,6 +53,7 @@
         "issuance.recentAuctionYields",
         "issuance.couponMix",
         "issuance.borrowingEstimates",
+        "issuance.refundingNov2026",
         "rates_on_debt.couponsMaturingNext12m",
         "rates_on_debt.shareMaturingWithin12m",
         "fed.onRrp",
@@ -1397,7 +1398,7 @@
         }
       ],
       "total": 319.5,
-      "note": "10y: $42bn new issue, $39bn reopenings; 20y: $16bn / $13bn; 30y: $25bn / $22bn. Plus 2-year FRNs ($28bn/month) and TIPS. Sizes have been unchanged since 2024; the Aug 2026 refunding kept the guidance of no changes \"for at least the next several quarters\"."
+      "note": "10y: $42bn new issue, $39bn reopenings; 20y: $16bn / $13bn; 30y: $25bn / $22bn. Plus 2-year FRNs ($28–30bn/month) and TIPS. Confirmed unchanged for Nov 2026–Jan 2027 in the Nov 4 2026 refunding statement (sb0678)."
     },
     "recentAuctionYields": {
       "label": "Recent auction high yields",
@@ -1462,7 +1463,7 @@
           "endCash": 1000
         }
       ],
-      "note": "Excludes SOMA rollovers. The refunding policy statement (auction sizes) is scheduled for 8:30 a.m. ET Nov 4 2026; not yet incorporated."
+      "note": "Excludes SOMA rollovers. Auction sizes were confirmed unchanged in the Nov 4 2026 refunding statement (sb0678)."
     },
     "auctionStats": {
       "label": "Recent coupon auction results",
@@ -1503,6 +1504,32 @@
         }
       ],
       "note": "USD bn accepted. Indirect bidders are mostly foreign central banks and investors bidding through dealers; direct bidders bid for their own account. Totals include SOMA add-ons where applicable."
+    },
+    "refundingNov2026": {
+      "label": "Quarterly Refunding statement, Nov 2026",
+      "value": "2026-11-04",
+      "asOf": "2026-11-04",
+      "status": "primary",
+      "source": "Treasury press release sb0678, Quarterly Refunding Statement (Nov 4 2026)",
+      "url": "https://home.treasury.gov/news/press-releases/sb0678",
+      "refunding": {
+        "offered": 125,
+        "maturing": 97,
+        "newCash": 28,
+        "sizes": {
+          "3y": 58,
+          "10y": 42,
+          "30y": 25
+        }
+      },
+      "buybacks": {
+        "liquiditySupport": 70,
+        "cashManagement": 25
+      },
+      "tgaPeak": 1025,
+      "tgaEndDec": 850,
+      "nextAnnouncement": "2027-02-03",
+      "note": "Nominal coupon and FRN auction sizes kept unchanged \"for the next several quarters\". The 7-year note becomes a quarterly new issue (with two reopenings) from March 2027. The TGA could peak at $1.025T (±$50bn) in late November and late January."
     }
   },
   "connections": {

@@ -122,6 +122,15 @@ add('issuance.borrowingEstimates.series.1.borrowing', () => sbNum(/October–Dec
 add('issuance.borrowingEstimates.series.1.endCash', () => sbNum(/end-of-December cash balance of \$([\d,.]+) billion/), 0.5, 'Treasury sb0675');
 add('issuance.borrowingEstimates.series.2.borrowing', () => sbNum(/January–March 2027 quarter, Treasury expects to borrow \$([\d,.]+) billion/), 0.5, 'Treasury sb0675');
 add('issuance.borrowingEstimates.series.2.endCash', () => sbNum(/end-of-March cash balance of \$([\d,.]+) trillion/), 0.5, 'Treasury sb0675');
+// Quarterly Refunding statement (Nov 4 2026)
+const rs = async () => (await text('https://home.treasury.gov/news/press-releases/sb0678')).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ');
+const rsNum = async (re, mult = 1) => { const m = (await rs()).match(re); if (!m) throw new Error('not found ' + re); return +m[1].replace(/,/g, '') * mult; };
+add('issuance.refundingNov2026.refunding.offered', () => rsNum(/offering \$([\d,.]+) billion of Treasury securities/), 0.5, 'Treasury sb0678');
+add('issuance.refundingNov2026.refunding.newCash', () => rsNum(/new cash from private investors of approximately \$([\d,.]+) billion/), 0.5, 'Treasury sb0678');
+add('issuance.refundingNov2026.tgaPeak', () => rsNum(/could peak at \$([\d.]+) trillion/, 1000), 0.5, 'Treasury sb0678');
+add('issuance.refundingNov2026.buybacks.liquiditySupport', () => rsNum(/purchase up to \$([\d,.]+) billion in off-the-run/), 0.5, 'Treasury sb0678');
+add('issuance.refundingNov2026.buybacks.cashManagement', () => rsNum(/up to \$([\d,.]+) billion in the 1-month to 2-year/), 0.5, 'Treasury sb0678');
+add('issuance.couponMix.series.10y.perMonth', async () => { const t = await rs(); const m = t.match(/Nov-26 69 58 70 44 (\d+) (\d+) (\d+) \d+ Dec-26 69 58 70 44 (\d+) (\d+) (\d+)/); return (+m[1] + +m[4]) / 2; }, 0.01, 'Treasury sb0678 (new + reopening avg)');
 // MSPD-derived maturity figures
 const mat = JSON.parse(readFileSync(join(root, 'data/maturities.json'), 'utf8'));
 add('rates_on_debt.couponsMaturingNext12m.value', async () => mat._meta.checks.find((c) => /Fixed notes\+bonds/.test(c.what)).mspd, 0.05, 'MSPD Table III (maturities.json)');

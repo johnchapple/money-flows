@@ -257,7 +257,7 @@ Rechecked 2026-11-03 against primary sources. Items marked ✅ are resolved, wit
 ### Part III notes
 29. The term premium shown is the Kim-Wright model estimate (FRED THREEFYTP10). The NY Fed's ACM estimate differs in level. Should the page show both?
 30. No free daily series for the cross-currency basis was found, so the global-dollar section describes it without a chart.
-31. The refunding policy statement (auction sizes) was due 8:30 a.m. ET Nov 4 2026 and isn't yet reflected. Check whether the coupon sizes in data.issuance.couponMix changed.
+31. ✅ Nov 4 2026 refunding statement (sb0678): auction sizes unchanged for the next several quarters. The 7-year note becomes a quarterly new issue from March 2027. TGA peak about $1.025T in late November. Buybacks up to $70B (liquidity) + $25B (cash management). Next announcement Feb 3, 2027.
 32. Still secondary because hosts are unreachable: ICI money-fund assets (ici.org returns 403 to automated clients), OFR repo size (data.financialresearch.gov refused by the proxy), Form PF hedge-fund repo (sec.gov refused), and Tether/Circle reserves (tether.to and circle.com refused).
 
 ### Phase 4 notes

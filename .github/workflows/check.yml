@@ -1,0 +1,23 @@
+name: check
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # Data file structure, glossary links and accounting identities (offline)
+      - run: node scripts/validate-data.mjs
+      # The page's embedded data must match data/*.json
+      - run: |
+          cp index.html /tmp/index.before.html
+          node scripts/sync-data.mjs
+          diff -q /tmp/index.before.html index.html || (echo "index.html is out of sync: run node scripts/sync-data.mjs" && exit 1)
+      # Scenario, lesson and simulator balance tests
+      - run: node --test
